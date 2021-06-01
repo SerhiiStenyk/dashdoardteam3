@@ -1,4 +1,4 @@
-
+# dashdoardteam3
 
 1. npx create-react-app . (имя_папки_проекта)
 2. npm install --save-dev prop-types
@@ -33,4 +33,4 @@ status = 200
 
 7. команду разработчиков оставляем
 
-8. Придумываем уникальное имяnpm i
+8. Придумываем уникальное имя
