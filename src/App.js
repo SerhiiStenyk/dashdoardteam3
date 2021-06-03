@@ -5,6 +5,10 @@ import DifficultLevelModal from './components/DifficultLevelModal';
 function App() {
   return (
     <div>
+      <br />
+      <br />
+      <br />
+
       <DifficultLevelModal />
     </div>
   );
