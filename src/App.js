@@ -1,10 +1,11 @@
 import './App.css';
-import './fonts.css'
+import './fonts.css';
+import DifficultLevelModal from './components/DifficultLevelModal';
 
 function App() {
   return (
     <div>
-      <p>Hello World</p>
+      <DifficultLevelModal />
     </div>
   );
 }
