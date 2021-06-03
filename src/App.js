@@ -1,3 +1,4 @@
+import Landing from './pages/Landing/Landing';
 import './App.css';
 import './fonts.css';
 import DifficultLevelModal from './components/DifficultLevelModal';
@@ -5,10 +6,7 @@ import DifficultLevelModal from './components/DifficultLevelModal';
 function App() {
   return (
     <div>
-      <br />
-      <br />
-      <br />
-
+      <Landing/>
       <DifficultLevelModal />
     </div>
   );
