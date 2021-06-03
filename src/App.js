@@ -1,10 +1,11 @@
+import Landing from './pages/Landing/Landing';
 import './App.css';
 import './fonts.css'
 
 function App() {
   return (
     <div>
-      <p>Hello World</p>
+      <Landing/>
     </div>
   );
 }
