@@ -1,0 +1,38 @@
+
+  $primary-bg-color: #f2f3f7; /*весь dashboard*/
+  $header-bg-color: #242a37; /*шапка*/
+  $header-box-shadow: 0px 4px 4px rgba(36, 42, 55, 0.1);
+  $button-hover: #7B8AA4;
+
+  $timing-function-bezier: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  $primary-bg-card: #FFFFFF; /*белые тудушки*/
+  $primary-shadow-card: -3px -4px 4px rgba(21, 57, 90, 0.03), 3px 4px 4px rgba(21, 57, 90, 0.03); /*тень для белых тудушек*/
+  $challenge-bg-card: #15395a; /*синие тудушки*/
+  $challenge-shadow-card: -3px 0px 5px rgba(21, 57, 90, 0.08), 3px 5px 5px rgba(21, 57, 90, 0.08);/*тень для синих тудушек*/
+  $backdrop-card: rgba(21, 57, 90, 0.3); /*бэкдроп для всех тудушек*/
+  $primary-drop-down-menu: #FFFFFF;/*белое выпадающее меню*/
+  $secondary-drop-down-menu: #3E4E6C;/*синее выпадающее меню и элипс в хедере*/
+  $shadow-drop-down-menu: -3px -4px 4px rgba(21, 57, 90, 0.05), 3px 4px 4px rgba(21, 57, 90, 0.05); /*для всех выпадающих менюшек*/
+  /*цветные полоски на картах*/
+  $staff-card-colour: #B9C3C8;
+  $family-card-colour: #FFE6D3;
+  $heals-card-colour: #CDF7FF;
+  $learning-card-colour: #FFF6C0;
+  $leisure-card-colour: #F8D2FF;
+  $work-card-colour: #D3F6CE;
+
+  $normal-indicator-card: #24D40C;
+  $easy-primary-accent-colour: #00D7FF; /*звёзды, кубок, лого, easy*/
+  $hard-indicator-card: #DB0837;
+
+  $accent-circle-button: #ff851c;
+  /*Текст*/
+ $text-colour-landing: #15395A; /*текст на главном экране*/
+ $primary-text-card: #282828;
+ $secondary-text-card: #B9C3C8;
+ $header-name-colour: #7B8AA4;
+ $white-text-color: #ffffff;
+ $text-green: #24D40C;
+ $text-red:#DB0938;
+
