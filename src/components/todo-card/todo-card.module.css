@@ -1,0 +1,10 @@
+.todoCard {
+  max-width: 33%;
+  min-width: 300px;
+}
+.dark {
+  background-color: #15395a;
+}
+.white {
+  color: white;
+}
