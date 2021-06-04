@@ -1,12 +1,16 @@
+import Landing from './pages/Landing/Landing';
 import './App.css';
 import './fonts.css';
 import AddButton from './component/addButton/button'
+import DifficultLevelModal from './components/DifficultLevelModal';
+
 
 function App() {
   return (
     <div>
-      <p>Hello World</p>
       <AddButton/>
+      <Landing/>
+      <DifficultLevelModal />
     </div>
   );
 }
