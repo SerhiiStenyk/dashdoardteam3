@@ -7,7 +7,9 @@ import routes from './routes';
 // import AppBar from './components/AppBar/AppBar'
 import './App.css';
 import './fonts.css';
-// import AddButton from './component/addButton/button';
+//import AddButton from './components/addButton/button';
+
+
 
 const Landing = lazy(() =>
   import(
