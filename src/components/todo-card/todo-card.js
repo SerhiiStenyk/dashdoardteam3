@@ -13,11 +13,11 @@ export default function CustomSelect() {
 
   // Основное состояние карточки: create, edit, ready, done
   // eslint-disable-next-line
-  const [status, setStatus] = useState('done');
+  const [status, setStatus] = useState('edit');
 
   // Начат chelenge или нет, для изменения фона карточки, звездочка или кубок, и надписи CHALLENGE
   const [isChallengeStarted, setIsChallengeStarted] =
-    useState(false);
+    useState(true);
 
   // Для внесения (изменения) и отрисовки наименования тудушки
   const [whatToDo, setWhatToDo] = useState('Do some thing');
@@ -57,22 +57,34 @@ export default function CustomSelect() {
           : `${s.todoCard} ${s.dark}`
       }
     >
+      {/* Иконки кубка и звезды */}
       {isChallengeStarted ? (
-        <svg alt="cup blue">
+        <svg className={s.starCupIcon} alt="cup blue">
           <use
             href={`${sprite}#cup-blue`}
             onClick={() => setIsChallengeStarted(false)}
           ></use>
         </svg>
       ) : (
-        <svg alt="star blue">
+        <svg className={s.starCupIcon} alt="star blue">
           <use
             href={`${sprite}#star-blue`}
             onClick={() => setIsChallengeStarted(true)}
           ></use>
         </svg>
       )}
-      {isChallengeStarted && <p>CHALLENGE</p>}
+      {/* Надпись CHALLENGE, EDIT CHALLENGE, CREATE NEW QUEST или EDIT QUEST */}
+      {status === 'create' && <p>CREATE NEW QUEST</p>}
+      {status === 'edit' && !isChallengeStarted ? (
+        <p>EDIT QUEST</p>
+      ) : null}
+      {isChallengeStarted && status !== 'edit' ? (
+        <p>CHALLENGE</p>
+      ) : null}
+      {isChallengeStarted && status === 'edit' ? (
+        <p>EDIT CHALLENGE</p>
+      ) : null}
+      {/* Инпут или наименование карточки */}
       {status === 'create' || status === 'edit' ? (
         <input
           name="todo"
@@ -85,20 +97,52 @@ export default function CustomSelect() {
           {whatToDo}
         </p>
       )}
-      <div style={{ backgroundColor: group.color }}>
-        {group.name}
-      </div>
-      <div>
-        <ul>
-          {groups.map(item => (
-            <li
-              key={item.name}
-              onClick={() => setGroup(item)}
-            >
-              {item.name}
-            </li>
-          ))}
-        </ul>
+      {/* Группы карточек */}
+      {isGroupActive ? (
+        <div onClick={() => setIsGroupActive(false)}>
+          <ul>
+            {groups.map(item => (
+              <li
+                key={item.name}
+                onClick={() => setGroup(item)}
+              >
+                {item.name}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div
+          onClick={() => setIsGroupActive(true)}
+          style={{ backgroundColor: group.color }}
+        >
+          {group.name}
+        </div>
+      )}
+
+      {/* Иконки save, clear, done и кнопка START*/}
+      <div className={s.saveClearDoneCon}>
+        <svg
+          className={s.saveClearDoneIcon}
+          alt="diskette save"
+          onClick={() => setStatus('ready')}
+        >
+          <use href={`${sprite}#diskette-save`}></use>
+        </svg>
+        <svg
+          className={s.saveClearDoneIcon}
+          alt="cross red"
+        >
+          <use href={`${sprite}#cross-red-clear`}></use>
+        </svg>
+        <svg
+          className={s.saveClearDoneIcon}
+          alt="check mark"
+          onClick={() => setStatus('done')}
+        >
+          <use href={`${sprite}#check-mark`}></use>
+        </svg>
+        <div>START</div>
       </div>
     </div>
   );
