@@ -7,36 +7,44 @@ import routes from './routes';
 // import AppBar from './components/AppBar/AppBar'
 import './App.css';
 import './fonts.css';
-import AddButton from './component/addButton/button'
+import AddButton from './components/addButton/button';
 import DifficultLevelModal from './components/DifficultLevelModal';
 
-
 const Landing = lazy(() =>
-  import('./pages/Landing/Landing.js' /*webpackChunkName: "landing-page"*/),
+  import(
+    './pages/Landing/Landing.js' /*webpackChunkName: "landing-page"*/
+  ),
 );
 const CardPage = lazy(() =>
-  import('./pages/CardPage.js' /*webpackChunkName: "card-page"*/),
+  import(
+    './pages/CardPage.js' /*webpackChunkName: "card-page"*/
+  ),
 );
 const NotFoundPage = lazy(() =>
-  import('./pages/NotFound.js' /*webpackChunkName: "notFound-page"*/),
+  import(
+    './pages/NotFound.js' /*webpackChunkName: "notFound-page"*/
+  ),
 );
 
 const App = () => (
   <>
-//       <AddButton/>
-//       <Landing/>
-//       <DifficultLevelModal />
-    
+    {/* <AddButton/>
+<Landing/>
+<DifficultLevelModal /> */}
+
     {/* <NavLink to={routes.card} > Card</NavLink> */}
-    <Suspense fallback={<h1>Loader...</h1>}>   
+    <Suspense fallback={<h1>Loader...</h1>}>
       <Switch>
-        <Route exact path={routes.landing} component={Landing} />
+        <Route
+          exact
+          path={routes.landing}
+          component={Landing}
+        />
         <Route path={routes.card} component={CardPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </Suspense>
   </>
-)
-
+);
 
 export default App;
