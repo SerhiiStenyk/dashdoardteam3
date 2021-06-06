@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 
-export default function CustomSelect({ value }) {
-  const [isActive, setIsActive] = useState(false);
+export default function CustomSelect({ options }) {
+  const [isActive, setIsActive] = useState(true);
 
-  const [level, setLevel] = useState('');
+  const [level, setLevel] = useState(' Normal ');
+
+  const onChoiseLevel = function (value) {
+    setLevel(value);
+    setIsActive(!isActive);
+  };
 
   return (
     <div className="dropdown-container">
@@ -12,32 +17,40 @@ export default function CustomSelect({ value }) {
         onClick={() => setIsActive(!isActive)}
       >
         <div
-          className={`dropdown-round ${value.color}`}
+          className={`dropdown-round ${options.color}`}
         ></div>
-        {value.label}
+        {options.label}
         <div className="dropdown-placeholder">
-          <div className={'dropdown-round green'}></div>
-          {level || 'Normal'}
+          {level === 'Easy' && (
+            <div className={'dropdown-round teal'}></div>
+          )}
+          {level === 'Hard' && (
+            <div className={'dropdown-round red'}></div>
+          )}
+          {level === 'Normal' && (
+            <div className={'dropdown-round green'}></div>
+          )}
+          {level}
         </div>
         <span className="arrow-down"></span>
       </div>
       <div
         className={
           isActive
-            ? 'dropdown-options active '
+            ? 'dropdown-options dropdown-active '
             : 'dropdown-options'
         }
       >
-        {value.map(item => (
+        {options.map(item => (
           <div
             className="dropdown-item"
             key={item.id}
-            onClick={() => setLevel(item.label)}
+            onClick={() => onChoiseLevel(item.level)}
           >
             <div
               className={`dropdown-round ${item.color}`}
             ></div>
-            {item.label}
+            {item.level}
           </div>
         ))}
       </div>

@@ -7,8 +7,9 @@ import routes from './routes';
 // import AppBar from './components/AppBar/AppBar'
 import './App.css';
 import './fonts.css';
-import AddButton from './components/addButton/button';
-import DifficultLevelModal from './components/DifficultLevelModal';
+//import AddButton from './components/addButton/button';
+
+
 
 const Landing = lazy(() =>
   import(
@@ -28,9 +29,8 @@ const NotFoundPage = lazy(() =>
 
 const App = () => (
   <>
-    {/* <AddButton/>
-<Landing/>
-<DifficultLevelModal /> */}
+    {/* //       <AddButton/> */}
+    {/* //       <Landing/> */}
 
     {/* <NavLink to={routes.card} > Card</NavLink> */}
     <Suspense fallback={<h1>Loader...</h1>}>

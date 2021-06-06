@@ -1,21 +1,21 @@
-import './DifficultLevelModal.css';
+import './DifficultLevelModal.scss';
 
 import CustomSelect from './CustomSelect';
 
 const levels = [
   {
     id: 0,
-    label: 'Easy',
+    level: 'Easy',
     color: 'teal',
   },
   {
     id: 1,
-    label: 'Normal',
+    level: 'Normal',
     color: 'green',
   },
   {
     id: 2,
-    label: 'Hard',
+    level: 'Hard',
     color: 'red',
   },
 ];
@@ -23,7 +23,7 @@ const levels = [
 export default function DifficultLevelModal() {
   return (
     <div>
-      <CustomSelect value={levels} />
+      <CustomSelect options={levels} />
     </div>
   );
 }
