@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 // import routes from './routes';
-import s from './Logout.module.scss';
+//import s from './Logout.module.scss';
 import sprite from '../../sprite.svg'
 
 const Logout = () => {
@@ -8,10 +8,10 @@ const Logout = () => {
      <NavLink
       to="/"
       exact
-      className={s.link}
+      //className={s.link}
       // activeClassName={s.activeLink}
     >
-      <svg className={s.svg}>
+      <svg /*className={s.svg}*/>
         <use href={`${sprite}#logout`}></use>
       </svg>
     </NavLink>
