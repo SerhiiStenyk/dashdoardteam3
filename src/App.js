@@ -7,8 +7,8 @@ import routes from './routes';
 // import AppBar from './components/AppBar/AppBar'
 import './App.css';
 import './fonts.css';
-import AddButton from './components/addButton/button';
-import DifficultLevelModal from './components/DifficultLevelModal';
+// import AddButton from './components/addButton/button';
+// import DifficultLevelModal from './components/DifficultLevelModal';
 
 const Landing = lazy(() =>
   import(
