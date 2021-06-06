@@ -1,59 +1,96 @@
-.box {
+.Box {
   position: absolute;
-  left: 20px;
-  top: 20px;
-  z-index: 999999;
+left: 15px;
+top: 60px;
 
-  @media (max-width: 767px) {
-    left: 100px;
-  top: 80px;
-    }
+  z-index: 999999;
+}
 
     @media (min-width: 768px) {
+      .Box {
+        position: absolute;
       left: 230px;
       top: 190px;
-    }
-}
+      z-index: 999999;
+    }}
+
 
 .logo {
-color:#00D7FF;
-font-family: HelveticaNeueCyr;
-font-size: 24px;
-font-weight: 700;
-letter-spacing: 0.02em;
+  position: absolute;
+  width: 99px;
+  height: 24px;
+  font-family: HelveticaNeueCyr;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: #00D7FF;
 }
 
+@media (min-width: 768px) {
+  .Box {
+    position: absolute;
+  left: 230px;
+  top: 190px;
+  z-index: 999999;
+}}
+
 .title {
-    color: #15395A;
-    font-family: HelveticaNeueCyr;
-    line-height: 45px;
-    letter-spacing: 0.02em;
-    margin-top: 70px;
+  position: absolute;
+  width: 281px;
+  height: 87px;
+  top: 144px;
+  font-family: HelveticaNeueCyr;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 29px;
+  letter-spacing: 0.02em;
+  color: #15395A;
 }
 
 .appeal {
-font-family: HelveticaNeueCyr;
-font-weight: normal;
-line-height: 45px;
-margin-top: 35px;
-letter-spacing: 0.02em;
-
-color: #B9C3C8;
+  position: absolute;
+  width: 250px;
+  height: 45px;
+  top: 261px;
+  font-family: HelveticaNeueCyr;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 45px;
+  letter-spacing: 0.02em;
+  color: #B9C3C8;
    }
 
-   .input {
+   .inputEmail {
     display: flex;
-    width: 196px;
-    height: 18px;
-    margin-top: 23px;
+    position: absolute;
+width: 290px;
+height: 18px;
+top: 336px;
+    border:none;
+    border-bottom: 1px solid #00D7FF;  
+    color: #00D7FF; 
+   }
+
+   .inputPassword {
+    display: flex;
+    position: absolute;
+    width: 290px;
+height: 18px;
+top: 374px;
     border:none;
     border-bottom: 1px solid #00D7FF;  
     color: #00D7FF; 
    }
 
    .button {
-        width: 56px;
-        height: 56px;
+    width: 52px;
+    height: 52px;
+    left: 134px;
+    top: 415px;
         appearance: none;
         border-radius: 50%;
         border: 0;
@@ -68,12 +105,15 @@ color: #B9C3C8;
         line-height: 24px;
         text-align: center;
         letter-spacing: 0.02em;
-        margin-top: 23px;
-        margin-left: 145px;
    }
 
-   body { 
-        background: url(../../images/desktop/landing.jpg) 
+   /*body { 
+        background: url(../../images/mobile/landing\ -\ mobile.jpg) 
        fixed;
        background-size: cover;
-    }
+    }*/
+
+    .Page { 
+      background: fixed;
+     background-size: cover;
+  }
