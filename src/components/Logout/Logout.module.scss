@@ -1,0 +1,25 @@
+@import '../../colour.scss';
+
+.link {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.svg {
+  width: 25px;
+  height: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  fill: $secondary-drop-down-menu;
+  transition: $timing-function-bezier;
+  transition-property: fill;
+  &:hover,
+  &:focus {
+    fill:  $button-hover
+  }
+  
+}
+

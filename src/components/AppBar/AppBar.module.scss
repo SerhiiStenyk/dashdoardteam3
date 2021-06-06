@@ -1,0 +1,23 @@
+@import '../../colour.scss';
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: $header-bg-color;
+  box-shadow: $header-box-shadow;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  left: 0px;
+  top: 0px;
+}
+
+.box {
+  display: flex;
+}
