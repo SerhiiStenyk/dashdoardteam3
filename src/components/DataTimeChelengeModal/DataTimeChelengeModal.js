@@ -86,12 +86,6 @@ export default function DataTimeChelengeModal() {
 
   return (
     <>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
       <div className="chelenge-timer-container">
         <div
           className="chelenge-timer-input"

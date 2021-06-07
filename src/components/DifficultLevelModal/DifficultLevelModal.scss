@@ -15,14 +15,14 @@
 .dropdown-input {
   display: flex;
   align-items: center;
-  padding-top: 6px;
+  // padding-top: 6px;
 }
 
 .dropdown-placeholder {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-left: 36px;
+  // margin-left: 36px;
   color: #b9c3c8;
   cursor: pointer;
 }
@@ -32,16 +32,16 @@
 
 .dropdown-options {
   position: absolute;
-  top: -100%;
-  left: 15px;
+  top: calc(-100% - 22px);
+  left: -21px;
   display: flex;
-  // flex-direction: column;
+  flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   visibility: hidden;
-  width: 80px;
-  height: 90px;
-  padding-left: 10px;
+  width: 90px;
+  height: 80px;
+  padding-left: 12px;
   color: #b9c3c8;
   opacity: 0;
   background-color: white;

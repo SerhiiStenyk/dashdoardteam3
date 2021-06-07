@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import s from './TodoCard.module.css';
+import s from './TodoCard.module.scss';
 import sprite from '../../sprite.svg';
+import DifficultLevelModal from '../DifficultLevelModal/DifficultLevelModal';
+import DataTimeChelengeModal from '../DataTimeChelengeModal/DataTimeChelengeModal';
+import DataTimeModal from '../DataTimeModal/DataTimeModal';
 
 export default function CustomSelect() {
   // Состояние выпадающего окна для выбора level
@@ -28,7 +31,7 @@ export default function CustomSelect() {
 
   // Дата окончания
   // eslint-disable-next-line
-  const [finishDate, setFinichDate] = useState('');
+  const [finishDate, setFinishDate] = useState('');
 
   //Группы: STUFF, FAMILY, HEALTH, LEARNING, LEISURE, WORK
   const [group, setGroup] = useState({
@@ -61,69 +64,89 @@ export default function CustomSelect() {
       }
     >
       <div className={s.mainCardContainer}>
-        {/* Иконки кубка и звезды */}
-        <div className={s.TopContainer}>
-          <div>LEVEL</div>
-          {isChallengeStarted ? (
-            <svg className={s.starCupIcon}>
-              <use
-                href={`${sprite}#cup-blue`}
-                onClick={() => setIsChallengeStarted(false)}
-              ></use>
-            </svg>
+        <div className={s.topContainer}>
+          {' '}
+          {/* Иконки кубка и звезды */}
+          <div className={s.levelStarCupContainer}>
+            <DifficultLevelModal />
+            {isChallengeStarted ? (
+              <svg className={s.starCupIcon}>
+                <use
+                  href={`${sprite}#cup-blue`}
+                  onClick={() =>
+                    setIsChallengeStarted(false)
+                  }
+                ></use>
+              </svg>
+            ) : (
+              <svg
+                className={s.starCupIcon}
+                alt="star blue"
+              >
+                <use
+                  href={`${sprite}#star-blue`}
+                  onClick={() =>
+                    setIsChallengeStarted(true)
+                  }
+                ></use>
+              </svg>
+            )}
+          </div>
+          {/* Надпись CHALLENGE, EDIT CHALLENGE, CREATE NEW QUEST или EDIT QUEST */}
+          <div className={s.operationContainer}>
+            {status === 'create' && isChallengeStarted ? (
+              <p className={s.operation}>
+                CREATE NEW QUEST
+              </p>
+            ) : null}
+            {status === 'edit' && !isChallengeStarted ? (
+              <p className={s.operation}>EDIT QUEST</p>
+            ) : null}
+            {isChallengeStarted && status !== 'edit' ? (
+              <p className={s.operation}>CHALLENGE</p>
+            ) : null}
+            {isChallengeStarted && status === 'edit' ? (
+              <p className={s.operation}>EDIT CHALLENGE</p>
+            ) : null}
+            {status === 'done' || status === 'ready' ? (
+              <br
+                className={`${s.operation} ${s.hidden}`}
+              ></br>
+            ) : null}
+          </div>
+          {/* Инпут или наименование карточки */}
+          {status === 'create' || status === 'edit' ? (
+            <input
+              className={`${s.whatToDo} ${s.inline}`}
+              name="todo"
+              type="text"
+              value={whatToDo}
+              onChange={handleChangeInpute}
+            />
           ) : (
-            <svg className={s.starCupIcon} alt="star blue">
-              <use
-                href={`${sprite}#star-blue`}
-                onClick={() => setIsChallengeStarted(true)}
-              ></use>
-            </svg>
+            <p
+              className={`${s.whatToDo} ${
+                isChallengeStarted && s.white
+              }`}
+            >
+              {whatToDo}
+            </p>
+          )}
+          {/* Дата и время */}
+          {isChallengeStarted ? (
+            <DataTimeChelengeModal />
+          ) : (
+            <DataTimeModal />
           )}
         </div>
-        {/* Надпись CHALLENGE, EDIT CHALLENGE, CREATE NEW QUEST или EDIT QUEST */}
-        <div className={s.operationContainer}>
-          {status === 'create' && isChallengeStarted ? (
-            <p className={s.operation}>CREATE NEW QUEST</p>
-          ) : null}
-          {status === 'edit' && !isChallengeStarted ? (
-            <p className={s.operation}>EDIT QUEST</p>
-          ) : null}
-          {isChallengeStarted && status !== 'edit' ? (
-            <p className={s.operation}>CHALLENGE</p>
-          ) : null}
-          {isChallengeStarted && status === 'edit' ? (
-            <p className={s.operation}>EDIT CHALLENGE</p>
-          ) : null}
-          {status === 'done' || status === 'ready' ? (
-            <p className={`${s.operation} ${s.hidden}`}>
-              HIDDEN
-            </p>
-          ) : null}
-        </div>
-        {/* Инпут или наименование карточки */}
-        {status === 'create' || status === 'edit' ? (
-          <input
-            className={`${s.whatToDo} ${s.inline}`}
-            name="todo"
-            type="text"
-            value={whatToDo}
-            onChange={handleChangeInpute}
-          />
-        ) : (
-          <p
-            className={`${s.whatToDo} ${
-              isChallengeStarted && s.white
-            }`}
-          >
-            {whatToDo}
-          </p>
-        )}
-        {/* Дата и время */}
-        <div>DATE</div>
+
         <div className={s.bottomContainer}>
           {/* Группы карточек */}
           {isGroupActive ? (
-            <div onClick={() => setIsGroupActive(false)}>
+            <div
+              className={s.groupContainer}
+              onClick={() => setIsGroupActive(false)}
+            >
               <ul className={s.groupList}>
                 {groups.map(item => (
                   <li
@@ -154,7 +177,6 @@ export default function CustomSelect() {
               <>
                 <svg
                   className={`${s.saveClearDoneIcon} ${s.saveIcon}`}
-                  alt="diskette save"
                   onClick={() => setStatus('ready')}
                 >
                   <use

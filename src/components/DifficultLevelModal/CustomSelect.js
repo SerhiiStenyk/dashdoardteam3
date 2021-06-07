@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 
 export default function CustomSelect({ options }) {
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState(false);
 
-  const [level, setLevel] = useState(' Normal ');
+  const [level, setLevel] = useState({
+    id: 1,
+    level: 'Normal',
+    color: 'green',
+  });
 
   const onChoiseLevel = function (value) {
     setLevel(value);
@@ -16,21 +20,30 @@ export default function CustomSelect({ options }) {
         className="dropdown-input"
         onClick={() => setIsActive(!isActive)}
       >
-        <div
+        {/* <div
           className={`dropdown-round ${options.color}`}
-        ></div>
-        {options.label}
+        ></div> */}
+        {/* {options.label} */}
         <div className="dropdown-placeholder">
-          {level === 'Easy' && (
-            <div className={'dropdown-round teal'}></div>
+          <div
+            className={`dropdown-round ${level.color}`}
+          ></div>
+          {/* {level.level === 'Easy' && (
+            <div
+              className={`dropdown-round ${level.color}`}
+            ></div>
           )}
-          {level === 'Hard' && (
-            <div className={'dropdown-round red'}></div>
+          {level.level === 'Hard' && (
+            <div
+              className={`dropdown-round ${level.color}`}
+            ></div>
           )}
-          {level === 'Normal' && (
-            <div className={'dropdown-round green'}></div>
-          )}
-          {level}
+          {level.level === 'Normal' && (
+            <div
+              className={`dropdown-round ${level.color}`}
+            ></div>
+          )} */}
+          {level.level}
         </div>
         <span className="arrow-down"></span>
       </div>
@@ -45,7 +58,7 @@ export default function CustomSelect({ options }) {
           <div
             className="dropdown-item"
             key={item.id}
-            onClick={() => onChoiseLevel(item.level)}
+            onClick={() => onChoiseLevel(item)}
           >
             <div
               className={`dropdown-round ${item.color}`}
