@@ -1,6 +1,7 @@
 import { Component } from "react";
 import style from './addButton.module.css'
-//import Card from './Card'
+import Card from '../TodoCard/TodoCard'
+import Container from '../Container/Container'
 
 class Button extends Component {
 
@@ -28,14 +29,16 @@ class Button extends Component {
 */
     render() {
       return (
+        <Container>
         <div className={style.container}>
-         {/*this.state.numClicked && <Card/>*/}
+         {this.state.numClicked && <Card/>}
             <div className={style.btnHolder}>
                 <button type="submit" className={style.makeButton}
                 onClick={this.handleAddCard}> +
                       </button>
           </div>
-        </div>
+          </div>
+        </Container>
         )
     }
 }
