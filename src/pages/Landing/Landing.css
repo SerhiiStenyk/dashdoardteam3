@@ -106,6 +106,8 @@ line-height: 45px;
     color: #00D7FF; 
    }
 
+   .inputEmail:focus { color: #000000; }
+
    @media (min-width: 768px) {
     .inputEmail {
       width: 193px;
@@ -128,6 +130,8 @@ top: 374px;
     border-bottom: 1px solid #00D7FF;  
     color: #00D7FF; 
    }
+
+   .inputPassword:focus { color: #000000; }
 
    @media (min-width: 768px) {
     .inputPassword {
@@ -161,6 +165,9 @@ top: 265px;
         text-align: center;
         letter-spacing: 0.02em;
    }
+
+   .button:hover { background: #00D7FF; }
+   .button:focus { background: #00D7FF; } 
 
    @media (min-width: 768px) {
     .button {
