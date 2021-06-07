@@ -1,5 +1,4 @@
 @import '../../colour.scss';
-@import '../../fonts.css';
 
 .wrapper {
   display: flex;
@@ -18,37 +17,35 @@
 }
 
 .letter {
-font-family: HelveticaNeueCyr;
-font-style: normal;
-font-weight: 900;
-font-size: 17px;
-line-height: 16px;
-letter-spacing: 0.02em;
+  font-family: $helvetica;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 17px;
+  line-height: 0, 9;
+  letter-spacing: 0.02em;
 
-color: $white-text-color;
+  color: $white-text-color;
 }
 
 .hidden {
-  font-family: HelveticaNeueCyr;
-font-style: normal;
-font-weight: normal;
-font-size: 17px;
-line-height: 17px;
-margin-left: 10px;
-/* identical to box height */
+  font-family: $helvetica;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1;
+  margin-left: 10px;
+  letter-spacing: 0.02em;
+  color: $button-hover;
 
-letter-spacing: 0.02em;
-
-color: $button-hover;
   @media (max-width: 767px) {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  border: 0;
-  padding: 0;
-  clip: rect(0 0 0 0);
-  overflow: hidden; 
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    clip: rect(0 0 0 0);
+    overflow: hidden;
   }
 
   @media (min-width: 768px) {

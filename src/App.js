@@ -5,9 +5,6 @@ import './App.css';
 import './fonts.css';
 
 
-
-
-
 const Landing = lazy(() =>
   import(
     './pages/Landing/Landing.js' /*webpackChunkName: "landing-page"*/
