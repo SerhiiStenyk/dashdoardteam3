@@ -4,9 +4,6 @@ import routes from './routes';
 import './App.css';
 import './fonts.css';
 
-//import AddButton from './components/addButton/button';
-
-
 
 const Landing = lazy(() =>
   import(
@@ -26,12 +23,6 @@ const NotFoundPage = lazy(() =>
 
 const App = () => (
   <>
-
-    {/* //       <AddButton/> */}
-    {/* //       <Landing/> */}
-   
-
-    {/* <NavLink to={routes.card} > Card</NavLink> */}
 
 
     <Suspense fallback={<h1>Loader...</h1>}>
