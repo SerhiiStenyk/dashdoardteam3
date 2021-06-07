@@ -8,8 +8,8 @@ import routes from './routes';
 import './App.css';
 import './fonts.css';
 //import AddButton from './components/addButton/button';
-
-
+import DataTimeChelengeModal from './components/DataTimeChelengeModal';
+import DataTimeModa from './components/DataTimeModal';
 
 const Landing = lazy(() =>
   import(
@@ -31,6 +31,9 @@ const App = () => (
   <>
     {/* //       <AddButton/> */}
     {/* //       <Landing/> */}
+    {/* <DataTimeChelengeModal />
+     */}
+    <DataTimeModa />
 
     {/* <NavLink to={routes.card} > Card</NavLink> */}
     <Suspense fallback={<h1>Loader...</h1>}>
