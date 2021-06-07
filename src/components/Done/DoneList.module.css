@@ -1,0 +1,47 @@
+ul {
+  padding: 0;
+  margin: 0;
+}
+.list {
+  list-style: none;
+  margin-top: 20px;
+}
+@media screen and (min-width: 768px) {
+  .list {
+    margin-top: 30px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    display: flex;
+  }
+  .list li:not(:nth-child(3n)) {
+    margin-right: 27px;
+  }
+}
+/* @media screen and (min-width: 1020px) {
+  .list {
+    margin-top: 30px;
+  }
+  .list li:not(:nth-child(3n)) {
+    margin-right: 0;
+  }
+  .list li:not(:nth-child(4n)) {
+    margin-right: 40px;
+  }
+} */
+@media screen and (min-width: 1280px) {
+  .list {
+    margin-top: 30px;
+  }
+  .list li:not(:nth-child(3n)) {
+    margin-right: 0;
+  }
+  .list li:not(:nth-child(4n)) {
+    margin-right: 0;
+  }
+  .list li:not(:nth-child(5n)) {
+    margin-right: 27px;
+  }
+}
+.list li {
+  margin-bottom: 25px;
+}
