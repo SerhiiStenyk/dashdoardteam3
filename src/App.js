@@ -23,6 +23,8 @@ const NotFoundPage = lazy(() =>
 
 const App = () => (
   <>
+
+
     <Suspense fallback={<h1>Loader...</h1>}>
       <Switch>
         <Route
