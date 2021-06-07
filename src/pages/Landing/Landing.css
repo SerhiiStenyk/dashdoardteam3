@@ -1,17 +1,20 @@
 .Box {
   position: absolute;
-left: 15px;
-top: 60px;
-
+  left: 15px;
+  top: 60px;
   z-index: 999999;
 }
 
     @media (min-width: 768px) {
       .Box {
-        position: absolute;
+      left: 50px;
+      top: 312px;
+    }}
+
+    @media (min-width: 1280px) {
+      .Box {
       left: 230px;
       top: 190px;
-      z-index: 999999;
     }}
 
 
@@ -28,14 +31,6 @@ top: 60px;
   color: #00D7FF;
 }
 
-@media (min-width: 768px) {
-  .Box {
-    position: absolute;
-  left: 230px;
-  top: 190px;
-  z-index: 999999;
-}}
-
 .title {
   position: absolute;
   width: 281px;
@@ -49,6 +44,24 @@ top: 60px;
   letter-spacing: 0.02em;
   color: #15395A;
 }
+
+@media (min-width: 768px) {
+  .title {
+    width: 375px;
+height: 99px;
+top: 50px;
+font-size: 24px;
+line-height: 33px;
+}}
+
+@media (min-width: 1280px) {
+  .title {
+    width: 562px;
+height: 135px;
+top: 70px;
+font-size: 36px;
+line-height: 45px;
+}}
 
 .appeal {
   position: absolute;
@@ -64,16 +77,46 @@ top: 60px;
   color: #B9C3C8;
    }
 
+   @media (min-width: 768px) {
+    .appeal {
+      width: 298px;
+      height: 45px;;
+      top: 165px;
+      font-size: 18px;
+      line-height: 45px;
+  }}
+
+  @media (min-width: 1280px) {
+    .appeal {
+      width: 397px;
+      height: 45px;
+      top: 220px;
+      font-size: 24px;
+      line-height: 45px;
+  }}
+
    .inputEmail {
     display: flex;
     position: absolute;
-width: 290px;
-height: 18px;
-top: 336px;
+    width: 290px;
+    height: 18px;
+    top: 336px;
     border:none;
     border-bottom: 1px solid #00D7FF;  
     color: #00D7FF; 
    }
+
+   @media (min-width: 768px) {
+    .inputEmail {
+      width: 193px;
+      top: 230px;
+   }}
+
+   @media (min-width: 1280px) {
+    .inputEmail {
+      width: 196px;
+      top: 290px;
+   }}
 
    .inputPassword {
     display: flex;
@@ -85,6 +128,18 @@ top: 374px;
     border-bottom: 1px solid #00D7FF;  
     color: #00D7FF; 
    }
+
+   @media (min-width: 768px) {
+    .inputPassword {
+width: 193px;
+top: 265px;
+  }}
+
+  @media (min-width: 1280px) {
+    .inputPassword {
+      width: 196px;
+      top: 320px;
+   }}
 
    .button {
     width: 52px;
@@ -107,13 +162,37 @@ top: 374px;
         letter-spacing: 0.02em;
    }
 
-   /*body { 
-        background: url(../../images/mobile/landing\ -\ mobile.jpg) 
-       fixed;
-       background-size: cover;
-    }*/
+   @media (min-width: 768px) {
+    .button {
+      left: 143px;
+      top: 300px;
+  }}
 
-    .Page { 
+  @media (min-width: 1280px) {
+    .button {
+      top: 370px;
+   }}
+
+   body { 
+        background: url("../../images/mobile/landingMobile.jpg") ;
+        background-repeat: no-repeat;   
+      }
+
+      @media (min-width: 768px) {
+        body {
+          background: url("../../images/tablet/landing\ -\ tablet.jpg") ;
+          background-repeat: no-repeat; }}
+
+          @media (min-width: 1280px) {
+            body {
+              background: url("../../images/desktop/landing.jpg") ;
+              background-repeat: no-repeat; }}
+
+    /*.Page { 
       background: fixed;
      background-size: cover;
-  }
+  }*/
+
+  /*body {background-image:url("../../images/mobile/landingMobile.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;}*/
