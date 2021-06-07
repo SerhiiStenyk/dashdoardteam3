@@ -89,12 +89,6 @@ export default function DataTimeChelengeModal() {
 
   return (
     <>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
       <div className="chelenge-timer-container">
         <div
           className="chelenge-timer-input"
@@ -127,7 +121,6 @@ export default function DataTimeChelengeModal() {
             onChange={e => onCalendarInputChange(e)}
             value={calendarValue}
           />
-
           <div className="chelenge-timer-item-container">
             {time.map(item => (
               <div
