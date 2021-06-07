@@ -11,10 +11,8 @@ const AppBar = () => {
       <Container>
         <header /*className={s.header}*/>
           <Logo />
-          {/* <div className={s.box}> */}
             <UserMenu/>
             <Navigation />
-          {/* </div> */}
         </header>
       </Container>
     </div>

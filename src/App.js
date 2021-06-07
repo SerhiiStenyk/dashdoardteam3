@@ -1,14 +1,9 @@
 import React, { Suspense, lazy } from 'react';
 import { Route, NavLink, Switch } from 'react-router-dom';
 import routes from './routes';
-// import Landing from './pages/Landing/Landing';
-// import CardPage from './pages/CardPage';
-// import NotFoundPage from "./pages/NotFound";
-// import AppBar from './components/AppBar/AppBar'
 import './App.css';
 import './fonts.css';
-import AddButton from './components/addButton/button';
-import DifficultLevelModal from './components/DifficultLevelModal';
+
 
 const Landing = lazy(() =>
   import(
@@ -28,11 +23,8 @@ const NotFoundPage = lazy(() =>
 
 const App = () => (
   <>
-    {/* <AddButton/>
-<Landing/>
-<DifficultLevelModal /> */}
 
-    {/* <NavLink to={routes.card} > Card</NavLink> */}
+
     <Suspense fallback={<h1>Loader...</h1>}>
       <Switch>
         <Route
@@ -46,5 +38,6 @@ const App = () => (
     </Suspense>
   </>
 );
+
 
 export default App;

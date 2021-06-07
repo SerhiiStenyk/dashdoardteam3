@@ -5,6 +5,8 @@
   background: none;
   cursor: pointer;
   margin-left: 10px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .svg {
@@ -18,8 +20,6 @@
   transition-property: fill;
   &:hover,
   &:focus {
-    fill:  $button-hover
+    fill: $button-hover;
   }
-  
 }
-

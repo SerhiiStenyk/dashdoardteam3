@@ -1,0 +1,80 @@
+.data-timer-container {
+  position: relative;
+}
+.data-timer-options-close {
+  width: 15px;
+  height: 15px;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: orange;
+  cursor: pointer;
+}
+
+// .data-timer-input {
+//   // display: flex;
+//   align-items: center;
+//   padding-top: 6px;
+// }
+
+.data-timer-placeholder {
+  display: flex;
+  // justify-content: space-between;
+  // align-items: center;
+  margin-left: 36px;
+  color: #b9c3c8;
+  cursor: pointer;
+}
+.data-timer-placeholder:hover {
+  color: black;
+}
+
+.data-timer-options {
+  position: absolute;
+  top: -100%;
+  left: 15px;
+  display: flex;
+  //   flex-direction: column;
+
+  justify-content: center;
+  align-items: flex-start;
+  visibility: hidden;
+  overflow: scroll;
+
+  //   height: 90px;
+  padding: 10px;
+  color: #b9c3c8;
+  opacity: 0;
+  background-color: white;
+  border-radius: 10%;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.data-timer-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.data-timer-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  padding-bottom: 4px;
+  border-bottom: 1px dotted #fff;
+}
+
+.data-timer-item:hover {
+  color: #000;
+}
+
+.data-timer-item-container {
+  height: 90px;
+  overflow: scroll;
+}
+.calendar-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+}
