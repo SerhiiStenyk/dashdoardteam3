@@ -12,18 +12,17 @@ export default function CustomSelect() {
 
   // Типы level: Easy, Normal, Hard
   // eslint-disable-next-line
-  const [level, setLevel] = useState(' Normal ');
+  const [difficulty, setDifficulty] = useState(' Normal ');
 
-  // Основное состояние карточки: create, edit, ready, done
-  // eslint-disable-next-line
-  const [status, setStatus] = useState('edit');
+  // Основное состояние карточки: create, edit, incomplete, done
+  const [status, setStatus] = useState('incomplete');
 
   // Начат chelenge или нет, для изменения фона карточки, звездочка или кубок, и надписи CHALLENGE
   const [isChallengeStarted, setIsChallengeStarted] =
     useState(true);
 
   // Для внесения (изменения) и отрисовки наименования тудушки
-  const [whatToDo, setWhatToDo] = useState('Do some thing');
+  const [title, setTitle] = useState('Do some thing');
 
   // Дата начала
   // eslint-disable-next-line
@@ -34,34 +33,57 @@ export default function CustomSelect() {
   const [finishDate, setFinishDate] = useState('');
 
   //Группы: STUFF, FAMILY, HEALTH, LEARNING, LEISURE, WORK
-  const [group, setGroup] = useState({
+  const [category, setCategory] = useState({
     name: 'STUFF',
     color: '#B9C3C8',
   });
 
-  // Состояние выпадающего окна для выбора group
-  // eslint-disable-next-line
-  const [isGroupActive, setIsGroupActive] = useState(false);
+  // Состояние выпадающего окна для выбора category
+  const [isCategoryActive, setIsCategoryActive] =
+    useState(false);
 
-  const groups = [
-    { name: 'STUFF', color: '#B9C3C8' },
-    { name: 'FAMILY', color: '#FFE6D3' },
-    { name: 'HEALTH', color: '#CDF7FF' },
-    { name: 'LEARNING', color: '#FFF6C0' },
-    { name: 'LEISURE', color: '#F8D2FF' },
-    { name: 'WORK', color: '#D3F6CE' },
+  const categories = [
+    { name: 'stuff', color: '#B9C3C8' },
+    { name: 'famely', color: '#FFE6D3' },
+    { name: 'health', color: '#CDF7FF' },
+    { name: 'learning', color: '#FFF6C0' },
+    { name: 'leisure', color: '#F8D2FF' },
+    { name: 'work', color: '#D3F6CE' },
   ];
 
+  // Внесение значений инпута в стэйт
   const handleChangeInpute = e => {
-    setWhatToDo(e.target.value);
+    setTitle(e.target.value);
   };
+
+  // Начать редактировать карточку при клике на нее
+  const handleEdit = e => {
+    if (status !== 'incomplete') {
+      return;
+    }
+    if (e.target.getAttribute('class') === s.starCupIcon) {
+      return;
+    }
+    setStatus('edit');
+  };
+
+  // Сделать элемент доступным к редактированию,
+  // если карточка находится в сост. 'edit' или 'create'
+  const changeState = (func, arg) => {
+    if (status === 'edit' || status === 'create') {
+      func(arg);
+    }
+  };
+
+  // ----------------------------------------------------
   return (
     <div
       className={
         !isChallengeStarted
-          ? `${s.todoCard}`
+          ? s.todoCard
           : `${s.todoCard} ${s.dark}`
       }
+      onClick={handleEdit}
     >
       <div className={s.mainCardContainer}>
         <div className={s.topContainer}>
@@ -74,19 +96,20 @@ export default function CustomSelect() {
                 <use
                   href={`${sprite}#cup-blue`}
                   onClick={() =>
-                    setIsChallengeStarted(false)
+                    setIsChallengeStarted(
+                      !isChallengeStarted,
+                    )
                   }
                 ></use>
               </svg>
             ) : (
-              <svg
-                className={s.starCupIcon}
-                alt="star blue"
-              >
+              <svg className={s.starCupIcon}>
                 <use
                   href={`${sprite}#star-blue`}
                   onClick={() =>
-                    setIsChallengeStarted(true)
+                    setIsChallengeStarted(
+                      !isChallengeStarted,
+                    )
                   }
                 ></use>
               </svg>
@@ -94,7 +117,7 @@ export default function CustomSelect() {
           </div>
           {/* Надпись CHALLENGE, EDIT CHALLENGE, CREATE NEW QUEST или EDIT QUEST */}
           <div className={s.operationContainer}>
-            {status === 'create' && isChallengeStarted ? (
+            {status === 'create' ? (
               <p className={s.operation}>
                 CREATE NEW QUEST
               </p>
@@ -108,7 +131,8 @@ export default function CustomSelect() {
             {isChallengeStarted && status === 'edit' ? (
               <p className={s.operation}>EDIT CHALLENGE</p>
             ) : null}
-            {status === 'done' || status === 'ready' ? (
+            {status === 'done' ||
+            status === 'incomplete' ? (
               <br
                 className={`${s.operation} ${s.hidden}`}
               ></br>
@@ -117,19 +141,19 @@ export default function CustomSelect() {
           {/* Инпут или наименование карточки */}
           {status === 'create' || status === 'edit' ? (
             <input
-              className={`${s.whatToDo} ${s.inline}`}
+              className={`${s.title} ${s.inline}`}
               name="todo"
               type="text"
-              value={whatToDo}
+              value={title}
               onChange={handleChangeInpute}
             />
           ) : (
             <p
-              className={`${s.whatToDo} ${
+              className={`${s.title} ${
                 isChallengeStarted && s.white
               }`}
             >
-              {whatToDo}
+              {title}
             </p>
           )}
           {/* Дата и время */}
@@ -142,42 +166,48 @@ export default function CustomSelect() {
 
         <div className={s.bottomContainer}>
           {/* Группы карточек */}
-          {isGroupActive ? (
+          {isCategoryActive ? (
             <div
-              className={s.groupContainer}
-              onClick={() => setIsGroupActive(false)}
+              className={s.categoryContainer}
+              onClick={() =>
+                setIsCategoryActive(!isCategoryActive)
+              }
             >
-              <ul className={s.groupList}>
-                {groups.map(item => (
+              <ul className={s.categoryList}>
+                {categories.map(item => (
                   <li
                     key={item.name}
-                    onClick={() => setGroup(item)}
+                    onClick={() => setCategory(item)}
                   >
-                    {item.name}
+                    {item.name.toUpperCase()}
                   </li>
                 ))}
               </ul>
             </div>
-          ) : (
-            <div
-              className={s.selectedGroupContainer}
-              onClick={() => setIsGroupActive(true)}
-              style={{ backgroundColor: group.color }}
-            >
-              <p className={s.selectedGroup}>
-                {group.name}
-              </p>
-            </div>
-          )}
-
+          ) : null}
+          <div
+            className={`${s.selectedCategoryContainer} ${
+              isCategoryActive && s.hidden
+            }`}
+            onClick={() =>
+              changeState(
+                setIsCategoryActive,
+                !isCategoryActive,
+              )
+            }
+            style={{ backgroundColor: category.color }}
+          >
+            <p className={s.selectedCategory}>
+              {category.name.toUpperCase()}
+            </p>
+          </div>
           {/* Иконки save, clear, done и кнопка START*/}
-
           <div className={s.saveClearDoneStartContainer}>
             {status === 'edit' && (
               <>
                 <svg
                   className={`${s.saveClearDoneIcon} ${s.saveIcon}`}
-                  onClick={() => setStatus('ready')}
+                  onClick={() => setStatus('incomplete')}
                 >
                   <use
                     href={`${sprite}#diskette-save`}
@@ -210,7 +240,12 @@ export default function CustomSelect() {
                     href={`${sprite}#cross-red-clear`}
                   ></use>
                 </svg>
-                <div className={s.startButton}>START</div>
+                <div
+                  className={s.startButton}
+                  onClick={() => setStatus('incomplete')}
+                >
+                  START
+                </div>
               </>
             )}
           </div>

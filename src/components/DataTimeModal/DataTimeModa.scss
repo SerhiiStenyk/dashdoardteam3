@@ -1,5 +1,6 @@
 .data-timer-container {
   position: relative;
+  min-width: 0px;
 }
 .data-timer-options-close {
   width: 15px;
@@ -15,13 +16,12 @@
 .data-timer-input {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .data-timer-placeholder {
   display: flex;
   align-items: center;
-  margin-left: auto;
-  margin-right: auto;
   color: #b9c3c8;
   cursor: pointer;
 }
