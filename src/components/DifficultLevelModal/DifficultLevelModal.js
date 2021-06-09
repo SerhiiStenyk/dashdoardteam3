@@ -3,12 +3,13 @@ import './DifficultLevelModal.scss';
 
 export default function DifficultLevelModal({
   difficultlevel,
+  difficultlevelCameFromProps,
 }) {
   const [isActive, setIsActive] = useState(false);
 
   const [level, setLevel] = useState({
     id: 1,
-    level: 'Normal',
+    level: difficultlevelCameFromProps || 'Normal',
     color: 'green',
   });
 

@@ -86,15 +86,22 @@ console.log(
 
 export default function DataTimeModal({
   setFinishDate,
+  timeCameFromProps,
+  dataCameFromProps,
   setTime,
 }) {
+  console.log(timeCameFromProps);
   const [isActive, setIsActive] = useState(false);
-  const [startDate, setStartDate] = useState(today);
+  const [startDate, setStartDate] = useState(
+    dataCameFromProps || today,
+  );
   console.log(
     '🚀 ~ file: DataTimeModal.js ~ line 87 ~ startDate',
     startDate,
   );
-  const [timer, setTimer] = useState('00:00');
+  const [timer, setTimer] = useState(
+    timeCameFromProps || '00:00',
+  );
   setTime(timer);
   setFinishDate(startDate);
 

@@ -55,11 +55,15 @@ const time = [
 
 export default function DataTimeChelengeModal({
   setFinishDate,
+  timeCameFromProps,
+  dataCameFromProps,
   setTime,
 }) {
   const [isActive, setIsActive] = useState(false);
-  const [calendarValue, setCalendarValue] = useState('');
-  const [timer, setTimer] = useState('00:00');
+  const [calendarValue, setCalendarValue] = useState(
+    dataCameFromProps,
+  );
+  const [timer, setTimer] = useState(timeCameFromProps);
   setFinishDate(calendarValue);
   setTime(timer);
 
@@ -100,8 +104,8 @@ export default function DataTimeChelengeModal({
           onClick={() => setIsActive(!isActive)}
         >
           <div className="chelenge-timer-placeholder">
-            <div>{DayOfWeek}, &nbsp;</div>
-            <div>{timer}</div>
+            <div>{DayOfWeek},</div>
+            <div>&nbsp;{timer}</div>
             <div>
               <svg className="chelenge-calendar-icon">
                 <use href={sprite + '#calendar'}></use>

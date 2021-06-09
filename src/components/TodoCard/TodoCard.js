@@ -13,7 +13,7 @@ import DifficultLevelModal from '../DifficultLevelModal/DifficultLevelModal';
 import DataTimeChelengeModal from '../DataTimeChelengeModal/DataTimeChelengeModal';
 import DataTimeModal from '../DataTimeModal/DataTimeModal';
 
-export default function CustomSelect() {
+export default function CustomSelect(props) {
   const dispatch = useDispatch();
 
   // Состояние выпадающего окна для выбора level
@@ -25,7 +25,9 @@ export default function CustomSelect() {
   const [difficulty, setDifficulty] = useState('Normal');
 
   // Основное состояние карточки: create, edit, incomplete, done
-  const [status, setStatus] = useState('incomplete');
+  const [status, setStatus] = useState(
+    props.status || 'incomplete',
+  );
 
   // Начат chelenge или нет, для изменения фона карточки, звездочка или кубок, и надписи CHALLENGE
   const [isChallengeStarted, setIsChallengeStarted] =
@@ -34,7 +36,9 @@ export default function CustomSelect() {
   const [type, setType] = useState('Challenge');
 
   // Для внесения (изменения) и отрисовки наименования тудушки
-  const [title, setTitle] = useState('Do some thing');
+  const [title, setTitle] = useState(
+    props.title || 'Do some thing',
+  );
 
   // Дата начала
   // eslint-disable-next-line
@@ -43,11 +47,11 @@ export default function CustomSelect() {
   // Дата окончания
   // eslint-disable-next-line
   const [finishDate, setFinishDate] = useState(new Date());
-  const [timer, setTime] = useState('00:00');
+  const [timer, setTime] = useState(props.time || '00:00');
 
   //Группы: STUFF, FAMILY, HEALTH, LEARNING, LEISURE, WORK
   const [category, setCategory] = useState({
-    name: 'Stuff',
+    name: props.category || 'Stuff',
     color: '#B9C3C8',
   });
 
@@ -145,6 +149,7 @@ export default function CustomSelect() {
           {/* Иконки кубка и звезды */}
           <div className={s.levelStarCupContainer}>
             <DifficultLevelModal
+              difficultlevelCameFromProps={props.difficulty}
               difficultlevel={setDifficulty}
             />
             {isChallengeStarted ? (
@@ -207,11 +212,15 @@ export default function CustomSelect() {
           {/* Дата и время */}
           {isChallengeStarted ? (
             <DataTimeChelengeModal
+              timeCameFromProps={props.time}
+              dataCameFromProps={props.date}
               setTime={setTime}
               setFinishDate={setFinishDate}
             />
           ) : (
             <DataTimeModal
+              timeCameFromProps={props.time}
+              dataCameFromProps={props.date}
               setTime={setTime}
               setFinishDate={setFinishDate}
             />
