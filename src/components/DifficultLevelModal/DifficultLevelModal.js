@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './DifficultLevelModal.scss';
 
-export default function DifficultLevelModal() {
+export default function DifficultLevelModal({
+  difficultlevel,
+}) {
   const [isActive, setIsActive] = useState(false);
 
   const [level, setLevel] = useState({
@@ -9,6 +11,8 @@ export default function DifficultLevelModal() {
     level: 'Normal',
     color: 'green',
   });
+
+  difficultlevel(level.level);
 
   const levels = [
     {

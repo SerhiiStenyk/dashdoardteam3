@@ -1,7 +1,11 @@
 import axios from 'axios';
 import authActions from './auth-actions';
 
-axios.defaults.baseURL = 'https://questify-backend.goit.global/';
+axios.defaults.baseURL =
+  'https://questify-backend.goit.global/';
+
+axios.defaults.headers.common.Authorization =
+  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGJlNzUxNDhiYjU0ZjZmMTVhYjU4MmQiLCJzaWQiOiI2MGMwOTk0ZjhiYjU0ZjZmMTVhYjU4ZjIiLCJpYXQiOjE2MjMyMzQ4OTUsImV4cCI6MTYyMzIzODQ5NX0.u1Ov--S_u7iuHIcushz_2jYzR8YCjJq4jlj9D0UsnDs';
 
 const token = {
   set(token) {
@@ -16,22 +20,27 @@ const register = credentials => async dispatch => {
   dispatch(authActions.registerRequest());
 
   try {
-    const response = await axios.post('/auth/register', credentials);
+    const response = await axios.post(
+      '/auth/register',
+      credentials,
+    );
     console.log('response.data', response);
-    
+
     token.set(response.data.token);
     dispatch(authActions.registerSuccess(response));
   } catch (error) {
-     dispatch(authActions.registerError(error.message));
-    }
-   
+    dispatch(authActions.registerError(error.message));
+  }
 };
 
 const logIn = credentials => async dispatch => {
   dispatch(authActions.loginRequest());
 
   try {
-    const response = await axios.post('/auth/login', credentials);
+    const response = await axios.post(
+      '/auth/login',
+      credentials,
+    );
     // console.log('response111', response);
     token.set(response.data.token);
     // dispatch(cardsActions.getAllCardsSuccess(data.userData));
