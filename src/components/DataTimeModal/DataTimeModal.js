@@ -79,7 +79,7 @@ const getTommorow = function () {
 const tommorow = getTommorow();
 
 export default function DataTimeModal() {
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState(false);
   const [startDate, setStartDate] = useState(today);
   const [timer, setTimer] = useState('00:00');
 
@@ -121,11 +121,6 @@ export default function DataTimeModal() {
 
   return (
     <>
-      <br />
-      <br />
-      <br />
-      <br />
-
       <div className="data-timer-container">
         <div
           className="data-timer-input"
