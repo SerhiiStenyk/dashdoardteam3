@@ -1,4 +1,13 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
+import axios from 'axios';
+
+import { useSelector, useDispatch } from 'react-redux';
+
+import {
+  cardsOperations,
+  cardsSelectors,
+} from '../../redux/cards';
+
 import './DataTimeChelengeModal.scss';
 import sprite from '../../sprite.svg';
 
@@ -53,20 +62,43 @@ const time = [
   '23:30',
 ];
 
-export default function DataTimeChelengeModal() {
+export default function DataTimeChelengeModal({
+  setFinichDate,
+  setTime,
+}) {
+  // const dispatch = useDispatch();
   const [isActive, setIsActive] = useState(false);
   const [calendarValue, setCalendarValue] = useState('');
   const [timer, setTimer] = useState('00:00');
+  setFinichDate(calendarValue);
+  setTime(timer);
 
   const onCalendarInputChange = function (event) {
     setCalendarValue(event.target.value);
     setIsActive(!isActive);
+    // if (calendarValue !== '' && timer !== '') {
+    //   // const duplicate = contacts.filter(
+    //   //   contact => contact.name === event.target.elements[0].value,
+    //   // );
+    //   const card = {
+    //     title: 'Sergii todo2',
+    //     difficulty: 'Easy',
+    //     category: 'Stuff',
+    //     date: calendarValue,
+    //     time: timer,
+    //     type: 'Task',
+    //   };
+
+    //   // onSubmit(card);
+    //   return;
+    // }
   };
 
   const onTimeclick = function (item) {
     setTimer(item);
     setIsActive(!isActive);
   };
+
   function getDayOfWeek(date) {
     const dayOfWeek = new Date(date).getDay();
     return isNaN(dayOfWeek)
@@ -86,6 +118,54 @@ export default function DataTimeChelengeModal() {
   );
   // console.log(DayOfWeek);
   // console.log(calendarValue);
+  // const cards = useSelector(cardsSelectors.getCards);
+  // console.log(
+  //   '🚀 ~ file: DataTimeChelengeModal.js ~ line 106 ~ DataTimeChelengeModal ~ contacts',
+  //   cards,
+  // );
+
+  // const onSubmit = useCallback(
+  //   ({ title, difficulty, category, date, time, type }) =>
+  //     dispatch(
+  //       cardsOperations.addCards({
+  //         title,
+  //         difficulty,
+  //         category,
+  //         date,
+  //         time,
+  //         type,
+  //       }),
+  //     ),
+  //   [dispatch],
+  // );
+
+  // axios.defaults.baseURL =
+  //   'https://questify-backend.goit.global/';
+  // axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGJlNzUxNDhiYjU0ZjZmMTVhYjU4MmQiLCJzaWQiOiI2MGJmNTAwMDhiYjU0ZjZmMTVhYjU4NjQiLCJpYXQiOjE2MjMxNTA1OTIsImV4cCI6MTYyMzE1NDE5Mn0.2X7yf5I2z64LZ_dbUvwiWOn4L97-5rmd19g44BlpQxM`;
+
+  // const token = {
+  //   set(token) {
+  //     axios.defaults.headers.common.Authorization = `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGJlNzUxNDhiYjU0ZjZmMTVhYjU4MmQiLCJzaWQiOiI2MGJmNTAwMDhiYjU0ZjZmMTVhYjU4NjQiLCJpYXQiOjE2MjMxNTA1OTIsImV4cCI6MTYyMzE1NDE5Mn0.2X7yf5I2z64LZ_dbUvwiWOn4L97-5rmd19g44BlpQxM`;
+  //   },
+  //   unset() {
+  //     axios.defaults.headers.common.Authorization = '';
+  //   },
+  // };
+
+  // const addCards = card => dispatch => {
+  // const card = { card };
+  // console.log(
+  //   '🚀 ~ file: cards-operations.js ~ line 38 ~ card',
+  //   card,
+  // );
+
+  // dispatch(addCardRequest());
+
+  //   axios
+  //     .post('/card', { ...card })
+  //     .then(({ data }) => data)
+  //     .catch(error => error.message);
+  // };
 
   return (
     <>
@@ -132,6 +212,7 @@ export default function DataTimeChelengeModal() {
               </div>
             ))}
           </div>
+          <button type="submit">Add contact</button>
         </div>
       </div>
     </>

@@ -20,10 +20,15 @@ const levels = [
   },
 ];
 
-export default function DifficultLevelModal() {
+export default function DifficultLevelModal({
+  difficultlevel,
+}) {
   return (
     <div>
-      <CustomSelect options={levels} />
+      <CustomSelect
+        options={levels}
+        difficultlevel={difficultlevel}
+      />
     </div>
   );
 }

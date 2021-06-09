@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 
-export default function CustomSelect({ options }) {
+export default function CustomSelect({
+  options,
+  difficultlevel,
+}) {
   const [isActive, setIsActive] = useState(true);
 
-  const [level, setLevel] = useState(' Normal ');
+  const [level, setLevel] = useState('Normal');
+  difficultlevel(level);
 
   const onChoiseLevel = function (value) {
     setLevel(value);

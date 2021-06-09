@@ -1,15 +1,29 @@
-import React, { useState } from 'react';
+import { useState, useCallback } from 'react';
+
+import axios from 'axios';
+
+import { useSelector, useDispatch } from 'react-redux';
+
+import {
+  cardsOperations,
+  cardsSelectors,
+} from '../../redux/cards';
+
 import s from './TodoCard.module.css';
 import sprite from '../../sprite.svg';
+import DataTimeChelengeModal from '../DataTimeChelengeModal';
+import DifficultLevelModal from '../DifficultLevelModal';
 
 export default function CustomSelect() {
+  const dispatch = useDispatch();
+
   // Состояние выпадающего окна для выбора level
   // eslint-disable-next-line
   const [isActive, setIsActive] = useState(false);
 
   // Типы level: Easy, Normal, Hard
   // eslint-disable-next-line
-  const [level, setLevel] = useState(' Normal ');
+  const [level, setLevel] = useState('Normal');
 
   // Основное состояние карточки: create, edit, ready, done
   // eslint-disable-next-line
@@ -25,6 +39,7 @@ export default function CustomSelect() {
   // Дата начала
   // eslint-disable-next-line
   const [startDate, setStartDate] = useState('');
+  const [timer, setTime] = useState('00:00');
 
   // Дата окончания
   // eslint-disable-next-line
@@ -52,6 +67,48 @@ export default function CustomSelect() {
   const handleChangeInpute = e => {
     setWhatToDo(e.target.value);
   };
+  const onSubmit = useCallback(
+    ({ title, difficulty, category, date, time, type }) =>
+      dispatch(
+        cardsOperations.addCards({
+          title,
+          difficulty,
+          category,
+          date,
+          time,
+          type,
+        }),
+      ),
+    [dispatch],
+  );
+  console.log(group.name);
+
+  // if (finishDate !== '' && timer !== '') {
+  // const duplicate = contacts.filter(
+  //   contact => contact.name === event.target.elements[0].value,
+  // );
+
+  const card = {
+    title: whatToDo,
+    difficulty: level,
+    category: group.name,
+    date: finishDate,
+    time: timer,
+    type: 'Challenge',
+  };
+
+  // return;
+  // }
+  const onReadyClick = function (params) {
+    setStatus('done');
+    console.log(
+      '🚀 ~ file: TodoCard.js ~ line 97 ~ CustomSelect ~ card',
+      card,
+    );
+
+    onSubmit(card);
+  };
+
   return (
     <div
       className={
@@ -63,7 +120,7 @@ export default function CustomSelect() {
       <div className={s.mainCardContainer}>
         {/* Иконки кубка и звезды */}
         <div className={s.TopContainer}>
-          <div>LEVEL</div>
+          <DifficultLevelModal difficultlevel={setLevel} />
           {isChallengeStarted ? (
             <svg className={s.starCupIcon}>
               <use
@@ -119,7 +176,11 @@ export default function CustomSelect() {
           </p>
         )}
         {/* Дата и время */}
-        <div>DATE</div>
+        <DataTimeChelengeModal
+          setTime={setTime}
+          setFinichDate={setFinichDate}
+        />
+
         <div className={s.bottomContainer}>
           {/* Группы карточек */}
           {isGroupActive ? (
@@ -155,7 +216,7 @@ export default function CustomSelect() {
                 <svg
                   className={`${s.saveClearDoneIcon} ${s.saveIcon}`}
                   alt="diskette save"
-                  onClick={() => setStatus('ready')}
+                  onClick={onReadyClick}
                 >
                   <use
                     href={`${sprite}#diskette-save`}
