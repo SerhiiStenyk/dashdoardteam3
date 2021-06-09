@@ -1,15 +1,6 @@
 import { useState } from 'react';
 import './DataTimeChelengeModal.scss';
-
-const days = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
+import sprite from '../../sprite.svg';
 
 const time = [
   '00:00',
@@ -62,27 +53,39 @@ const time = [
   '23:30',
 ];
 
-const data = new Date();
-const dayNumber = data.getDay();
-// const hour = data.getHours();
-// console.log(hour);
-
-// console.log(days[dayNumber]);
-
 export default function DataTimeChelengeModal() {
   const [isActive, setIsActive] = useState(false);
-
-  const [dayOfWeek, setDayOfWeek] = useState('');
+  const [calendarValue, setCalendarValue] = useState('');
   const [timer, setTimer] = useState('00:00');
 
-  const onDataclick = function (item) {
-    setDayOfWeek(item);
+  const onCalendarInputChange = function (event) {
+    setCalendarValue(event.target.value);
     setIsActive(!isActive);
   };
+
   const onTimeclick = function (item) {
     setTimer(item);
     setIsActive(!isActive);
   };
+  function getDayOfWeek(date) {
+    const dayOfWeek = new Date(date).getDay();
+    return isNaN(dayOfWeek)
+      ? null
+      : [
+          'Sunday',
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday',
+        ][dayOfWeek];
+  }
+  const DayOfWeek = getDayOfWeek(
+    calendarValue || new Date(),
+  );
+  // console.log(DayOfWeek);
+  // console.log(calendarValue);
 
   return (
     <>
@@ -92,8 +95,13 @@ export default function DataTimeChelengeModal() {
           onClick={() => setIsActive(!isActive)}
         >
           <div className="chelenge-timer-placeholder">
-            <div>{dayOfWeek || days[dayNumber]}, </div>
+            <div>{DayOfWeek}, &nbsp;</div>
             <div>{timer}</div>
+            <div>
+              <svg className="chelenge-calendar-icon">
+                <use href={sprite + '#calendar'}></use>
+              </svg>
+            </div>
           </div>
         </div>
 
@@ -104,23 +112,15 @@ export default function DataTimeChelengeModal() {
               : 'chelenge-timer-options'
           }
         >
-          <div
-            className="chelenge-timer-options-close"
-            onClick={() => setIsActive(!isActive)}
-          >
-            X
-          </div>
-          <div className="chelenge-timer-item-container">
-            {days.map(item => (
-              <div
-                className="chelenge-timer-item"
-                key={item}
-                onClick={() => onDataclick(item)}
-              >
-                {item}
-              </div>
-            ))}
-          </div>
+          <input
+            className="chelenge-calendar-item-container"
+            type="date"
+            id="start"
+            name="trip-start"
+            draggable
+            onChange={e => onCalendarInputChange(e)}
+            value={calendarValue}
+          />
           <div className="chelenge-timer-item-container">
             {time.map(item => (
               <div

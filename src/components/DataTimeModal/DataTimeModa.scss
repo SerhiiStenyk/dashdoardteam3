@@ -13,6 +13,7 @@
   cursor: pointer;
 }
 
+
 .data-timer-input {
   display: flex;
   align-items: center;
@@ -22,6 +23,19 @@
 .data-timer-placeholder {
   display: flex;
   align-items: center;
+
+// .data-timer-input {
+//   // display: flex;
+//   align-items: center;
+//   padding-top: 6px;
+// }
+
+.data-timer-placeholder {
+  display: flex;
+  // justify-content: space-between;
+  // align-items: center;
+  margin-left: 36px;
+
   color: #b9c3c8;
   cursor: pointer;
 }
@@ -69,4 +83,9 @@
 .data-timer-item-container {
   height: 90px;
   overflow: scroll;
+}
+.calendar-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
 }

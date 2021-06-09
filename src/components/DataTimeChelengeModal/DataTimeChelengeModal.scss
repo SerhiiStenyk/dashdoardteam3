@@ -20,8 +20,11 @@
 
 .chelenge-timer-placeholder {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+  // justify-content: space-between;
+  // align-items: center;
+  margin-left: 36px;
+
   color: #b9c3c8;
   cursor: pointer;
 }
@@ -34,11 +37,23 @@
   top: -30%;
   left: 46px;
   display: flex;
+
   justify-content: center;
   align-items: flex-start;
+
+  flex-direction: column;
+
+  // justify-content: center;
+  // align-items: center;
+
   visibility: hidden;
+  overflow: hidden;
+
 
   // height: 90px;
+
+  height: 120px;
+
   padding: 10px;
   color: #b9c3c8;
   opacity: 0;
@@ -67,6 +82,17 @@
 }
 
 .chelenge-timer-item-container {
+  width: 80px;
   height: 90px;
   overflow: scroll;
+}
+
+.chelenge-calendar-item-container {
+  width: 54px;
+}
+
+.chelenge-calendar-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
 }

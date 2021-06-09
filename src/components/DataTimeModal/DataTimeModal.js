@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './DataTimeModa.scss';
+import sprite from '../../sprite.svg';
 
 const time = [
   '00:00',
@@ -60,9 +61,9 @@ const getToday = function () {
     new Date().getTime() + 24 * 60 * 60 * 1000,
   );
   const day = currentDate.getDate();
-  const month = currentDate.getMonth();
+  const month = currentDate.getMonth() + 1;
   const year = currentDate.getFullYear();
-  return day + '/' + month + '/' + year;
+  return year + '-' + day + '-' + month;
 };
 const today = getToday();
 
@@ -71,13 +72,11 @@ const getTommorow = function () {
     new Date().getTime() + 24 * 60 * 60 * 1000,
   );
   const day = currentDate.getDate() + 1;
-  const month = currentDate.getMonth();
+  const month = currentDate.getMonth() + 1;
   const year = currentDate.getFullYear();
-  return day + '/' + month + '/' + year;
+  return year + '-' + day + '-' + month;
 };
 const tommorow = getTommorow();
-
-const DataTime = [];
 
 export default function DataTimeModal() {
   const [isActive, setIsActive] = useState(false);
@@ -89,9 +88,9 @@ export default function DataTimeModal() {
       new Date().getTime() + 24 * 60 * 60 * 1000,
     );
     const day = currentDate.getDate();
-    const month = currentDate.getMonth();
+    const month = currentDate.getMonth() + 1;
     const year = currentDate.getFullYear();
-    setStartDate(day + '/' + month + '/' + year);
+    setStartDate(year + '-' + day + '-' + month);
   };
 
   const setTomorrowData = function () {
@@ -101,7 +100,7 @@ export default function DataTimeModal() {
     const day = currentDate.getDate() + 1;
     const month = currentDate.getMonth();
     const year = currentDate.getFullYear();
-    setStartDate(day + '/' + month + '/' + year);
+    setStartDate(year + '-' + day + '-' + month);
   };
 
   const onDataTodayClick = function () {
@@ -117,6 +116,8 @@ export default function DataTimeModal() {
     setTimer(item);
     setIsActive(!isActive);
   };
+  console.log(startDate);
+  console.log(today);
 
   return (
     <>
@@ -131,7 +132,12 @@ export default function DataTimeModal() {
             ) : (
               <div>Tomorrow, </div>
             )}
-            <div>{timer}</div>
+            <div>&nbsp;{timer}</div>
+            <div>
+              <svg className="calendar-icon">
+                <use href={sprite + '#calendar'}></use>
+              </svg>
+            </div>
           </div>
         </div>
 
@@ -169,7 +175,7 @@ export default function DataTimeModal() {
                 key={item}
                 onClick={() => onTimeclick(item)}
               >
-                {item}
+                &nbsp;{item}
               </div>
             ))}
           </div>

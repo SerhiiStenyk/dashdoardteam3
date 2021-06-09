@@ -1,74 +1,163 @@
-.box {
-    position: absolute;
-    width: 591px;
-    height: 307px;
-    left: 200px;
-    top: 258px;
-    z-index: 999999;
+
+
+.Box {
+  position: absolute;
+  left: 15px;
+  top: 60px;
+  z-index: 999999;
 }
 
-.logo {
-    color:#00D7FF;
-    font-family: HelveticaNeueCyr;
-font-size: 24px;
-font-style: normal;
-font-weight: 700;
-line-height: 24px;
-letter-spacing: 0.02em;
-text-align: left;
+    @media (min-width: 768px) {
+      .Box {
+      left: 50px;
+      top: 312px;
+    }}
 
+    @media (min-width: 1280px) {
+      .Box {
+      left: 230px;
+      top: 190px;
+    }}
+
+
+.logo {
+  position: absolute;
+  width: 99px;
+  height: 24px;
+  font-family: HelveticaNeueCyr;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: 0.02em;
+  color: #00D7FF;
 }
 
 .title {
-    color: #15395A;
-    font-family: HelveticaNeueCyr;
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 45px;
-    letter-spacing: 0.02em;
-    text-align: left;
-    margin-left: 30px;
+  position: absolute;
+  width: 281px;
+  height: 87px;
+  top: 144px;
+  font-family: HelveticaNeueCyr;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 29px;
+  letter-spacing: 0.02em;
+  color: #15395A;
 }
 
-.input-box {
-    display:inline-flex;
-}
+@media (min-width: 768px) {
+  .title {
+    width: 375px;
+height: 99px;
+top: 50px;
+font-size: 24px;
+line-height: 33px;
+}}
+
+@media (min-width: 1280px) {
+  .title {
+    width: 562px;
+height: 135px;
+top: 70px;
+font-size: 36px;
+line-height: 45px;
+}}
 
 .appeal {
-
-width: 400px;
-height: 45px;
-
-font-family: HelveticaNeueCyr;
-font-style: normal;
-font-weight: normal;
-font-size: 24px;
-line-height: 45px;
-margin-left: 30px;
-letter-spacing: 0.02em;
-
-color: #B9C3C8;
+  position: absolute;
+  width: 250px;
+  height: 45px;
+  top: 261px;
+  font-family: HelveticaNeueCyr;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 45px;
+  letter-spacing: 0.02em;
+  color: #B9C3C8;
    }
 
-   .input {
-    width: 148px;
-    height: 24px;
-    margin-top: 30px;
+   @media (min-width: 768px) {
+    .appeal {
+      width: 298px;
+      height: 45px;;
+      top: 165px;
+      font-size: 18px;
+      line-height: 45px;
+  }}
+
+  @media (min-width: 1280px) {
+    .appeal {
+      width: 397px;
+      height: 45px;
+      top: 220px;
+      font-size: 24px;
+      line-height: 45px;
+  }}
+
+   .inputEmail {
+    display: flex;
+    position: absolute;
+    width: 290px;
+    height: 18px;
+    top: 336px;
     border:none;
-    border-bottom: 1px solid #00D7FF;   
+    border-bottom: 1px solid #00D7FF;  
+    color: #00D7FF; 
    }
+
+   .inputEmail:focus { color: #000000; }
+
+   @media (min-width: 768px) {
+    .inputEmail {
+      width: 193px;
+      top: 230px;
+   }}
+
+   @media (min-width: 1280px) {
+    .inputEmail {
+      width: 196px;
+      top: 290px;
+   }}
+
+   .inputPassword {
+    display: flex;
+    position: absolute;
+    width: 290px;
+height: 18px;
+top: 374px;
+    border:none;
+    border-bottom: 1px solid #00D7FF;  
+    color: #00D7FF; 
+   }
+
+   .inputPassword:focus { color: #000000; }
+
+   @media (min-width: 768px) {
+    .inputPassword {
+width: 193px;
+top: 265px;
+  }}
+
+  @media (min-width: 1280px) {
+    .inputPassword {
+      width: 196px;
+      top: 320px;
+   }}
 
    .button {
-        width: 56px;
-        height: 56px;
+    width: 52px;
+    height: 52px;
+    left: 134px;
+    top: 415px;
         appearance: none;
         border-radius: 50%;
         border: 0;
         color: #FFFFFF;
         background-color: #FF851C;
         cursor: pointer;
-        padding: 0;
         position: relative;
         font-family: HelveticaNeueCyr;
         font-style: normal;
@@ -77,17 +166,61 @@ color: #B9C3C8;
         line-height: 24px;
         text-align: center;
         letter-spacing: 0.02em;
-        margin-left: 10px;
    }
 
-   .pic1 {
-    position: absolute;
-    left: 70%;
-    top: -13.82px;
-   }
+   .button:hover { background: #00D7FF; }
+   .button:focus { background: #00D7FF; } 
 
-   .pic2 {
-    position: absolute;
-    left: 33%;
-    top: 250px; 
-   }
+   @media (min-width: 768px) {
+    .button {
+      left: 143px;
+      top: 300px;
+  }}
+
+  @media (min-width: 1280px) {
+    .button {
+      top: 370px;
+   }}
+
+   body { 
+        background: url("../../images/mobile/landingMobile.jpg") ;
+        background-repeat: no-repeat; 
+        background-size: cover;  
+      }
+      @media (min-resolution: 1.25dppx) {
+        body {
+        background: url("../../images/mobile/landing\ -\ mobile@2x.jpg");
+      }}
+      @media (min-resolution: 3.25dppx) {
+        body {
+        background: url("../../images/mobile/landing\ -\ mobile@4x.jpg");
+      }}
+
+    @media (min-width: 768px) {
+        body {
+          background: url("../../images/tablet/landing\ -\ tablet.jpg") ;
+          background-repeat: no-repeat;
+          background-size: cover; }
+        }
+        @media (min-resolution: 1.25dppx) {
+          body {
+          background: url("../../images/tablet/landing\ -\ tablet@2x.jpg");
+        }}
+        @media (min-resolution: 3.25dppx) {
+          body {
+          background: url("../../images/tablet/landing\ -\ tablet@4x.jpg");
+        }}
+
+    @media (min-width: 1280px) {
+        body {
+          background: url("../../images/desktop/landing.jpg") ;
+          background-repeat: no-repeat;
+          background-size: cover; }
+          @media (min-resolution: 1.25dppx) {
+            body {
+            background: url("../../images/desktop/landing@2x.jpg");
+          }}
+          @media (min-resolution: 3.25dppx) {
+            body {
+            background: url("../../images/desktop/landing@4x.jpg");
+          }}}

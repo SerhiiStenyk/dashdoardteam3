@@ -4,7 +4,9 @@ import routes from './routes';
 import './App.css';
 import './fonts.css';
 
+
 import TodoCard from './components/TodoCard/TodoCard';
+
 
 const Landing = lazy(() =>
   import(
@@ -24,6 +26,7 @@ const NotFoundPage = lazy(() =>
 
 const App = () => (
   <>
+
     <TodoCard />
     <TodoCard />
     <TodoCard />
@@ -31,6 +34,11 @@ const App = () => (
     <TodoCard />
 
     {/* <Suspense fallback={<h1>Loader...</h1>}>
+
+
+
+    <Suspense fallback={<h1>Loader...</h1>}>
+
       <Switch>
         <Route
           exact
