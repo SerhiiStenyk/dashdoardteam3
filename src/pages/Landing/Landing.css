@@ -1,3 +1,5 @@
+
+
 .Box {
   position: absolute;
   left: 15px;
@@ -182,24 +184,43 @@ top: 265px;
 
    body { 
         background: url("../../images/mobile/landingMobile.jpg") ;
-        background-repeat: no-repeat;   
+        background-repeat: no-repeat; 
+        background-size: cover;  
       }
+      @media (min-resolution: 1.25dppx) {
+        body {
+        background: url("../../images/mobile/landing\ -\ mobile@2x.jpg");
+      }}
+      @media (min-resolution: 3.25dppx) {
+        body {
+        background: url("../../images/mobile/landing\ -\ mobile@4x.jpg");
+      }}
 
-      @media (min-width: 768px) {
+    @media (min-width: 768px) {
         body {
           background: url("../../images/tablet/landing\ -\ tablet.jpg") ;
-          background-repeat: no-repeat; }}
+          background-repeat: no-repeat;
+          background-size: cover; }
+        }
+        @media (min-resolution: 1.25dppx) {
+          body {
+          background: url("../../images/tablet/landing\ -\ tablet@2x.jpg");
+        }}
+        @media (min-resolution: 3.25dppx) {
+          body {
+          background: url("../../images/tablet/landing\ -\ tablet@4x.jpg");
+        }}
 
-          @media (min-width: 1280px) {
+    @media (min-width: 1280px) {
+        body {
+          background: url("../../images/desktop/landing.jpg") ;
+          background-repeat: no-repeat;
+          background-size: cover; }
+          @media (min-resolution: 1.25dppx) {
             body {
-              background: url("../../images/desktop/landing.jpg") ;
-              background-repeat: no-repeat; }}
-
-    /*.Page { 
-      background: fixed;
-     background-size: cover;
-  }*/
-
-  /*body {background-image:url("../../images/mobile/landingMobile.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;}*/
+            background: url("../../images/desktop/landing@2x.jpg");
+          }}
+          @media (min-resolution: 3.25dppx) {
+            body {
+            background: url("../../images/desktop/landing@4x.jpg");
+          }}}
