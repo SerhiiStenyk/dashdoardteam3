@@ -53,10 +53,15 @@ const time = [
   '23:30',
 ];
 
-export default function DataTimeChelengeModal() {
+export default function DataTimeChelengeModal({
+  setFinishDate,
+  setTime,
+}) {
   const [isActive, setIsActive] = useState(false);
   const [calendarValue, setCalendarValue] = useState('');
   const [timer, setTimer] = useState('00:00');
+  setFinishDate(calendarValue);
+  setTime(timer);
 
   const onCalendarInputChange = function (event) {
     setCalendarValue(event.target.value);

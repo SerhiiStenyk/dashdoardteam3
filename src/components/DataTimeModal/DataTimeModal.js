@@ -58,49 +58,66 @@ const dayNumber = data.getDay();
 
 const getToday = function () {
   const currentDate = new Date(
-    new Date().getTime() + 24 * 60 * 60 * 1000,
+    new Date().getTime(),
+    // + 24 * 60 * 60 * 1000,
   );
   const day = currentDate.getDate();
   const month = currentDate.getMonth() + 1;
   const year = currentDate.getFullYear();
-  return year + '-' + day + '-' + month;
+  return year + '-' + '0' + month + '-' + day;
 };
 const today = getToday();
 
 const getTommorow = function () {
   const currentDate = new Date(
-    new Date().getTime() + 24 * 60 * 60 * 1000,
+    new Date().getTime(),
+    // + 24 * 60 * 60 * 1000,
   );
   const day = currentDate.getDate() + 1;
   const month = currentDate.getMonth() + 1;
   const year = currentDate.getFullYear();
-  return year + '-' + day + '-' + month;
+  return year + '-' + '0' + month + '-' + day;
 };
 const tommorow = getTommorow();
+console.log(
+  '🚀 ~ file: DataTimeModal.js ~ line 80 ~ tommorow',
+  tommorow,
+);
 
-export default function DataTimeModal() {
+export default function DataTimeModal({
+  setFinishDate,
+  setTime,
+}) {
   const [isActive, setIsActive] = useState(false);
   const [startDate, setStartDate] = useState(today);
+  console.log(
+    '🚀 ~ file: DataTimeModal.js ~ line 87 ~ startDate',
+    startDate,
+  );
   const [timer, setTimer] = useState('00:00');
+  setTime(timer);
+  setFinishDate(startDate);
 
   const setTodayData = function () {
     const currentDate = new Date(
-      new Date().getTime() + 24 * 60 * 60 * 1000,
+      new Date().getTime(),
+      // + 24 * 60 * 60 * 1000,
     );
     const day = currentDate.getDate();
     const month = currentDate.getMonth() + 1;
     const year = currentDate.getFullYear();
-    setStartDate(year + '-' + day + '-' + month);
+    setStartDate(year + '-' + '0' + month + '-' + day);
   };
 
   const setTomorrowData = function () {
     const currentDate = new Date(
-      new Date().getTime() + 24 * 60 * 60 * 1000,
+      new Date().getTime(),
+      // + 24 * 60 * 60 * 1000,
     );
     const day = currentDate.getDate() + 1;
-    const month = currentDate.getMonth();
+    const month = currentDate.getMonth() + 1;
     const year = currentDate.getFullYear();
-    setStartDate(year + '-' + day + '-' + month);
+    setStartDate(year + '-' + '0' + month + '-' + day);
   };
 
   const onDataTodayClick = function () {
@@ -116,8 +133,6 @@ export default function DataTimeModal() {
     setTimer(item);
     setIsActive(!isActive);
   };
-  console.log(startDate);
-  console.log(today);
 
   return (
     <>
@@ -149,12 +164,6 @@ export default function DataTimeModal() {
           }
         >
           <div>
-            <div
-              className="data-timer-options-close"
-              onClick={() => setIsActive(!isActive)}
-            >
-              X
-            </div>
             <div
               className="data-timer-item"
               onClick={onDataTodayClick}

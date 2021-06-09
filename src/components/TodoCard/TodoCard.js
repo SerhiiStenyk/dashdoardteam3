@@ -1,4 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+
+import { useSelector, useDispatch } from 'react-redux';
+
+import {
+  cardsOperations,
+  cardsSelectors,
+} from '../../redux/cards';
+
 import s from './TodoCard.module.scss';
 import sprite from '../../sprite.svg';
 import DifficultLevelModal from '../DifficultLevelModal/DifficultLevelModal';
@@ -6,13 +14,15 @@ import DataTimeChelengeModal from '../DataTimeChelengeModal/DataTimeChelengeModa
 import DataTimeModal from '../DataTimeModal/DataTimeModal';
 
 export default function CustomSelect() {
+  const dispatch = useDispatch();
+
   // Состояние выпадающего окна для выбора level
   // eslint-disable-next-line
   const [isActive, setIsActive] = useState(false);
 
   // Типы level: Easy, Normal, Hard
   // eslint-disable-next-line
-  const [difficulty, setDifficulty] = useState(' Normal ');
+  const [difficulty, setDifficulty] = useState('Normal');
 
   // Основное состояние карточки: create, edit, incomplete, done
   const [status, setStatus] = useState('incomplete');
@@ -20,6 +30,8 @@ export default function CustomSelect() {
   // Начат chelenge или нет, для изменения фона карточки, звездочка или кубок, и надписи CHALLENGE
   const [isChallengeStarted, setIsChallengeStarted] =
     useState(true);
+
+  const [type, setType] = useState('Challenge');
 
   // Для внесения (изменения) и отрисовки наименования тудушки
   const [title, setTitle] = useState('Do some thing');
@@ -30,11 +42,12 @@ export default function CustomSelect() {
 
   // Дата окончания
   // eslint-disable-next-line
-  const [finishDate, setFinishDate] = useState('');
+  const [finishDate, setFinishDate] = useState(new Date());
+  const [timer, setTime] = useState('00:00');
 
   //Группы: STUFF, FAMILY, HEALTH, LEARNING, LEISURE, WORK
   const [category, setCategory] = useState({
-    name: 'STUFF',
+    name: 'Stuff',
     color: '#B9C3C8',
   });
 
@@ -43,17 +56,24 @@ export default function CustomSelect() {
     useState(false);
 
   const categories = [
-    { name: 'stuff', color: '#B9C3C8' },
-    { name: 'famely', color: '#FFE6D3' },
-    { name: 'health', color: '#CDF7FF' },
-    { name: 'learning', color: '#FFF6C0' },
-    { name: 'leisure', color: '#F8D2FF' },
-    { name: 'work', color: '#D3F6CE' },
+    { name: 'Stuff', color: '#B9C3C8' },
+    { name: 'Family', color: '#FFE6D3' },
+    { name: 'Health', color: '#CDF7FF' },
+    { name: 'Learning', color: '#FFF6C0' },
+    { name: 'Leisure', color: '#F8D2FF' },
+    { name: 'Work', color: '#D3F6CE' },
   ];
-
   // Внесение значений инпута в стэйт
   const handleChangeInpute = e => {
     setTitle(e.target.value);
+  };
+  const onSetTypeOfTastOrChallenge = function () {
+    setIsChallengeStarted(!isChallengeStarted);
+
+    setType(
+      (isChallengeStarted && 'Task') ||
+        (!isChallengeStarted && 'Chalenge'),
+    );
   };
 
   // Начать редактировать карточку при клике на нее
@@ -74,6 +94,40 @@ export default function CustomSelect() {
       func(arg);
     }
   };
+  const onSubmit = useCallback(
+    ({ title, difficulty, category, date, time, type }) =>
+      dispatch(
+        cardsOperations.addCards({
+          title,
+          difficulty,
+          category,
+          date,
+          time,
+          type,
+        }),
+      ),
+    [dispatch],
+  );
+  // console.log(group.name);
+
+  const card = {
+    title,
+    difficulty,
+    category: category.name,
+    date: finishDate,
+    time: timer,
+    type,
+  };
+  const onReadyClick = function () {
+    // setStatus('done');
+    setStatus('incomplete');
+    console.log(
+      '🚀 ~ file: TodoCard.js ~ line 97 ~ CustomSelect ~ card',
+      card,
+    );
+
+    onSubmit(card);
+  };
 
   // ----------------------------------------------------
   return (
@@ -90,27 +144,21 @@ export default function CustomSelect() {
           {' '}
           {/* Иконки кубка и звезды */}
           <div className={s.levelStarCupContainer}>
-            <DifficultLevelModal />
+            <DifficultLevelModal
+              difficultlevel={setDifficulty}
+            />
             {isChallengeStarted ? (
               <svg className={s.starCupIcon}>
                 <use
                   href={`${sprite}#cup-blue`}
-                  onClick={() =>
-                    setIsChallengeStarted(
-                      !isChallengeStarted,
-                    )
-                  }
+                  onClick={onSetTypeOfTastOrChallenge}
                 ></use>
               </svg>
             ) : (
               <svg className={s.starCupIcon}>
                 <use
                   href={`${sprite}#star-blue`}
-                  onClick={() =>
-                    setIsChallengeStarted(
-                      !isChallengeStarted,
-                    )
-                  }
+                  onClick={onSetTypeOfTastOrChallenge}
                 ></use>
               </svg>
             )}
@@ -158,9 +206,15 @@ export default function CustomSelect() {
           )}
           {/* Дата и время */}
           {isChallengeStarted ? (
-            <DataTimeChelengeModal />
+            <DataTimeChelengeModal
+              setTime={setTime}
+              setFinishDate={setFinishDate}
+            />
           ) : (
-            <DataTimeModal />
+            <DataTimeModal
+              setTime={setTime}
+              setFinishDate={setFinishDate}
+            />
           )}
         </div>
 
@@ -207,7 +261,8 @@ export default function CustomSelect() {
               <>
                 <svg
                   className={`${s.saveClearDoneIcon} ${s.saveIcon}`}
-                  onClick={() => setStatus('incomplete')}
+                  // onClick={() => setStatus('incomplete')}
+                  onClick={onReadyClick}
                 >
                   <use
                     href={`${sprite}#diskette-save`}
