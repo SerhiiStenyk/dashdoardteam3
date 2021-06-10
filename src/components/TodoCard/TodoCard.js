@@ -13,9 +13,14 @@ import DifficultLevelModal from '../DifficultLevelModal/DifficultLevelModal';
 import DataTimeChelengeModal from '../DataTimeChelengeModal/DataTimeChelengeModal';
 import DataTimeModal from '../DataTimeModal/DataTimeModal';
 
+import Modal from '../Modal/modal'
+
 export default function CustomSelect() {
   const dispatch = useDispatch();
-
+  
+  //modal
+  const [modalActive, setModal] = useState(false)
+ 
   // Состояние выпадающего окна для выбора level
   // eslint-disable-next-line
   const [isActive, setIsActive] = useState(false);
@@ -268,6 +273,8 @@ export default function CustomSelect() {
                     href={`${sprite}#diskette-save`}
                   ></use>
                 </svg>
+
+                <div onClick={() => setModal(true)}>
                 <svg
                   className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
                   alt="cross red"
@@ -276,6 +283,8 @@ export default function CustomSelect() {
                     href={`${sprite}#cross-red-clear`}
                   ></use>
                 </svg>
+                </div>
+
                 <svg
                   className={`${s.saveClearDoneIcon} ${s.doneIcon}`}
                   alt="check mark"
@@ -305,7 +314,14 @@ export default function CustomSelect() {
             )}
           </div>
         </div>
+        {/*Модалка/**/}
+      
+        <Modal isOpened={modalActive} onModalClose={setModal} title={`Delete this ${type}?`}>
+          
+      </Modal>
       </div>
+    
+      
     </div>
   );
 }
