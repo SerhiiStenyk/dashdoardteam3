@@ -41,15 +41,6 @@ export default function App() {
 
   return (
     <>
-      <br />
-      <br />
-
-      <br />
-
-      <br />
-
-      <br />
-
       {/* <DataTimeChelengeModal /> */}
       <Suspense fallback={<h1>Loader...</h1>}>
         <Switch>
