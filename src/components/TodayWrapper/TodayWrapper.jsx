@@ -2,9 +2,10 @@ import React,{useState, useEffect} from 'react';
 // import PropTypes from 'prop-types';
 import s from './TodayWrapper.module.css';
 import axios from 'axios';
+import TodoCard from '../TodoCard/TodoCard'
 
 // надо изменить на глобальную переменную где будет лежать токен авторизации
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGJkZmU4MzhiYjU0ZjZmMTVhYjU3ZjAiLCJzaWQiOiI2MGMwYWVmZDhiYjU0ZjZmMTVhYjU4ZmYiLCJpYXQiOjE2MjMyNDA0NDUsImV4cCI6MTYyMzI0NDA0NX0.lPt19jtkmB-CDRlnpi4MlWVMI1nBgJ9l5icSu9ATcQ8'
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGJkZmU4MzhiYjU0ZjZmMTVhYjU3ZjAiLCJzaWQiOiI2MGMyNDMyMzhiYjU0ZjZmMTVhYjU5N2EiLCJpYXQiOjE2MjMzNDM5MDcsImV4cCI6MTYyMzM0NzUwN30.h8D47iwlnQh4w7cxmhSB4tT2V2DvP9ZbZj3Gd2nDmOE'
 const url = 'https://questify-backend.goit.global/card'
 
 export default function TodayWrapper() {
@@ -29,15 +30,28 @@ export default function TodayWrapper() {
             <h2 className={s.dayTitle}>TODAY</h2>
 
             <ul className={s.list}>
-            {filteredCards.map(({difficulty, title, date, time, category, _id}) => (
-                <li key={_id}>
-                    <ul>
-                        <li>{title}</li>
-                        <li>{ category}</li>
-                        <li>{difficulty }</li>
-                        <li>{date}, {time}</li>
-                    </ul>
-                </li>
+                {filteredCards.map(({ difficulty, title, date, time, category, status, type, _id }) => (
+                
+                    <TodoCard key={_id}
+                        id={_id}
+                        category={category}
+                        date={date}
+                        difficulty={difficulty}
+                        status={status}
+                        time={time}
+                        title={title}
+                        type={type}
+                    />
+
+                    
+                // <li key={_id}>
+                //     <ul>
+                //         <li>{title}</li>
+                //         <li>{ category}</li>
+                //         <li>{difficulty }</li>
+                //         <li>{date}, {time}</li>
+                //     </ul>
+                // </li>
             )
             )}
         </ul>

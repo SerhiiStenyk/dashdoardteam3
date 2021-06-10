@@ -2,13 +2,14 @@ import React from 'react';
 // import PropTypes from 'prop-types';
 // import Card from '../TodoCard/TodoCard';
 import s from './DoneList.module.css';
+import TodoCard from '../TodoCard/TodoCard'
 
 const DoneList = ({ cards }) => {
     const filtredCards = cards.filter(({ status }) =>  status === "Complete" ) 
 
     return (
         <ul className={s.list}>
-            {filtredCards.map(({difficulty, title, date, time, category}) => (
+            {filtredCards.map(({ difficulty, title, date, time, category, status, type, _id }) => (
                 // <Card key={id}
                 //     level={level}
                 //     title={title}
@@ -16,14 +17,16 @@ const DoneList = ({ cards }) => {
                 //     time={time}
                 //     group={group}
                 // />
-                <li>
-                    <ul>
-                        <li>{title }</li>
-                        <li>{ category}</li>
-                        <li>{difficulty }</li>
-                        <li>{date}, {time}</li>
-                    </ul>
-                </li>
+                  <TodoCard key={_id}
+                        id={_id}
+                        category={category}
+                        date={date}
+                        difficulty={difficulty}
+                        status={status}
+                        time={time}
+                        title={title}
+                        type={type}
+                    />
             )
             )}
         </ul>

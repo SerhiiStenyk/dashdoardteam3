@@ -87,6 +87,8 @@ console.log(
 export default function DataTimeModal({
   setFinishDate,
   setTime,
+  timeCameFromProps,
+  dataCameFromProps
 }) {
   const [isActive, setIsActive] = useState(false);
   const [startDate, setStartDate] = useState(today);

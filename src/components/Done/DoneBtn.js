@@ -9,7 +9,7 @@ import axios from 'axios';
 // import cards from './example.json';
 
 // надо изменить на глобальную переменную где будет лежать токен авторизации
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGJkZmU4MzhiYjU0ZjZmMTVhYjU3ZjAiLCJzaWQiOiI2MGMwYWVmZDhiYjU0ZjZmMTVhYjU4ZmYiLCJpYXQiOjE2MjMyNDA0NDUsImV4cCI6MTYyMzI0NDA0NX0.lPt19jtkmB-CDRlnpi4MlWVMI1nBgJ9l5icSu9ATcQ8'
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGJkZmU4MzhiYjU0ZjZmMTVhYjU3ZjAiLCJzaWQiOiI2MGMyNDMyMzhiYjU0ZjZmMTVhYjU5N2EiLCJpYXQiOjE2MjMzNDM5MDcsImV4cCI6MTYyMzM0NzUwN30.h8D47iwlnQh4w7cxmhSB4tT2V2DvP9ZbZj3Gd2nDmOE'
 const url = 'https://questify-backend.goit.global/card'
 
 export default function DoneBtn() {

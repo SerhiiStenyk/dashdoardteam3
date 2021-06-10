@@ -15,7 +15,7 @@ import DataTimeModal from '../DataTimeModal/DataTimeModal';
 
 import Modal from '../Modal/modal'
 
-export default function CustomSelect() {
+export default function CustomSelect(props) {
   const dispatch = useDispatch();
   
   //modal
@@ -30,16 +30,16 @@ export default function CustomSelect() {
   const [difficulty, setDifficulty] = useState('Normal');
 
   // Основное состояние карточки: create, edit, incomplete, done
-  const [status, setStatus] = useState('incomplete');
+  const [status, setStatus] = useState(props.status || 'incomplete');
 
   // Начат chelenge или нет, для изменения фона карточки, звездочка или кубок, и надписи CHALLENGE
   const [isChallengeStarted, setIsChallengeStarted] =
     useState(true);
 
-  const [type, setType] = useState('Challenge');
+  const [type, setType] = useState(props.type || 'Challenge');
 
   // Для внесения (изменения) и отрисовки наименования тудушки
-  const [title, setTitle] = useState('Do some thing');
+  const [title, setTitle] = useState(props.title || 'Do some thing');
 
   // Дата начала
   // eslint-disable-next-line
@@ -48,11 +48,11 @@ export default function CustomSelect() {
   // Дата окончания
   // eslint-disable-next-line
   const [finishDate, setFinishDate] = useState(new Date());
-  const [timer, setTime] = useState('00:00');
+  const [timer, setTime] = useState(props.time || '00:00');
 
   //Группы: STUFF, FAMILY, HEALTH, LEARNING, LEISURE, WORK
   const [category, setCategory] = useState({
-    name: 'Stuff',
+    name: props.category || 'Stuff',
     color: '#B9C3C8',
   });
 
@@ -150,7 +150,7 @@ export default function CustomSelect() {
           {/* Иконки кубка и звезды */}
           <div className={s.levelStarCupContainer}>
             <DifficultLevelModal
-              difficultlevel={setDifficulty}
+              difficultlevel={setDifficulty} difficultlevelCameFromProps={props.difficulty}
             />
             {isChallengeStarted ? (
               <svg className={s.starCupIcon}>
@@ -214,11 +214,17 @@ export default function CustomSelect() {
             <DataTimeChelengeModal
               setTime={setTime}
               setFinishDate={setFinishDate}
+              timeCameFromProps={props.time}
+              dataCameFromProps={props.date}
+
             />
           ) : (
             <DataTimeModal
               setTime={setTime}
               setFinishDate={setFinishDate}
+              timeCameFromProps={props.time}
+              dataCameFromProps={props.date}
+
             />
           )}
         </div>
