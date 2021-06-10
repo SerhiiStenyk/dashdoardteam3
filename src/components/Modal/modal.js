@@ -8,7 +8,7 @@ const Modal = ({isOpened, onModalClose, title, children}) => {
             <div className={style.modal_content}>
 
                 <div>
-                    <h2>{title}</h2>
+                    <h2 className={style.modal_title}>{title}</h2>
                         {children}
                 </div>
                 
