@@ -102,8 +102,8 @@ export default function DataTimeModal({
   const [timer, setTimer] = useState(
     timeCameFromProps || '00:00',
   );
-  setTime(timer);
-  setFinishDate(startDate);
+  // setTime(timer);
+  // setFinishDate(startDate);
 
   const setTodayData = function () {
     const currentDate = new Date(

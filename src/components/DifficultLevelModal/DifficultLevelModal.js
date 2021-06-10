@@ -13,7 +13,7 @@ export default function DifficultLevelModal({
     color: 'green',
   });
 
-  difficultlevel(level.level);
+  // difficultlevel(level.level);
 
   const levels = [
     {
