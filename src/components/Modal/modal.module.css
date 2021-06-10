@@ -1,0 +1,30 @@
+.modal__wrapper{
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    background: rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+}
+
+.modal__wrapper.open{
+    height: 100%;
+    display: block;
+}
+
+.modal__wrapper.close{
+    height: 0;
+    display: none;
+}
+
+.modal__wrapper.delete{
+    height: 0;
+    display: none;
+}
+.modal{
+    width: 163px;
+    height: 77px;
+    position: absolute;
+    background: #FFFFFF;
+    box-shadow: -3px -4px 4px rgba(21, 57, 90, 0.03), 3px 4px 4px rgba(21, 57, 90, 0.03);
+    border-radius: 10px;
+}

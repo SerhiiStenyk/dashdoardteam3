@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
 import s from './TodoCard.module.css';
 import sprite from '../../sprite.svg';
+//для модалки
+import Modal from '../Modal/modal';
+
+
 
 export default function CustomSelect() {
+//modal
+  const [modal, setModal] = useState({
+    modal: false
+  })
+
+
   // Состояние выпадающего окна для выбора level
   // eslint-disable-next-line
   const [isActive, setIsActive] = useState(false);
@@ -61,6 +71,7 @@ export default function CustomSelect() {
       }
     >
       <div className={s.mainCardContainer}>
+        
         {/* Иконки кубка и звезды */}
         <div className={s.TopContainer}>
           <div>LEVEL</div>
@@ -161,14 +172,24 @@ export default function CustomSelect() {
                     href={`${sprite}#diskette-save`}
                   ></use>
                 </svg>
+
                 <svg
                   className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
-                  alt="cross red"
+                  alt="cross red" onClick={() => setModal({
+                    modal
+                  })}
                 >
                   <use
                     href={`${sprite}#cross-red-clear`}
                   ></use>
                 </svg>
+
+
+
+                <button onClick={() => setModal({
+                    modal
+                  })}></button>
+
                 <svg
                   className={`${s.saveClearDoneIcon} ${s.doneIcon}`}
                   alt="check mark"
@@ -194,6 +215,11 @@ export default function CustomSelect() {
           </div>
         </div>
       </div>
+     
+      {/*Модалка*/}
+      <Modal
+        isOpened={modal.modal} />
+      
     </div>
   );
 }
