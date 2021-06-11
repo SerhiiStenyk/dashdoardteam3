@@ -25,8 +25,8 @@ export default function ContactList() {
   //   );
   //   const searchName = useSelector(cardsSelectors.getFilter);
 
-  //   const onRemoveContact = contactId =>
-  //     dispatch(cardsOperations.deleteContact(contactId));
+  const onRemoveContact = contactId =>
+    dispatch(cardsOperations.deleteCard(contactId));
 
   return (
     <>
@@ -52,8 +52,7 @@ export default function ContactList() {
               time={time}
               title={title}
               type={type}
-
-              //   onRemove={() => onRemoveContact(id)}
+              onRemove={() => onRemoveContact(_id)}
             />
           ),
         )}

@@ -25,9 +25,7 @@ export default function CustomSelect(props) {
   const [difficulty, setDifficulty] = useState('Normal');
 
   // Основное состояние карточки: create, edit, incomplete, done
-  const [status, setStatus] = useState(
-    props.status || 'incomplete',
-  );
+  const [status, setStatus] = useState('incomplete');
 
   // Начат chelenge или нет, для изменения фона карточки, звездочка или кубок, и надписи CHALLENGE
   const [isChallengeStarted, setIsChallengeStarted] =
