@@ -86,7 +86,7 @@ export default function CustomSelect(props) {
 
     setType(
       (isChallengeStarted && 'Task') ||
-        (!isChallengeStarted && 'Chalenge'),
+        (!isChallengeStarted && 'Challenge'),
     );
   };
 
