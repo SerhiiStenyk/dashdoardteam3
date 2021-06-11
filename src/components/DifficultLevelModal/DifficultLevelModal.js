@@ -20,7 +20,7 @@ const levels = [
 
 export default function DifficultLevelModal({
   difficultlevelCameFromProps,
-  difficultlevel,
+  onDifficltChange,
 }) {
   const filteredLevel = levels.find(
     level => level.level === difficultlevelCameFromProps,
@@ -36,11 +36,12 @@ export default function DifficultLevelModal({
     },
   );
 
-  // difficultlevel(level.level);
-
   const onChoiseLevel = function (value) {
+    console.log(value.level);
+
     setLevel(value);
     setIsActive(!isActive);
+    onDifficltChange(value.level);
   };
 
   return (

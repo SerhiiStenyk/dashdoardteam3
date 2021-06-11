@@ -82,6 +82,9 @@ const getTommorow = function () {
 export default function DataTimeModal({
   timeCameFromProps,
   dataCameFromProps,
+  onTimeChange,
+
+  onDataChange,
 }) {
   let tommorow;
 
@@ -108,6 +111,7 @@ export default function DataTimeModal({
     const month = currentDate.getMonth() + 1;
     const year = currentDate.getFullYear();
     setStartDate(year + '-' + '0' + month + '-' + day);
+    onDataChange(year + '-' + '0' + month + '-' + day);
   };
 
   const setTomorrowData = function () {
@@ -119,6 +123,7 @@ export default function DataTimeModal({
     const month = currentDate.getMonth() + 1;
     const year = currentDate.getFullYear();
     setStartDate(year + '-' + '0' + month + '-' + day);
+    onDataChange(year + '-' + '0' + month + '-' + day);
   };
 
   const onDataTodayClick = function () {
@@ -130,9 +135,11 @@ export default function DataTimeModal({
     setTomorrowData();
     setIsActive(!isActive);
   };
+
   const onTimeclick = function (item) {
     setTimer(item);
     setIsActive(!isActive);
+    onTimeChange(item);
   };
 
   return (

@@ -56,9 +56,8 @@ const time = [
 export default function DataTimeChelengeModal({
   timeCameFromProps,
   dataCameFromProps,
-
-  setFinishDate,
-  setTime,
+  onTimeChange,
+  onDataChange,
 }) {
   const [isActive, setIsActive] = useState(false);
   const [calendarValue, setCalendarValue] = useState(
@@ -73,11 +72,13 @@ export default function DataTimeChelengeModal({
   const onCalendarInputChange = function (event) {
     setCalendarValue(event.target.value);
     setIsActive(!isActive);
+    onTimeChange(event.target.value);
   };
 
   const onTimeclick = function (item) {
     setTimer(item);
     setIsActive(!isActive);
+    onDataChange(item);
   };
   function getDayOfWeek(date) {
     const dayOfWeek = new Date(date).getDay();

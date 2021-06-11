@@ -15,6 +15,15 @@ import DataTimeModal from '../DataTimeModal/DataTimeModal';
 
 import Modal from '../Modal/modal';
 
+const categories = [
+  { name: 'Stuff', color: '#B9C3C8' },
+  { name: 'Family', color: '#FFE6D3' },
+  { name: 'Health', color: '#CDF7FF' },
+  { name: 'Learning', color: '#FFF6C0' },
+  { name: 'Leisure', color: '#F8D2FF' },
+  { name: 'Work', color: '#D3F6CE' },
+];
+
 export default function CustomSelect(props) {
   const dispatch = useDispatch();
 
@@ -47,7 +56,7 @@ export default function CustomSelect(props) {
 
   // Дата начала
   // eslint-disable-next-line
-  const [startDate, setStartDate] = useState('');
+  // const [startDate, setStartDate] = useState('');
 
   // Дата окончания
   // eslint-disable-next-line
@@ -55,23 +64,22 @@ export default function CustomSelect(props) {
   const [timer, setTime] = useState(props.time || '00:00');
 
   //Группы: STUFF, FAMILY, HEALTH, LEARNING, LEISURE, WORK
-  const [category, setCategory] = useState({
-    name: props.category || 'Stuff',
-    color: '#B9C3C8',
-  });
+
+  const filteredСategories = categories.find(
+    category => category.name === props.category,
+  );
+
+  const [category, setCategory] = useState(
+    filteredСategories || {
+      name: 'Stuff',
+      color: '#B9C3C8',
+    },
+  );
 
   // Состояние выпадающего окна для выбора category
   const [isCategoryActive, setIsCategoryActive] =
     useState(false);
 
-  const categories = [
-    { name: 'Stuff', color: '#B9C3C8' },
-    { name: 'Family', color: '#FFE6D3' },
-    { name: 'Health', color: '#CDF7FF' },
-    { name: 'Learning', color: '#FFF6C0' },
-    { name: 'Leisure', color: '#F8D2FF' },
-    { name: 'Work', color: '#D3F6CE' },
-  ];
   // Внесение значений инпута в стэйт
   const handleChangeInpute = e => {
     setTitle(e.target.value);
@@ -94,6 +102,19 @@ export default function CustomSelect(props) {
       return;
     }
     setStatus('edit');
+  };
+
+  const onDifficltChange = function (value) {
+    setDifficulty(value);
+  };
+  const onTimeChange = function (value) {
+    console.log(value);
+    setTime(value);
+  };
+  const onDataChange = function (value) {
+    console.log(value);
+
+    setFinishDate(value);
   };
 
   // Сделать элемент доступным к редактированию,
@@ -150,8 +171,8 @@ export default function CustomSelect(props) {
           {/* Иконки кубка и звезды */}
           <div className={s.levelStarCupContainer}>
             <DifficultLevelModal
+              onDifficltChange={onDifficltChange}
               difficultlevelCameFromProps={props.difficulty}
-              difficultlevel={setDifficulty}
             />
             {isChallengeStarted ? (
               <svg className={s.starCupIcon}>
@@ -215,11 +236,15 @@ export default function CustomSelect(props) {
             <DataTimeChelengeModal
               timeCameFromProps={props.time}
               dataCameFromProps={props.date}
+              onTimeChange={onTimeChange}
+              onDataChange={onDataChange}
             />
           ) : (
             <DataTimeModal
               timeCameFromProps={props.time}
               dataCameFromProps={props.date}
+              onTimeChange={onTimeChange}
+              onDataChange={onDataChange}
             />
           )}
         </div>
