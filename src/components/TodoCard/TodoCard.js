@@ -108,12 +108,9 @@ export default function CustomSelect(props) {
     setDifficulty(value);
   };
   const onTimeChange = function (value) {
-    console.log(value);
     setTime(value);
   };
   const onDataChange = function (value) {
-    console.log(value);
-
     setFinishDate(value);
   };
 
@@ -343,9 +340,11 @@ export default function CustomSelect(props) {
         {/*Модалка/**/}
 
         <Modal
+          id={props.id}
           isOpened={modalActive}
           onModalClose={setModal}
           title={`Delete this ${type}?`}
+          onRemove={props.onRemove}
         ></Modal>
       </div>
     </div>

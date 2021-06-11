@@ -16,7 +16,7 @@ import TodoCard from '../TodoCard/TodoCard';
 // const url = 'https://questify-backend.goit.global/card';
 
 export default function TodayWrapper() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const cards = useSelector(cardsSelectors.getCards);
 
   const today = new Date();
@@ -37,6 +37,10 @@ export default function TodayWrapper() {
         status !== 'Complete' && date === dateToCompar,
     );
   }
+  const onRemoveCard = cardId => {
+    console.log(cardId);
+    dispatch(cardsOperations.deleteCard(cardId));
+  };
 
   return (
     <div className={s.container}>
@@ -65,6 +69,7 @@ export default function TodayWrapper() {
                 time={time}
                 title={title}
                 type={type}
+                onRemove={() => onRemoveCard(_id)}
               />
               // <TodoCardToRender
               //   key={_id}

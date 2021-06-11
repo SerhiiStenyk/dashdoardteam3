@@ -8,28 +8,12 @@ import {
 } from '../../redux/cards';
 // import PropTypes from 'prop-types';
 import s from './TommorowWrapper.module.css';
-// import axios from 'axios';
 
 import TodoCard from '../TodoCard/TodoCard';
 
-// надо изменить на глобальную переменную где будет лежать токен авторизации
-// const token =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGJkZmU4MzhiYjU0ZjZmMTVhYjU3ZjAiLCJzaWQiOiI2MGMwYWVmZDhiYjU0ZjZmMTVhYjU4ZmYiLCJpYXQiOjE2MjMyNDA0NDUsImV4cCI6MTYyMzI0NDA0NX0.lPt19jtkmB-CDRlnpi4MlWVMI1nBgJ9l5icSu9ATcQ8';
-// const url = 'https://questify-backend.goit.global/card';
-
 export default function TmmorowWrapper() {
-  //   const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const cards = useSelector(cardsSelectors.getCards);
-
-  //   const [cards, setCards] = useState([]);
-  //   useEffect(() => {
-  //     axios
-  //       .get(url, {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       })
-  //       .then(({ data }) => setCards(data.cards))
-  //       .catch(err => console.log(err));
-  //   }, []);
 
   const today = new Date();
   const dateToCompar = `${today.getFullYear()}-${
@@ -50,6 +34,11 @@ export default function TmmorowWrapper() {
         status !== 'Complete' && date > dateToCompar,
     );
   }
+
+  const onRemoveCard = cardId => {
+    console.log(cardId);
+    dispatch(cardsOperations.deleteCard(cardId));
+  };
 
   return (
     <div className={s.container}>
@@ -78,6 +67,7 @@ export default function TmmorowWrapper() {
                 time={time}
                 title={title}
                 type={type}
+                onRemove={() => onRemoveCard(_id)}
               />
             ),
           )}

@@ -5,7 +5,7 @@ import s from './DoneList.module.css';
 
 import TodoCard from '../TodoCard/TodoCard';
 
-const DoneList = ({ cards }) => {
+const DoneList = ({ cards, onRemove }) => {
   let filtredCards;
 
   if (cards) {
@@ -38,6 +38,7 @@ const DoneList = ({ cards }) => {
               time={time}
               title={title}
               type={type}
+              onRemove={() => onRemove(_id)}
             />
           ),
         )}

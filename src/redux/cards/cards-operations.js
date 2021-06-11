@@ -45,6 +45,8 @@ const addCards = card => dispatch => {
 
 const deleteCard = cardId => dispatch => {
   dispatch(deleteCardRequest());
+  axios.defaults.baseURL =
+    'https://questify-backend.goit.global/';
 
   axios
     .delete(`/card/${cardId}`)

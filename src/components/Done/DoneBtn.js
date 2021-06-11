@@ -12,31 +12,19 @@ import s from './DoneBtn.module.css';
 
 import DoneList from './DoneList';
 import Container from '../Container/Container';
-// import axios from 'axios';
-
-// import cards from './example.json';
-
-// надо изменить на глобальную переменную где будет лежать токен авторизации
-// const token =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGJkZmU4MzhiYjU0ZjZmMTVhYjU3ZjAiLCJzaWQiOiI2MGMwYWVmZDhiYjU0ZjZmMTVhYjU4ZmYiLCJpYXQiOjE2MjMyNDA0NDUsImV4cCI6MTYyMzI0NDA0NX0.lPt19jtkmB-CDRlnpi4MlWVMI1nBgJ9l5icSu9ATcQ8';
-// const url = 'https://questify-backend.goit.global/card';
 
 export default function DoneBtn() {
+  const dispatch = useDispatch();
+
   const cards = useSelector(cardsSelectors.getCards);
 
   const [isOpen, setIsOpen] = useState(false);
   const toggling = () => setIsOpen(!isOpen);
 
-  //   const [cards, setCards] = useState([]);
-
-  //   useEffect(() => {
-  //     axios
-  //       .get(url, {
-  //         headers: { Authorization: `Bearer ${token}` },
-  //       })
-  //       .then(({ data }) => setCards(data.cards))
-  //       .catch(err => console.log(err));
-  //   }, []);
+  const onRemoveCard = cardId => {
+    console.log(cardId);
+    // dispatch(cardsOperations.deleteCard(cardId));
+  };
 
   return (
     // <div className={s.container}>
@@ -59,7 +47,12 @@ export default function DoneBtn() {
         </button>
         <span className={s.dashed}></span>
       </div>
-      {isOpen && <DoneList cards={cards.cards} />}
+      {isOpen && (
+        <DoneList
+          cards={cards.cards}
+          onRemove={() => onRemoveCard}
+        />
+      )}
     </Container>
 
     // </div>
