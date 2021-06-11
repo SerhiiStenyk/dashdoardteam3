@@ -17,6 +17,9 @@ import {
 const fetchCards = () => dispatch => {
   dispatch(fetchAllCardsRequest());
 
+  axios.defaults.baseURL =
+    'https://questify-backend.goit.global/';
+
   axios
     .get('/card')
     .then(({ data }) =>

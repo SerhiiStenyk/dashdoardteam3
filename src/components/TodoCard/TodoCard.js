@@ -13,14 +13,14 @@ import DifficultLevelModal from '../DifficultLevelModal/DifficultLevelModal';
 import DataTimeChelengeModal from '../DataTimeChelengeModal/DataTimeChelengeModal';
 import DataTimeModal from '../DataTimeModal/DataTimeModal';
 
-import Modal from '../Modal/modal'
+import Modal from '../Modal/modal';
 
-export default function CustomSelect() {
+export default function CustomSelect(props) {
   const dispatch = useDispatch();
-  
+
   //modal
-  const [modalActive, setModal] = useState(false)
- 
+  const [modalActive, setModal] = useState(false);
+
   // Состояние выпадающего окна для выбора level
   // eslint-disable-next-line
   const [isActive, setIsActive] = useState(false);
@@ -34,12 +34,16 @@ export default function CustomSelect() {
 
   // Начат chelenge или нет, для изменения фона карточки, звездочка или кубок, и надписи CHALLENGE
   const [isChallengeStarted, setIsChallengeStarted] =
-    useState(true);
+    useState(props.type === 'Challenge');
 
-  const [type, setType] = useState('Challenge');
+  const [type, setType] = useState(
+    props.type === 'Task' ? 'Task' : 'Challenge',
+  );
 
   // Для внесения (изменения) и отрисовки наименования тудушки
-  const [title, setTitle] = useState('Do some thing');
+  const [title, setTitle] = useState(
+    props.title || 'Do some thing',
+  );
 
   // Дата начала
   // eslint-disable-next-line
@@ -48,11 +52,11 @@ export default function CustomSelect() {
   // Дата окончания
   // eslint-disable-next-line
   const [finishDate, setFinishDate] = useState(new Date());
-  const [timer, setTime] = useState('00:00');
+  const [timer, setTime] = useState(props.time || '00:00');
 
   //Группы: STUFF, FAMILY, HEALTH, LEARNING, LEISURE, WORK
   const [category, setCategory] = useState({
-    name: 'Stuff',
+    name: props.category || 'Stuff',
     color: '#B9C3C8',
   });
 
@@ -150,6 +154,7 @@ export default function CustomSelect() {
           {/* Иконки кубка и звезды */}
           <div className={s.levelStarCupContainer}>
             <DifficultLevelModal
+              difficultlevelCameFromProps={props.difficulty}
               difficultlevel={setDifficulty}
             />
             {isChallengeStarted ? (
@@ -275,14 +280,14 @@ export default function CustomSelect() {
                 </svg>
 
                 <div onClick={() => setModal(true)}>
-                <svg
-                  className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
-                  alt="cross red"
-                >
-                  <use
-                    href={`${sprite}#cross-red-clear`}
-                  ></use>
-                </svg>
+                  <svg
+                    className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
+                    alt="cross red"
+                  >
+                    <use
+                      href={`${sprite}#cross-red-clear`}
+                    ></use>
+                  </svg>
                 </div>
 
                 <svg
@@ -315,13 +320,13 @@ export default function CustomSelect() {
           </div>
         </div>
         {/*Модалка/**/}
-      
-        <Modal isOpened={modalActive} onModalClose={setModal} title={`Delete this ${type}?`}>
-          
-      </Modal>
+
+        <Modal
+          isOpened={modalActive}
+          onModalClose={setModal}
+          title={`Delete this ${type}?`}
+        ></Modal>
       </div>
-    
-      
     </div>
   );
 }

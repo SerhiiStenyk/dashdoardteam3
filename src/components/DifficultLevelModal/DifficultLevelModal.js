@@ -1,36 +1,43 @@
 import React, { useState } from 'react';
 import './DifficultLevelModal.scss';
-
-export default function DifficultLevelModal({
-  difficultlevel,
-}) {
-  const [isActive, setIsActive] = useState(false);
-
-  const [level, setLevel] = useState({
+const levels = [
+  {
+    id: 0,
+    level: 'Easy',
+    color: 'teal',
+  },
+  {
     id: 1,
     level: 'Normal',
     color: 'green',
-  });
+  },
+  {
+    id: 2,
+    level: 'Hard',
+    color: 'red',
+  },
+];
 
-  difficultlevel(level.level);
+export default function DifficultLevelModal({
+  difficultlevelCameFromProps,
+  difficultlevel,
+}) {
+  const filteredLevel = levels.find(
+    level => level.level === difficultlevelCameFromProps,
+  );
 
-  const levels = [
-    {
-      id: 0,
-      level: 'Easy',
-      color: 'teal',
-    },
-    {
+  const [isActive, setIsActive] = useState(false);
+
+  const [level, setLevel] = useState(
+    filteredLevel || {
       id: 1,
       level: 'Normal',
       color: 'green',
     },
-    {
-      id: 2,
-      level: 'Hard',
-      color: 'red',
-    },
-  ];
+  );
+  console.log(filteredLevel);
+
+  difficultlevel(level.level);
 
   const onChoiseLevel = function (value) {
     setLevel(value);
