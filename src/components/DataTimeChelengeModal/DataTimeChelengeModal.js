@@ -66,8 +66,6 @@ export default function DataTimeChelengeModal({
   const [timer, setTimer] = useState(
     timeCameFromProps || '00:00',
   );
-  // setFinishDate(calendarValue);
-  // setTime(timer);
 
   const onCalendarInputChange = function (event) {
     setCalendarValue(event.target.value);

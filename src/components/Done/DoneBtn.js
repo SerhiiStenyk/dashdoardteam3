@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -23,12 +23,10 @@ export default function DoneBtn() {
 
   const onRemoveCard = cardId => {
     console.log(cardId);
-    // dispatch(cardsOperations.deleteCard(cardId));
+    dispatch(cardsOperations.deleteCard(cardId));
   };
 
   return (
-    // <div className={s.container}>
-
     <Container>
       <div className={s.head}>
         <button

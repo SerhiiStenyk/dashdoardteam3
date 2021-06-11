@@ -1,4 +1,3 @@
-// import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   cardsOperations,
@@ -6,14 +5,8 @@ import {
 } from '../../redux/cards';
 // import PropTypes from 'prop-types';
 import s from './TodayWrapper.module.css';
-// import axios from 'axios';
-import TodoCard from '../TodoCard/TodoCard';
-// import TodoCardToRender from '../../TodoCardToRender/TodoCardToRender';
 
-// надо изменить на глобальную переменную где будет лежать токен авторизации
-// const token =
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGJlNzUxNDhiYjU0ZjZmMTVhYjU4MmQiLCJzaWQiOiI2MGMzMWFmNjhiYjU0ZjZmMTVhYjU5YmMiLCJpYXQiOjE2MjMzOTkxNTgsImV4cCI6MTYyMzQwMjc1OH0.B7p9cz1Jb34AHWGFIIJjJchM5HrAs9CJzcGX5AoawsQ';
-// const url = 'https://questify-backend.goit.global/card';
+import TodoCard from '../TodoCard/TodoCard';
 
 export default function TodayWrapper() {
   const dispatch = useDispatch();
@@ -38,7 +31,6 @@ export default function TodayWrapper() {
     );
   }
   const onRemoveCard = cardId => {
-    console.log(cardId);
     dispatch(cardsOperations.deleteCard(cardId));
   };
 
@@ -71,28 +63,6 @@ export default function TodayWrapper() {
                 type={type}
                 onRemove={() => onRemoveCard(_id)}
               />
-              // <TodoCardToRender
-              //   key={_id}
-              //   id={_id}
-              //   category={category}
-              //   date={date}
-              //   difficulty={difficulty}
-              //   status={status}
-              //   time={time}
-              //   title={title}
-              //   type={type}
-              // />
-
-              // <li key={_id}>
-              //   <ul>
-              //     <li>{title}</li>
-              //     <li>{category}</li>
-              //     <li>{difficulty}</li>
-              //     <li>
-              //       {date}, {time}
-              //     </li>
-              //   </ul>
-              // </li>
             ),
           )}
       </ul>

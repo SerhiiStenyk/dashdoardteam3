@@ -53,8 +53,8 @@ const time = [
   '23:30',
 ];
 
-const data = new Date();
-const dayNumber = data.getDay();
+// const data = new Date();
+// const dayNumber = data.getDay();
 
 const getToday = function () {
   const currentDate = new Date(
