@@ -135,7 +135,23 @@ export default function CustomSelect(props) {
       ),
     [dispatch],
   );
-  // console.log(group.name);
+  const onEdit = useCallback(
+    (
+      cardId,
+      { title, difficulty, category, date, time, type },
+    ) =>
+      dispatch(
+        cardsOperations.editCard(cardId, {
+          title,
+          difficulty,
+          category,
+          date,
+          time,
+          type,
+        }),
+      ),
+    [dispatch],
+  );
 
   const card = {
     title,
@@ -145,9 +161,13 @@ export default function CustomSelect(props) {
     time: timer,
     type,
   };
-  const onReadyClick = function () {
+  const onReadyClick = function (id) {
     // setStatus('done');
     setStatus('incomplete');
+
+    // console.log(id);
+
+    // onEdit(id, card);
 
     onSubmit(card);
   };
@@ -290,7 +310,7 @@ export default function CustomSelect(props) {
                 <svg
                   className={`${s.saveClearDoneIcon} ${s.saveIcon}`}
                   // onClick={() => setStatus('incomplete')}
-                  onClick={onReadyClick}
+                  onClick={() => onReadyClick(props.id)}
                 >
                   <use
                     href={`${sprite}#diskette-save`}
