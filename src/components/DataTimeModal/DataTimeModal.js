@@ -78,25 +78,26 @@ const getTommorow = function () {
   const year = currentDate.getFullYear();
   return year + '-' + '0' + month + '-' + day;
 };
-const tommorow = getTommorow();
-console.log(
-  '🚀 ~ file: DataTimeModal.js ~ line 80 ~ tommorow',
-  tommorow,
-);
 
 export default function DataTimeModal({
-  setFinishDate,
-  setTime,
+  timeCameFromProps,
+  dataCameFromProps,
 }) {
+  let tommorow;
+
+  if (dataCameFromProps > today) {
+    tommorow = getTommorow();
+  }
+
   const [isActive, setIsActive] = useState(false);
-  const [startDate, setStartDate] = useState(today);
-  console.log(
-    '🚀 ~ file: DataTimeModal.js ~ line 87 ~ startDate',
-    startDate,
+  const [startDate, setStartDate] = useState(
+    tommorow || today,
   );
-  const [timer, setTimer] = useState('00:00');
-  setTime(timer);
-  setFinishDate(startDate);
+  const [timer, setTimer] = useState(
+    timeCameFromProps || '00:00',
+  );
+  // setTime(timer);
+  // setFinishDate(startDate);
 
   const setTodayData = function () {
     const currentDate = new Date(

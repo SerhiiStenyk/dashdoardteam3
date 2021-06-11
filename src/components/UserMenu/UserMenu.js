@@ -10,7 +10,7 @@ import {
 // const isAuthanticated
 
 const UserMenu = ({ email }) => {
-  console.log('email', email);
+  // console.log('email', email);
   // const mail = 'Jacob@gm.com';
   // if (email) {
   //

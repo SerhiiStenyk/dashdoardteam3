@@ -35,9 +35,8 @@ export default function DifficultLevelModal({
       color: 'green',
     },
   );
-  console.log(filteredLevel);
 
-  difficultlevel(level.level);
+  // difficultlevel(level.level);
 
   const onChoiseLevel = function (value) {
     setLevel(value);

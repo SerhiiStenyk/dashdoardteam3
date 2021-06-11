@@ -130,10 +130,6 @@ export default function CustomSelect(props) {
   const onReadyClick = function () {
     // setStatus('done');
     setStatus('incomplete');
-    console.log(
-      '🚀 ~ file: TodoCard.js ~ line 97 ~ CustomSelect ~ card',
-      card,
-    );
 
     onSubmit(card);
   };
@@ -217,13 +213,13 @@ export default function CustomSelect(props) {
           {/* Дата и время */}
           {isChallengeStarted ? (
             <DataTimeChelengeModal
-              setTime={setTime}
-              setFinishDate={setFinishDate}
+              timeCameFromProps={props.time}
+              dataCameFromProps={props.date}
             />
           ) : (
             <DataTimeModal
-              setTime={setTime}
-              setFinishDate={setFinishDate}
+              timeCameFromProps={props.time}
+              dataCameFromProps={props.date}
             />
           )}
         </div>

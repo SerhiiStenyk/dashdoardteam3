@@ -26,6 +26,9 @@
     padding-left: 72px;
     padding-right: 72px;
   }
+  .list {
+    display: flex;
+  }
 }
 
 .dayTitle {
