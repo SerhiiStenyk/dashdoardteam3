@@ -1,11 +1,8 @@
 import React, { useState, useCallback } from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import {
-  cardsOperations,
-  cardsSelectors,
-} from '../../redux/cards';
+import { cardsOperations } from '../../redux/cards';
 
 import s from './TodoCard.module.scss';
 import sprite from '../../sprite.svg';
@@ -32,7 +29,7 @@ export default function CustomSelect(props) {
 
   // Состояние выпадающего окна для выбора level
   // eslint-disable-next-line
-  const [isActive, setIsActive] = useState(false);
+  // const [isActive, setIsActive] = useState(false);
 
   // Типы level: Easy, Normal, Hard
   // eslint-disable-next-line
@@ -165,11 +162,11 @@ export default function CustomSelect(props) {
     // setStatus('done');
     setStatus('incomplete');
 
-    // console.log(id);
-
-    // onEdit(id, card);
-
-    onSubmit(card);
+    if (props.isOnCreate) {
+      onSubmit(card);
+      return;
+    }
+    onEdit(id, card);
   };
 
   // ----------------------------------------------------
