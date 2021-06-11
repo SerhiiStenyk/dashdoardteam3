@@ -40,4 +40,14 @@ export const deleteCardError = createAction(
   'cards/deleteCardError',
 );
 
+export const toggleCompletedRequest = createAction(
+  'cards/toggleCompletedRequest',
+);
+export const toggleCompletedSuccess = createAction(
+  'cards/toggleCompletedSuccess',
+);
+export const toggleCompletedError = createAction(
+  'cards/toggleCompletedError',
+);
+
 export const clearError = createAction('cards/clearError');

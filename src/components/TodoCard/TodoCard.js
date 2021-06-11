@@ -150,6 +150,25 @@ export default function CustomSelect(props) {
     [dispatch],
   );
 
+  const onToggleComplete = useCallback(
+    (
+      cardId,
+      { title, difficulty, category, date, time, type },
+    ) =>
+      dispatch(
+        cardsOperations.toggleCompleted(cardId, {
+          title,
+          difficulty,
+          category,
+          date,
+          time,
+          type,
+          status,
+        }),
+      ),
+    [dispatch],
+  );
+
   const card = {
     title,
     difficulty,
@@ -157,7 +176,10 @@ export default function CustomSelect(props) {
     date: finishDate,
     time: timer,
     type,
+    status,
   };
+
+  console.log(card.status);
   const onReadyClick = function (id) {
     // setStatus('done');
     setStatus('incomplete');
@@ -167,6 +189,11 @@ export default function CustomSelect(props) {
       return;
     }
     onEdit(id, card);
+  };
+  const onCompleteClick = function (id) {
+    console.log(id);
+    setStatus('Complete');
+    onToggleComplete(id, card);
   };
 
   // ----------------------------------------------------
@@ -220,7 +247,7 @@ export default function CustomSelect(props) {
             {isChallengeStarted && status === 'edit' ? (
               <p className={s.operation}>EDIT CHALLENGE</p>
             ) : null}
-            {status === 'done' ||
+            {status === 'Complete' ||
             status === 'incomplete' ? (
               <br
                 className={`${s.operation} ${s.hidden}`}
@@ -328,7 +355,7 @@ export default function CustomSelect(props) {
                 <svg
                   className={`${s.saveClearDoneIcon} ${s.doneIcon}`}
                   alt="check mark"
-                  onClick={() => setStatus('done')}
+                  onClick={() => onCompleteClick(props.id)}
                 >
                   <use href={`${sprite}#check-mark`}></use>
                 </svg>
