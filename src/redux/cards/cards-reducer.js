@@ -19,11 +19,16 @@ import {
 const cards = createReducer([], {
   //actions.addContact.type вычисляемые свойства объекта(приведётся к строке и подставится свойство type )
   [fetchAllCardsSuccess]: (_, { payload }) => payload,
-  [addCardSuccess]: (state, { payload }) => [...state, payload],
+  [addCardSuccess]: (state, { payload }) => [
+    ...state,
+    payload,
+  ],
   [deleteCardSuccess]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
-  [editCardSuccess]: (state, { payload }) =>
-    [...state.filter(({ id }) => id !== payload.id), payload],
+  [editCardSuccess]: (state, { payload }) => [
+    ...state.filter(({ id }) => id !== payload.id),
+    payload,
+  ],
 });
 
 const loading = createReducer(false, {

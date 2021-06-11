@@ -53,8 +53,8 @@ const time = [
   '23:30',
 ];
 
-const data = new Date();
-const dayNumber = data.getDay();
+// const data = new Date();
+// const dayNumber = data.getDay();
 
 const getToday = function () {
   const currentDate = new Date(
@@ -78,25 +78,29 @@ const getTommorow = function () {
   const year = currentDate.getFullYear();
   return year + '-' + '0' + month + '-' + day;
 };
-const tommorow = getTommorow();
-console.log(
-  '🚀 ~ file: DataTimeModal.js ~ line 80 ~ tommorow',
-  tommorow,
-);
 
 export default function DataTimeModal({
-  setFinishDate,
-  setTime,
+  timeCameFromProps,
+  dataCameFromProps,
+  onTimeChange,
+
+  onDataChange,
 }) {
+  let tommorow;
+
+  if (dataCameFromProps > today) {
+    tommorow = getTommorow();
+  }
+
   const [isActive, setIsActive] = useState(false);
-  const [startDate, setStartDate] = useState(today);
-  console.log(
-    '🚀 ~ file: DataTimeModal.js ~ line 87 ~ startDate',
-    startDate,
+  const [startDate, setStartDate] = useState(
+    tommorow || today,
   );
-  const [timer, setTimer] = useState('00:00');
-  setTime(timer);
-  setFinishDate(startDate);
+  const [timer, setTimer] = useState(
+    timeCameFromProps || '00:00',
+  );
+  // setTime(timer);
+  // setFinishDate(startDate);
 
   const setTodayData = function () {
     const currentDate = new Date(
@@ -107,6 +111,7 @@ export default function DataTimeModal({
     const month = currentDate.getMonth() + 1;
     const year = currentDate.getFullYear();
     setStartDate(year + '-' + '0' + month + '-' + day);
+    onDataChange(year + '-' + '0' + month + '-' + day);
   };
 
   const setTomorrowData = function () {
@@ -118,6 +123,7 @@ export default function DataTimeModal({
     const month = currentDate.getMonth() + 1;
     const year = currentDate.getFullYear();
     setStartDate(year + '-' + '0' + month + '-' + day);
+    onDataChange(year + '-' + '0' + month + '-' + day);
   };
 
   const onDataTodayClick = function () {
@@ -129,9 +135,11 @@ export default function DataTimeModal({
     setTomorrowData();
     setIsActive(!isActive);
   };
+
   const onTimeclick = function (item) {
     setTimer(item);
     setIsActive(!isActive);
+    onTimeChange(item);
   };
 
   return (

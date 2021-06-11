@@ -1,6 +1,7 @@
-const getIsAuthenticated = state => state.auth.isAuthenticated;
-const getUserEmail = state => state.auth.user.email;//???
-const getToken = state => state.auth.token;//???
+const getIsAuthenticated = state =>
+  state.auth.isAuthenticated;
+const getUserEmail = state => state.auth.user.email; //???
+const getToken = state => state.auth.token; //???
 const getLoading = state => state.auth.loading;
 const getError = state => state.auth.error;
 

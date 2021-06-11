@@ -1,11 +1,8 @@
 import React, { useState, useCallback } from 'react';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import {
-  cardsOperations,
-  cardsSelectors,
-} from '../../redux/cards';
+import { cardsOperations } from '../../redux/cards';
 
 import s from './TodoCard.module.scss';
 import sprite from '../../sprite.svg';
@@ -13,17 +10,26 @@ import DifficultLevelModal from '../DifficultLevelModal/DifficultLevelModal';
 import DataTimeChelengeModal from '../DataTimeChelengeModal/DataTimeChelengeModal';
 import DataTimeModal from '../DataTimeModal/DataTimeModal';
 
-import Modal from '../Modal/modal'
+import Modal from '../Modal/modal';
 
-export default function CustomSelect() {
+const categories = [
+  { name: 'Stuff', color: '#B9C3C8' },
+  { name: 'Family', color: '#FFE6D3' },
+  { name: 'Health', color: '#CDF7FF' },
+  { name: 'Learning', color: '#FFF6C0' },
+  { name: 'Leisure', color: '#F8D2FF' },
+  { name: 'Work', color: '#D3F6CE' },
+];
+
+export default function CustomSelect(props) {
   const dispatch = useDispatch();
-  
+
   //modal
-  const [modalActive, setModal] = useState(false)
- 
+  const [modalActive, setModal] = useState(false);
+
   // Состояние выпадающего окна для выбора level
   // eslint-disable-next-line
-  const [isActive, setIsActive] = useState(false);
+  // const [isActive, setIsActive] = useState(false);
 
   // Типы level: Easy, Normal, Hard
   // eslint-disable-next-line
@@ -34,40 +40,43 @@ export default function CustomSelect() {
 
   // Начат chelenge или нет, для изменения фона карточки, звездочка или кубок, и надписи CHALLENGE
   const [isChallengeStarted, setIsChallengeStarted] =
-    useState(true);
+    useState(props.type === 'Challenge');
 
-  const [type, setType] = useState('Challenge');
+  const [type, setType] = useState(
+    props.type === 'Challenge' ? 'Challenge' : 'Task',
+  );
 
   // Для внесения (изменения) и отрисовки наименования тудушки
-  const [title, setTitle] = useState('Do some thing');
+  const [title, setTitle] = useState(
+    props.title || 'Do some thing',
+  );
 
   // Дата начала
   // eslint-disable-next-line
-  const [startDate, setStartDate] = useState('');
+  // const [startDate, setStartDate] = useState('');
 
   // Дата окончания
   // eslint-disable-next-line
   const [finishDate, setFinishDate] = useState(new Date());
-  const [timer, setTime] = useState('00:00');
+  const [timer, setTime] = useState(props.time || '00:00');
 
   //Группы: STUFF, FAMILY, HEALTH, LEARNING, LEISURE, WORK
-  const [category, setCategory] = useState({
-    name: 'Stuff',
-    color: '#B9C3C8',
-  });
+
+  const filteredСategories = categories.find(
+    category => category.name === props.category,
+  );
+
+  const [category, setCategory] = useState(
+    filteredСategories || {
+      name: 'Stuff',
+      color: '#B9C3C8',
+    },
+  );
 
   // Состояние выпадающего окна для выбора category
   const [isCategoryActive, setIsCategoryActive] =
     useState(false);
 
-  const categories = [
-    { name: 'Stuff', color: '#B9C3C8' },
-    { name: 'Family', color: '#FFE6D3' },
-    { name: 'Health', color: '#CDF7FF' },
-    { name: 'Learning', color: '#FFF6C0' },
-    { name: 'Leisure', color: '#F8D2FF' },
-    { name: 'Work', color: '#D3F6CE' },
-  ];
   // Внесение значений инпута в стэйт
   const handleChangeInpute = e => {
     setTitle(e.target.value);
@@ -92,6 +101,16 @@ export default function CustomSelect() {
     setStatus('edit');
   };
 
+  const onDifficltChange = function (value) {
+    setDifficulty(value);
+  };
+  const onTimeChange = function (value) {
+    setTime(value);
+  };
+  const onDataChange = function (value) {
+    setFinishDate(value);
+  };
+
   // Сделать элемент доступным к редактированию,
   // если карточка находится в сост. 'edit' или 'create'
   const changeState = (func, arg) => {
@@ -113,7 +132,23 @@ export default function CustomSelect() {
       ),
     [dispatch],
   );
-  // console.log(group.name);
+  const onEdit = useCallback(
+    (
+      cardId,
+      { title, difficulty, category, date, time, type },
+    ) =>
+      dispatch(
+        cardsOperations.editCard(cardId, {
+          title,
+          difficulty,
+          category,
+          date,
+          time,
+          type,
+        }),
+      ),
+    [dispatch],
+  );
 
   const card = {
     title,
@@ -123,15 +158,15 @@ export default function CustomSelect() {
     time: timer,
     type,
   };
-  const onReadyClick = function () {
+  const onReadyClick = function (id) {
     // setStatus('done');
     setStatus('incomplete');
-    console.log(
-      '🚀 ~ file: TodoCard.js ~ line 97 ~ CustomSelect ~ card',
-      card,
-    );
 
-    onSubmit(card);
+    if (props.isOnCreate) {
+      onSubmit(card);
+      return;
+    }
+    onEdit(id, card);
   };
 
   // ----------------------------------------------------
@@ -150,7 +185,8 @@ export default function CustomSelect() {
           {/* Иконки кубка и звезды */}
           <div className={s.levelStarCupContainer}>
             <DifficultLevelModal
-              difficultlevel={setDifficulty}
+              onDifficltChange={onDifficltChange}
+              difficultlevelCameFromProps={props.difficulty}
             />
             {isChallengeStarted ? (
               <svg className={s.starCupIcon}>
@@ -212,13 +248,17 @@ export default function CustomSelect() {
           {/* Дата и время */}
           {isChallengeStarted ? (
             <DataTimeChelengeModal
-              setTime={setTime}
-              setFinishDate={setFinishDate}
+              timeCameFromProps={props.time}
+              dataCameFromProps={props.date}
+              onTimeChange={onTimeChange}
+              onDataChange={onDataChange}
             />
           ) : (
             <DataTimeModal
-              setTime={setTime}
-              setFinishDate={setFinishDate}
+              timeCameFromProps={props.time}
+              dataCameFromProps={props.date}
+              onTimeChange={onTimeChange}
+              onDataChange={onDataChange}
             />
           )}
         </div>
@@ -267,7 +307,7 @@ export default function CustomSelect() {
                 <svg
                   className={`${s.saveClearDoneIcon} ${s.saveIcon}`}
                   // onClick={() => setStatus('incomplete')}
-                  onClick={onReadyClick}
+                  onClick={() => onReadyClick(props.id)}
                 >
                   <use
                     href={`${sprite}#diskette-save`}
@@ -275,14 +315,14 @@ export default function CustomSelect() {
                 </svg>
 
                 <div onClick={() => setModal(true)}>
-                <svg
-                  className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
-                  alt="cross red"
-                >
-                  <use
-                    href={`${sprite}#cross-red-clear`}
-                  ></use>
-                </svg>
+                  <svg
+                    className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
+                    alt="cross red"
+                  >
+                    <use
+                      href={`${sprite}#cross-red-clear`}
+                    ></use>
+                  </svg>
                 </div>
 
                 <svg
@@ -315,13 +355,15 @@ export default function CustomSelect() {
           </div>
         </div>
         {/*Модалка/**/}
-      
-        <Modal isOpened={modalActive} onModalClose={setModal} title={`Delete this ${type}?`}>
-          
-      </Modal>
+
+        <Modal
+          id={props.id}
+          isOpened={modalActive}
+          onModalClose={setModal}
+          title={`Delete this ${type}?`}
+          onRemove={props.onRemove}
+        ></Modal>
       </div>
-    
-      
     </div>
   );
 }

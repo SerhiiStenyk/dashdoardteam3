@@ -6,9 +6,9 @@ import {
   addCardRequest,
   addCardSuccess,
   addCardError,
-  // editCardRequest,
-  // editCardSuccess,
-  // editCardError,
+  editCardRequest,
+  editCardSuccess,
+  editCardError,
   deleteCardRequest,
   deleteCardSuccess,
   deleteCardError,
@@ -16,6 +16,8 @@ import {
 
 const fetchCards = () => dispatch => {
   dispatch(fetchAllCardsRequest());
+  axios.defaults.baseURL =
+    'https://questify-backend.goit.global/';
 
   axios
     .get('/card')
@@ -40,9 +42,10 @@ const addCards = card => dispatch => {
     .then(({ data }) => dispatch(addCardSuccess(data)))
     .catch(error => dispatch(addCardError(error.message)));
 };
-
 const deleteCard = cardId => dispatch => {
   dispatch(deleteCardRequest());
+  axios.defaults.baseURL =
+    'https://questify-backend.goit.global/';
 
   axios
     .delete(`/card/${cardId}`)
@@ -52,9 +55,21 @@ const deleteCard = cardId => dispatch => {
     );
 };
 
+const editCard = (cardId, card) => dispatch => {
+  dispatch(editCardRequest());
+  axios.defaults.baseURL =
+    'https://questify-backend.goit.global/';
+
+  axios
+    .patch(`/card/${cardId}`, { ...card })
+    .then(() => dispatch(editCardSuccess(cardId)))
+    .catch(error => dispatch(editCardError(error.message)));
+};
+
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {
   fetchCards,
+  editCard,
   addCards,
   deleteCard,
 };

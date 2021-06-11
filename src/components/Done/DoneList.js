@@ -3,35 +3,51 @@ import React from 'react';
 // import Card from '../TodoCard/TodoCard';
 import s from './DoneList.module.css';
 
-const DoneList = ({ cards }) => {
-    const filtredCards = cards.filter(({ status }) =>  status === "Complete" ) 
+import TodoCard from '../TodoCard/TodoCard';
 
-    return (
-        <ul className={s.list}>
-            {filtredCards.map(({difficulty, title, date, time, category}) => (
-                // <Card key={id}
-                //     level={level}
-                //     title={title}
-                //     date={date}
-                //     time={time}
-                //     group={group}
-                // />
-                <li>
-                    <ul>
-                        <li>{title }</li>
-                        <li>{ category}</li>
-                        <li>{difficulty }</li>
-                        <li>{date}, {time}</li>
-                    </ul>
-                </li>
-            )
-            )}
-        </ul>
+const DoneList = ({ cards, onRemove }) => {
+  let filtredCards;
+
+  if (cards) {
+    filtredCards = cards.filter(
+      ({ status }) => status === 'Complete',
     );
+  }
+
+  return (
+    <ul className={s.list}>
+      {filtredCards &&
+        filtredCards.map(
+          ({
+            difficulty,
+            title,
+            date,
+            time,
+            category,
+            status,
+            type,
+            _id,
+          }) => (
+            <TodoCard
+              key={_id}
+              id={_id}
+              category={category}
+              date={date}
+              difficulty={difficulty}
+              status={status}
+              time={time}
+              title={title}
+              type={type}
+              onRemove={() => onRemove(_id)}
+            />
+          ),
+        )}
+    </ul>
+  );
 };
 
 // DoneList.propTypes = {
-    
+
 // };
 
 export default DoneList;
