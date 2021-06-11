@@ -46,7 +46,7 @@ export default function CustomSelect(props) {
     useState(props.type === 'Challenge');
 
   const [type, setType] = useState(
-    props.type === 'Task' ? 'Task' : 'Challenge',
+    props.type === 'Challenge' ? 'Challenge' : 'Task',
   );
 
   // Для внесения (изменения) и отрисовки наименования тудушки
