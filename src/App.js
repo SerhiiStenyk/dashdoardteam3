@@ -1,8 +1,13 @@
-import React, { Suspense, lazy } from 'react';
-import { Route, NavLink, Switch } from 'react-router-dom';
+import React, { Component, Suspense, lazy } from 'react';
+import { Route, Switch} from 'react-router-dom';
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
 import routes from './routes';
+import { authOperations, authSelectors } from './redux/auth';
 import './App.css';
 import './fonts.css';
+import { connect } from 'react-redux';
+
 
 
 const Landing = lazy(() =>
@@ -21,23 +26,44 @@ const NotFoundPage = lazy(() =>
   ),
 );
 
-const App = () => (
-  <>
+
+class App extends Component {
+
+  render() {
+
+    return (
+      <>
+        <Suspense fallback={<h1>Loader...</h1>}>
+          <Switch>
+            
+            <PublicRoute
+              exact
+              path={routes.landing}
+              restricted
+              redirectTo ={routes.card}
+              component={Landing}
+            />
+            <PrivateRoute
+              path={routes.card}
+              component={CardPage}
+              redirectTo={routes.landing}
+              />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </Suspense>
+      </>
+    )
+  }
+};
+
+const mapStateToProps = (state) => ({
+  isAuthenticated: authSelectors.getIsAuthenticated(state),
+});
+
+const mapDispatchToProps = (state) => ({
+  getUser: authOperations.authRefresh,
+})
 
 
-    <Suspense fallback={<h1>Loader...</h1>}>
-      <Switch>
-        <Route
-          exact
-          path={routes.landing}
-          component={Landing}
-        />
-        <Route path={routes.card} component={CardPage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-    </Suspense>
-  </>
-);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
-
-export default App;

@@ -1,52 +1,57 @@
-import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-// import routes from './routes';
-
-// //import s from './Logout.module.scss';
-// import sprite from '../../sprite.svg'
-
-// const Logout = () => {
-//   return (
-//      <NavLink
-//       to="/"
-//       exact
-//       //className={s.link}
-//       // activeClassName={s.activeLink}
-//     >
-//       <svg /*className={s.svg}*/>
-//         <use href={`${sprite}#logout`}></use>
-//       </svg>
-//     </NavLink>
-//   )
-
+import React from 'react';
+import { authOperations } from '../../redux/auth';
 import s from './Logout.module.scss';
 import sprite from '../../sprite.svg';
-import axios from 'axios';
+import { connect } from 'react-redux';
 
- axios.defaults.baseURL = 'https://goit-phonebook-api.herokuapp.com';
 
-class Logout extends Component {
-  
-
-  render() {
-    return (
+const Logout = ({onLogout}) => {
+  return (
     <div>
       <button
         className={s.link}
         type="button"
-        // onClick={onLogout}
+        onClick={onLogout}
         >
         <svg className={s.svg}>
           <use href={`${sprite}#logout`}></use>
         </svg>
       </button>
     </div>
-    );
-  }
+  );
+};
 
+
+
+// class Logout extends Component {
+  
+
+//   render() {
+//     return (
+//     <div>
+//       <button
+//         className={s.link}
+//         type="button"
+//         // onClick={onLogout}
+//         >
+//         <svg className={s.svg}>
+//           <use href={`${sprite}#logout`}></use>
+//         </svg>
+//       </button>
+//     </div>
+//     );
+//   }
+
+// }
+
+
+
+const mapDispatchToProps = {
+  onLogout: authOperations.logOut,
 }
 
-export default Logout;
+
+export default connect(null, mapDispatchToProps)(Logout);
 
 // const Logout = () => {
 //   return (

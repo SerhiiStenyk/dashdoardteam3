@@ -16,5 +16,5 @@ export const deleteCardRequest = createAction('cards/deleteCardRequest');
 export const deleteCardSuccess = createAction('cards/deleteCardSuccess');
 export const deleteCardError = createAction('cards/deleteCardError');
 
-export const clearError = createAction('contacts/clearError');
+export const clearError = createAction('card/clearError');
 

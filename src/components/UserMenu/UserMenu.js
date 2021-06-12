@@ -1,42 +1,31 @@
 import React from 'react';
-//import s from './UserMenu.module.scss'
-// import Logout from '../Logout/Logout';
+import s from './UserMenu.module.scss'
 import { connect } from 'react-redux';
-import { authSelectors, authOperations } from '../../redux/auth';
+import { authSelectors} from '../../redux/auth';
 
-// const isAuthanticated
+const UserMenu = ({ email }) => {
+  // console.log('email', email);
 
+  let letter = '';
+  let mail = '';
 
-const UserMenu = ({ avatar, name, onLogout }) => (
-//   <div /*className={s.container}*/>
-//     <span /*className={s.wrapper}*/>
-//       <p /*className={s.letter}*/>J</p> {name}
-//     </span>
-//      <p /*className={s.hidden}*/>Your email</p>
-
-// const UserMenu = ({ email }) => {
-//   console.log('email', email);
-  // const mail = 'Jacob@gm.com';
-  // if (email) {
-  //   
-  //   const letter = email.slice(0, 1);
-  //   const mail = email.split("@")[0];
-  // }
+  if (email) {
+    letter = email.slice(0, 1).toUpperCase();
+    mail = email.split("@")[0];
+  }
   
-  
-  //.substring(0, str.indexOf(','));
   return (
   <div className={s.container}>
     <span className={s.wrapper}>
-      <p className={s.letter}>{email}</p>
+      <p className={s.letter}>{letter}</p>
     </span>
-     <p className={s.hidden}>{email}</p>
+     <p className={s.hidden}>{mail} Quest Log</p>
 
   </div>
   )
 };
 const mapStateToProps = state => ({
-  email: authSelectors.getUserEmail(state),
+  email: authSelectors.getEmailUser(state),
  
 });
 

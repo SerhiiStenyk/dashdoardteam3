@@ -1,13 +1,14 @@
 import { combineReducers } from 'redux';
 import { createReducer } from '@reduxjs/toolkit';
 import authActions from './auth-actions';
-//sid: null
-const initialUserState = { email: null };
+
+const initialUserState = { email: null, id: null };
 
 const user = createReducer(initialUserState, {
-  [authActions.registerSuccess]: (_, { payload }) => payload.user,
-  [authActions.loginSuccess]: (_, { payload }) => payload.user,
+  [authActions.registerSuccess]: (_, { payload }) => (payload.userData),
+  [authActions.loginSuccess]: (_, { payload }) => (payload.userData),
   [authActions.logoutSuccess]: () => initialUserState,
+ 
 });
 
 const token = createReducer(null, {
@@ -29,11 +30,11 @@ const error = createReducer(null, {
 const isAuthenticated = createReducer(false, {
   [authActions.registerSuccess]: () => true,
   [authActions.loginSuccess]: () => true,
-  [authActions.getCurrentUserSuccess]: () => true,
+  // [authActions.getAuthRefreshSuccess]: () => true,
 
   [authActions.registerError]: () => false,
   [authActions.loginError]: () => false,
-  [authActions.getCurrentUserError]: () => false,
+  // [authActions.getAuthRefreshError]: () => false,
 
   [authActions.logoutSuccess]: () => false,
 });
@@ -48,9 +49,9 @@ const isLoading = createReducer(false, {
   [authActions.logoutRequest]: () => true,
   [authActions.logoutSuccess]: () => false,
   [authActions.logoutError]: () => false,
-  [authActions.getCurrentUserRequest]: () => true,
-  [authActions.getCurrentUserSuccess]: () => false,
-  [authActions.getCurrentUserError]: () => false,
+  [authActions.getAuthRefreshRequest]: () => true,
+  [authActions.getAuthRefreshSuccess]: () => false,
+  [authActions.getAuthRefreshError]: () => false,
   [authActions.clearError]: () => false,
 });
 
@@ -58,7 +59,7 @@ const isLoading = createReducer(false, {
 export default combineReducers({
   user,
   isAuthenticated,
-  token,
   error,
+  token,
   isLoading,
 });
