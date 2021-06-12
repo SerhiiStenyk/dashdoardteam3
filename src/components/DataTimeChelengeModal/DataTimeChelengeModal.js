@@ -72,13 +72,13 @@ export default function DataTimeChelengeModal({
     calendarFedaultValue = event.target.value;
 
     setIsActive(!isActive);
-    onTimeChange(event.target.value);
+    onDataChange(event.target.value);
   };
 
   const onTimeclick = function (item) {
     setTimer(item);
     setIsActive(!isActive);
-    onDataChange(item);
+    onTimeChange(item);
   };
   function getDayOfWeek(date) {
     const dayOfWeek = new Date(date).getDay();
