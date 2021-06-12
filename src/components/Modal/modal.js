@@ -9,8 +9,11 @@ const Modal = ({
   id,
 }) => {
   const onDeleteCard = function () {
-    onRemove(id);
-    onModalClose(false);
+    if (onRemove) {
+      onRemove(id);
+      onModalClose(false);
+      return;
+    }
   };
 
   return (

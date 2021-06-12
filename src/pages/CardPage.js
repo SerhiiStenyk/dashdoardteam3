@@ -23,7 +23,7 @@ import {
 } from '../redux/cards';
 
 import AppBar from '../components/AppBar/AppBar';
-import AddButton from '../components/addButton/button';
+// import AddButton from '../components/addButton/button';
 import TodayWrapper from '../components/TodayWrapper/TodayWrapper';
 import TommorowWraper from '../components/TomorrowWrapper/TommorowWrapper';
 
@@ -43,7 +43,7 @@ export default function CardPage() {
     <div>
       <AppBar />
       {isLoadingCard && <h1>Загржаем...</h1>}
-      <AddButton />
+      {/* <AddButton /> */}
       <TodayWrapper />
       <TommorowWraper />
       <Done />

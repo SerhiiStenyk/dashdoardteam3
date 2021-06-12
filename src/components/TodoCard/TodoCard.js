@@ -179,19 +179,17 @@ export default function CustomSelect(props) {
     status,
   };
 
-  console.log(card.status);
   const onReadyClick = function (id) {
-    // setStatus('done');
     setStatus('incomplete');
 
     if (props.isOnCreate) {
       onSubmit(card);
+
       return;
     }
     onEdit(id, card);
   };
   const onCompleteClick = function (id) {
-    console.log(id);
     setStatus('Complete');
     onToggleComplete(id, card);
   };
@@ -342,23 +340,31 @@ export default function CustomSelect(props) {
                 </svg>
 
                 <div onClick={() => setModal(true)}>
-                  <svg
-                    className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
-                    alt="cross red"
-                  >
-                    <use
-                      href={`${sprite}#cross-red-clear`}
-                    ></use>
-                  </svg>
+                  {!props.isOnCreate && (
+                    <svg
+                      className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
+                      alt="cross red"
+                    >
+                      <use
+                        href={`${sprite}#cross-red-clear`}
+                      ></use>
+                    </svg>
+                  )}
                 </div>
 
-                <svg
-                  className={`${s.saveClearDoneIcon} ${s.doneIcon}`}
-                  alt="check mark"
-                  onClick={() => onCompleteClick(props.id)}
-                >
-                  <use href={`${sprite}#check-mark`}></use>
-                </svg>
+                {!props.isOnCreate && (
+                  <svg
+                    className={`${s.saveClearDoneIcon} ${s.doneIcon}`}
+                    alt="check mark"
+                    onClick={() =>
+                      onCompleteClick(props.id)
+                    }
+                  >
+                    <use
+                      href={`${sprite}#check-mark`}
+                    ></use>
+                  </svg>
+                )}
               </>
             )}
             {status === 'create' && (

@@ -5,7 +5,7 @@ axios.defaults.baseURL =
   'https://questify-backend.goit.global/';
 
 axios.defaults.headers.common.Authorization =
-  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGJlNzUxNDhiYjU0ZjZmMTVhYjU4MmQiLCJzaWQiOiI2MGMzYzNkYjhiYjU0ZjZmMTVhYjVhMzEiLCJpYXQiOjE2MjM0NDIzOTUsImV4cCI6MTYyMzQ0NTk5NX0.ESgw8BYIZBUWIwgqKD8W2Ayq0oufXbxVTCNes8sALls';
+  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGJlNzUxNDhiYjU0ZjZmMTVhYjU4MmQiLCJzaWQiOiI2MGM1MDQxNDhiYjU0ZjZmMTVhYjViNzgiLCJpYXQiOjE2MjM1MjQzNzIsImV4cCI6MTYyMzUyNzk3Mn0.rMnU8rhDU1CxkNTORwkvP6T_JQCc-EPHJk4XzjqcUY8';
 
 const token = {
   set(token) {

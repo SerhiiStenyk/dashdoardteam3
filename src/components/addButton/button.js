@@ -7,16 +7,18 @@ class Button extends Component {
   state = {
     isOnCreate: false,
     numClicked: '',
+    isHidden: false,
   };
 
   handleAddCard = e => {
-    e.preventDefault();
+    // e.preventDefault();
 
     this.setState(({ numClicked }) => ({
       isOnCreate: true,
-      numClicked: numClicked + 1,
+      // numClicked: numClicked + 1,
+      isHidden: !this.state.isHidden,
     }));
-    console.log(`clic ${this.state.numClicked}`);
+    // console.log(`clic ${this.state.numClicked}`);
   };
 
   /*
@@ -28,17 +30,18 @@ class Button extends Component {
     return (
       <Container>
         <div className={style.container}>
-          {this.state.numClicked && (
-            <Card isOnCreate={this.state.isOnCreate} />
+          {this.state.isHidden && (
+            <Card
+              isOnCreate={this.state.isOnCreate}
+              onHandleAddCard={this.handleAddCard}
+            />
           )}
           <div className={style.btnHolder}>
             <button
-              type="submit"
               className={style.makeButton}
               onClick={this.handleAddCard}
             >
-              {' '}
-              +
+              {this.state.isHidden ? '-' : '+'}
             </button>
           </div>
         </div>
