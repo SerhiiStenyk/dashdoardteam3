@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-
+import { CSSTransition } from 'react-transition-group';
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -21,17 +21,18 @@ export default function CustomSelect() {
   const [isActive, setIsActive] = useState(false);
 
   // Типы level: Easy, Normal, Hard
-  // eslint-disable-next-line
   const [difficulty, setDifficulty] = useState('Normal');
 
   // Основное состояние карточки: create, edit, incomplete, done
-  const [status, setStatus] = useState('incomplete');
+  const [status, setStatus] = useState('create');
 
-  // Начат chelenge или нет, для изменения фона карточки, звездочка или кубок, и надписи CHALLENGE
+  // Начат chelenge или нет, для изменения фона карточки,
+  // звездочка или кубок, и надписи CHALLENGE
   const [isChallengeStarted, setIsChallengeStarted] =
-    useState(true);
+    useState(false);
 
-  const [type, setType] = useState('Challenge');
+  // Тип карточки Challenge или Todo
+  const [type, setType] = useState('Todo');
 
   // Для внесения (изменения) и отрисовки наименования тудушки
   const [title, setTitle] = useState('Do some thing');
@@ -41,7 +42,6 @@ export default function CustomSelect() {
   const [startDate, setStartDate] = useState('');
 
   // Дата окончания
-  // eslint-disable-next-line
   const [finishDate, setFinishDate] = useState(new Date());
   const [timer, setTime] = useState('00:00');
 
@@ -53,6 +53,10 @@ export default function CustomSelect() {
 
   // Состояние выпадающего окна для выбора category
   const [isCategoryActive, setIsCategoryActive] =
+    useState(false);
+
+  // Отображается ли картинка по выполнению задачи
+  const [isDoneImgShown, setIsDoneImgShown] =
     useState(false);
 
   const categories = [
@@ -67,21 +71,18 @@ export default function CustomSelect() {
   const handleChangeInpute = e => {
     setTitle(e.target.value);
   };
+
   const onSetTypeOfTastOrChallenge = function () {
     setIsChallengeStarted(!isChallengeStarted);
-
     setType(
       (isChallengeStarted && 'Task') ||
-        (!isChallengeStarted && 'Chalenge'),
+        (!isChallengeStarted && 'Challenge'),
     );
   };
 
   // Начать редактировать карточку при клике на нее
-  const handleEdit = e => {
+  const handleEdit = () => {
     if (status !== 'incomplete') {
-      return;
-    }
-    if (e.target.getAttribute('class') === s.starCupIcon) {
       return;
     }
     setStatus('edit');
@@ -94,6 +95,7 @@ export default function CustomSelect() {
       func(arg);
     }
   };
+
   const onSubmit = useCallback(
     ({ title, difficulty, category, date, time, type }) =>
       dispatch(
@@ -131,181 +133,256 @@ export default function CustomSelect() {
 
   // ----------------------------------------------------
   return (
-    <div
-      className={
-        !isChallengeStarted
-          ? s.todoCard
-          : `${s.todoCard} ${s.dark}`
-      }
-      onClick={handleEdit}
-    >
-      <div className={s.mainCardContainer}>
-        <div className={s.topContainer}>
-          {' '}
-          {/* Иконки кубка и звезды */}
-          <div className={s.levelStarCupContainer}>
-            <DifficultLevelModal
-              difficultlevel={setDifficulty}
-            />
-            {isChallengeStarted ? (
-              <svg className={s.starCupIcon}>
-                <use
-                  href={`${sprite}#cup-blue`}
-                  onClick={onSetTypeOfTastOrChallenge}
-                ></use>
-              </svg>
-            ) : (
-              <svg className={s.starCupIcon}>
-                <use
-                  href={`${sprite}#star-blue`}
-                  onClick={onSetTypeOfTastOrChallenge}
-                ></use>
-              </svg>
-            )}
-          </div>
-          {/* Надпись CHALLENGE, EDIT CHALLENGE, CREATE NEW QUEST или EDIT QUEST */}
-          <div className={s.operationContainer}>
-            {status === 'create' ? (
-              <p className={s.operation}>
-                CREATE NEW QUEST
-              </p>
-            ) : null}
-            {status === 'edit' && !isChallengeStarted ? (
-              <p className={s.operation}>EDIT QUEST</p>
-            ) : null}
-            {isChallengeStarted && status !== 'edit' ? (
-              <p className={s.operation}>CHALLENGE</p>
-            ) : null}
-            {isChallengeStarted && status === 'edit' ? (
-              <p className={s.operation}>EDIT CHALLENGE</p>
-            ) : null}
-            {status === 'done' ||
-            status === 'incomplete' ? (
-              <br
-                className={`${s.operation} ${s.hidden}`}
-              ></br>
-            ) : null}
-          </div>
-          {/* Инпут или наименование карточки */}
-          {status === 'create' || status === 'edit' ? (
-            <input
-              className={`${s.title} ${s.inline}`}
-              name="todo"
-              type="text"
-              value={title}
-              onChange={handleChangeInpute}
-            />
-          ) : (
-            <p
-              className={`${s.title} ${
-                isChallengeStarted && s.white
-              }`}
-            >
-              {title}
-            </p>
-          )}
-          {/* Дата и время */}
-          {isChallengeStarted ? (
-            <DataTimeChelengeModal
-              setTime={setTime}
-              setFinishDate={setFinishDate}
-            />
-          ) : (
-            <DataTimeModal
-              setTime={setTime}
-              setFinishDate={setFinishDate}
-            />
-          )}
-        </div>
+    <>
+      <div
+        className={
+          !isChallengeStarted
+            ? s.todoCard
+            : `${s.todoCard} ${s.dark}`
+        }
+        onClick={handleEdit}
+      >
+        {/* Отображение картинки по окончанию выполнения */}
 
-        <div className={s.bottomContainer}>
-          {/* Группы карточек */}
-          {isCategoryActive ? (
-            <div
-              className={s.categoryContainer}
-              onClick={() =>
-                setIsCategoryActive(!isCategoryActive)
-              }
-            >
-              <ul className={s.categoryList}>
-                {categories.map(item => (
-                  <li
-                    key={item.name}
-                    onClick={() => setCategory(item)}
-                  >
-                    {item.name.toUpperCase()}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-          <div
-            className={`${s.selectedCategoryContainer} ${
-              isCategoryActive && s.hidden
-            }`}
-            onClick={() =>
-              changeState(
-                setIsCategoryActive,
-                !isCategoryActive,
-              )
-            }
-            style={{ backgroundColor: category.color }}
+        {isDoneImgShown ? (
+          <CSSTransition
+            in={isDoneImgShown}
+            timeout={250}
+            classNames={{
+              enter: s['animeCompleted-enter'],
+              enterActive: s['animeCompleted-enter-active'],
+            }}
           >
-            <p className={s.selectedCategory}>
-              {category.name.toUpperCase()}
-            </p>
-          </div>
-          {/* Иконки save, clear, done и кнопка START*/}
-          <div className={s.saveClearDoneStartContainer}>
-            {status === 'edit' && (
-              <>
-                <svg
-                  className={`${s.saveClearDoneIcon} ${s.saveIcon}`}
-                  // onClick={() => setStatus('incomplete')}
-                  onClick={onReadyClick}
-                >
-                  <use
-                    href={`${sprite}#diskette-save`}
-                  ></use>
-                </svg>
-                <svg
-                  className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
-                  alt="cross red"
-                >
-                  <use
-                    href={`${sprite}#cross-red-clear`}
-                  ></use>
-                </svg>
-                <svg
-                  className={`${s.saveClearDoneIcon} ${s.doneIcon}`}
-                  alt="check mark"
-                  onClick={() => setStatus('done')}
-                >
-                  <use href={`${sprite}#check-mark`}></use>
-                </svg>
-              </>
-            )}
-            {status === 'create' && (
-              <>
-                <svg
-                  className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
-                  alt="cross red"
-                >
-                  <use
-                    href={`${sprite}#cross-red-clear`}
-                  ></use>
-                </svg>
-                <div
-                  className={s.startButton}
-                  onClick={() => setStatus('incomplete')}
-                >
-                  START
+            <div className={s.completedContainer}>
+              <p
+                className={`${s.phraseCompleted} ${
+                  type === 'Challenge' && s.white
+                }`}
+              >
+                COMPLETED:
+                <span className={s.cutTitle}>{` ${title
+                  .split(' ')
+                  .slice(0, 3)
+                  .join(' ')}...`}</span>
+              </p>
+              <svg className={s.completedIcon}>
+                <use
+                  href={`${sprite}#${
+                    type === 'Todo'
+                      ? 'completed-todo'
+                      : 'completed-challenge'
+                  }`}
+                ></use>
+              </svg>
+              <p
+                className={s.continue}
+                onClick={() =>
+                  setIsDoneImgShown(!isDoneImgShown)
+                }
+              >
+                Continue
+              </p>
+            </div>
+          </CSSTransition>
+        ) : (
+          <CSSTransition
+            in={isDoneImgShown}
+            timeout={250}
+            classNames={{
+              exit: s['animeCard-exit'],
+              exitActive: s['animeCard-exit-active'],
+            }}
+          >
+            <div className={s.mainCardContainer}>
+              <div className={s.topContainer}>
+                {/* Иконки кубка и звезды */}
+                <div className={s.levelStarCupContainer}>
+                  <DifficultLevelModal
+                    difficultlevel={setDifficulty}
+                    changeState={changeState}
+                  />
+                  {isChallengeStarted ? (
+                    <svg className={s.starCupIcon}>
+                      <use
+                        href={`${sprite}#cup-blue`}
+                        onClick={onSetTypeOfTastOrChallenge}
+                      ></use>
+                    </svg>
+                  ) : (
+                    <svg className={s.starCupIcon}>
+                      <use
+                        href={`${sprite}#star-blue`}
+                        onClick={onSetTypeOfTastOrChallenge}
+                      ></use>
+                    </svg>
+                  )}
                 </div>
-              </>
-            )}
-          </div>
-        </div>
+                {/* Надпись CHALLENGE, EDIT CHALLENGE, CREATE NEW QUEST или EDIT QUEST */}
+                <div className={s.operationContainer}>
+                  {status === 'create' ? (
+                    <p className={s.operation}>
+                      CREATE NEW QUEST
+                    </p>
+                  ) : null}
+                  {status === 'edit' &&
+                  !isChallengeStarted ? (
+                    <p className={s.operation}>
+                      EDIT QUEST
+                    </p>
+                  ) : null}
+                  {isChallengeStarted &&
+                  status !== 'edit' ? (
+                    <p className={s.operation}>CHALLENGE</p>
+                  ) : null}
+                  {isChallengeStarted &&
+                  status === 'edit' ? (
+                    <p className={s.operation}>
+                      EDIT CHALLENGE
+                    </p>
+                  ) : null}
+                  {status === 'done' ||
+                  status === 'incomplete' ? (
+                    <br
+                      className={`${s.operation} ${s.hidden}`}
+                    ></br>
+                  ) : null}
+                </div>
+                {/* Инпут или наименование карточки */}
+                {status === 'create' ||
+                status === 'edit' ? (
+                  <input
+                    className={`${s.title} ${s.inline}`}
+                    name="todo"
+                    type="text"
+                    value={title}
+                    onChange={handleChangeInpute}
+                  />
+                ) : (
+                  <p
+                    className={`${s.title} ${
+                      isChallengeStarted && s.white
+                    }`}
+                  >
+                    {title}
+                  </p>
+                )}
+                {/* Дата и время */}
+                {isChallengeStarted ? (
+                  <DataTimeChelengeModal
+                    setTime={setTime}
+                    setFinishDate={setFinishDate}
+                    changeState={changeState}
+                  />
+                ) : (
+                  <DataTimeModal
+                    setTime={setTime}
+                    setFinishDate={setFinishDate}
+                    changeState={changeState}
+                  />
+                )}
+              </div>
+
+              <div className={s.bottomContainer}>
+                {/* Группы карточек */}
+                {isCategoryActive ? (
+                  <div
+                    className={s.categoryContainer}
+                    onClick={() =>
+                      setIsCategoryActive(!isCategoryActive)
+                    }
+                  >
+                    <ul className={s.categoryList}>
+                      {categories.map(item => (
+                        <li
+                          key={item.name}
+                          onClick={() => setCategory(item)}
+                        >
+                          {item.name.toUpperCase()}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+                <div
+                  className={`${
+                    s.selectedCategoryContainer
+                  } ${isCategoryActive && s.hidden}`}
+                  onClick={() =>
+                    changeState(
+                      setIsCategoryActive,
+                      !isCategoryActive,
+                    )
+                  }
+                  style={{
+                    backgroundColor: category.color,
+                  }}
+                >
+                  <p className={s.selectedCategory}>
+                    {category.name.toUpperCase()}
+                  </p>
+                </div>
+                {/* Иконки save, clear, done и кнопка START*/}
+                <div
+                  className={s.saveClearDoneStartContainer}
+                >
+                  {status === 'edit' && (
+                    <>
+                      <svg
+                        className={`${s.saveClearDoneIcon} ${s.saveIcon}`}
+                        onClick={onReadyClick}
+                      >
+                        <use
+                          href={`${sprite}#diskette-save`}
+                        ></use>
+                      </svg>
+                      <svg
+                        className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
+                        alt="cross red"
+                      >
+                        <use
+                          href={`${sprite}#cross-red-clear`}
+                        ></use>
+                      </svg>
+                      <svg
+                        className={`${s.saveClearDoneIcon} ${s.doneIcon}`}
+                        alt="check mark"
+                        onClick={() => {
+                          setStatus('done');
+                          setIsDoneImgShown(true);
+                        }}
+                      >
+                        <use
+                          href={`${sprite}#check-mark`}
+                        ></use>
+                      </svg>
+                    </>
+                  )}
+                  {status === 'create' && (
+                    <>
+                      <svg
+                        className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
+                        alt="cross red"
+                      >
+                        <use
+                          href={`${sprite}#cross-red-clear`}
+                        ></use>
+                      </svg>
+                      <div
+                        className={s.startButton}
+                        onClick={() =>
+                          setStatus('incomplete')
+                        }
+                      >
+                        START
+                      </div>
+                    </>
+                  )}
+                </div>
+              </div>
+            </div>
+          </CSSTransition>
+        )}
       </div>
-    </div>
+    </>
   );
 }

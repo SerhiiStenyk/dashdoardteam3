@@ -87,6 +87,7 @@ console.log(
 export default function DataTimeModal({
   setFinishDate,
   setTime,
+  changeState,
 }) {
   const [isActive, setIsActive] = useState(false);
   const [startDate, setStartDate] = useState(today);
@@ -139,7 +140,9 @@ export default function DataTimeModal({
       <div className="data-timer-container">
         <div
           className="data-timer-input"
-          onClick={() => setIsActive(!isActive)}
+          onClick={() =>
+            changeState(setIsActive, !isActive)
+          }
         >
           <div className="data-timer-placeholder">
             {startDate === today ? (

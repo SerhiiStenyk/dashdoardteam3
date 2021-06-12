@@ -3,6 +3,7 @@ import './DifficultLevelModal.scss';
 
 export default function DifficultLevelModal({
   difficultlevel,
+  changeState,
 }) {
   const [isActive, setIsActive] = useState(false);
 
@@ -41,7 +42,7 @@ export default function DifficultLevelModal({
     <div className="dropdown-container">
       <div
         className="dropdown-input"
-        onClick={() => setIsActive(!isActive)}
+        onClick={() => changeState(setIsActive, !isActive)}
       >
         <div className="dropdown-placeholder">
           <div
@@ -62,7 +63,7 @@ export default function DifficultLevelModal({
           <div
             className="dropdown-item"
             key={item.id}
-            onClick={() => onChoiseLevel(item)}
+            onClick={() => changeState(onChoiseLevel, item)}
           >
             <div
               className={`dropdown-round ${item.color}`}
