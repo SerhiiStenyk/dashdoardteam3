@@ -13,17 +13,29 @@ import {
   deleteCardRequest,
   deleteCardSuccess,
   deleteCardError,
+  toggleCompletedRequest,
+  toggleCompletedSuccess,
+  toggleCompletedError,
   clearError,
 } from './cards-actions';
 
 const cards = createReducer([], {
   //actions.addContact.type вычисляемые свойства объекта(приведётся к строке и подставится свойство type )
   [fetchAllCardsSuccess]: (_, { payload }) => payload,
-  [addCardSuccess]: (state, { payload }) => [...state, payload],
+  [addCardSuccess]: (state, { payload }) => [
+    ...state,
+    payload,
+  ],
   [deleteCardSuccess]: (state, { payload }) =>
     state.filter(({ id }) => id !== payload),
-  [editCardSuccess]: (state, { payload }) =>
-    [...state.filter(({ id }) => id !== payload.id), payload],
+  [editCardSuccess]: (state, { payload }) => [
+    ...state.filter(({ id }) => id !== payload.id),
+    payload,
+  ],
+  [toggleCompletedSuccess]: (state, { payload }) =>
+    state.map(todo =>
+      todo.id === payload.id ? payload : todo,
+    ),
 });
 
 const loading = createReducer(false, {
@@ -42,6 +54,10 @@ const loading = createReducer(false, {
   [editCardRequest]: () => true,
   [editCardSuccess]: () => false,
   [editCardError]: () => false,
+
+  [toggleCompletedRequest]: () => true,
+  [toggleCompletedSuccess]: () => false,
+  [toggleCompletedError]: () => false,
 });
 
 const setError = (_, { payload }) => payload;

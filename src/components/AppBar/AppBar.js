@@ -2,7 +2,7 @@ import Container from '../Container/Container';
 import Logo from '../Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 import UserMenu from '../UserMenu/UserMenu';
-import TodoCard from '../TodoCard/TodoCard';
+// import TodoCard from '../TodoCard/TodoCard';
 //import s from './AppBar.module.scss';
 
 const AppBar = () => {
@@ -14,7 +14,7 @@ const AppBar = () => {
           <UserMenu />
           <Navigation />
         </header>
-        <TodoCard />
+        {/* <TodoCard /> */}
       </Container>
     </div>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './DifficultLevelModal.scss';
+//<<<<<<< animation-maksym-1
 
 export default function DifficultLevelModal({
   difficultlevel,
@@ -8,34 +9,50 @@ export default function DifficultLevelModal({
   const [isActive, setIsActive] = useState(false);
 
   const [level, setLevel] = useState({
+//=======
+const levels = [
+  {
+    id: 0,
+    level: 'Easy',
+    color: 'teal',
+  },
+  {
+//>>>>>>> master
     id: 1,
     level: 'Normal',
     color: 'green',
-  });
+  },
+  {
+    id: 2,
+    level: 'Hard',
+    color: 'red',
+  },
+];
 
-  difficultlevel(level.level);
+export default function DifficultLevelModal({
+  difficultlevelCameFromProps,
+  onDifficltChange,
+}) {
+  const filteredLevel = levels.find(
+    level => level.level === difficultlevelCameFromProps,
+  );
 
-  const levels = [
-    {
-      id: 0,
-      level: 'Easy',
-      color: 'teal',
-    },
-    {
+  const [isActive, setIsActive] = useState(false);
+
+  const [level, setLevel] = useState(
+    filteredLevel || {
       id: 1,
       level: 'Normal',
       color: 'green',
     },
-    {
-      id: 2,
-      level: 'Hard',
-      color: 'red',
-    },
-  ];
+  );
 
   const onChoiseLevel = function (value) {
+    console.log(value.level);
+
     setLevel(value);
     setIsActive(!isActive);
+    onDifficltChange(value.level);
   };
 
   return (
