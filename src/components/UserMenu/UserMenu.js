@@ -1,35 +1,32 @@
 import React from 'react';
-import s from './UserMenu.module.scss';
-// import Logout from '../Logout/Logout';
+import s from './UserMenu.module.scss'
 import { connect } from 'react-redux';
-import {
-  authSelectors,
-  authOperations,
-} from '../../redux/auth';
-
-// const isAuthanticated
+import { authSelectors} from '../../redux/auth';
 
 const UserMenu = ({ email }) => {
   // console.log('email', email);
-  // const mail = 'Jacob@gm.com';
-  // if (email) {
-  //
-  //   const letter = email.slice(0, 1);
-  //   const mail = email.split("@")[0];
-  // }
 
-  //.substring(0, str.indexOf(','));
+  let letter = '';
+  let mail = '';
+
+  if (email) {
+    letter = email.slice(0, 1).toUpperCase();
+    mail = email.charAt(0).toUpperCase() + email.slice(1).split("@")[0];
+  }
+  
   return (
-    <div className={s.container}>
-      <span className={s.wrapper}>
-        <p className={s.letter}>{email}</p>
-      </span>
-      <p className={s.hidden}>{email}</p>
-    </div>
-  );
+  <div className={s.container}>
+    <span className={s.wrapper}>
+      <p className={s.letter}>{letter}</p>
+    </span>
+     <p className={s.hidden}>{mail} Quest Log</p>
+
+  </div>
+  )
 };
 const mapStateToProps = state => ({
-  email: authSelectors.getUserEmail(state),
+  email: authSelectors.getEmailUser(state),
+ 
 });
 
 // const mapDispatchToProps = {
@@ -37,5 +34,3 @@ const mapStateToProps = state => ({
 // };
 
 export default connect(mapStateToProps)(UserMenu);
-
-// export default UserMenu;
