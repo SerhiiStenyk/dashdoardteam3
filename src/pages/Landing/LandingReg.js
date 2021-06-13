@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {authOperations} from '../../redux/auth';
 import {NavLink} from 'react-router-dom';
-import LandingClasses from  './Landing.scss';
+import './Landing.scss';
 
 class LandingReg extends Component {
     state = {
