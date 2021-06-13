@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {authOperations} from '../../redux/auth';
+import {NavLink} from 'react-router-dom';
 import LandingClasses from  './Landing.scss';
 
 class LandingReg extends Component {
@@ -55,6 +56,8 @@ class LandingReg extends Component {
                   placeholder='Password' 
                   className="inputPassword"/>
 
+                  <NavLink to="/" className="registration">login</NavLink>
+
                   <button 
                   type="submit" 
                   className="button">go!</button>
@@ -65,8 +68,6 @@ class LandingReg extends Component {
         );
     }
 }
-
-//const mapStateToProps = (state) => ({})
 
 const mapDispatchToProps = {
     onRegister: authOperations.register,
