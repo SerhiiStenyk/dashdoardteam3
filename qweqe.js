@@ -80,17 +80,22 @@ const getTommorow = function () {
 };
 
 export default function DataTimeModal({
+<<<<<<< animation-maksym-1
+  setFinishDate,
+  setTime,
+  changeState,
+=======
   timeCameFromProps,
   dataCameFromProps,
   onTimeChange,
 
   onDataChange,
+>>>>>>> master
 }) {
   let tommorow;
 
   if (dataCameFromProps > today) {
     tommorow = getTommorow();
-    // onDataChange(tommorow);
   }
 
   const [isActive, setIsActive] = useState(false);
@@ -148,7 +153,9 @@ export default function DataTimeModal({
       <div className="data-timer-container">
         <div
           className="data-timer-input"
-          onClick={() => setIsActive(!isActive)}
+          onClick={() =>
+            changeState(setIsActive, !isActive)
+          }
         >
           <div className="data-timer-placeholder">
             {startDate === today ? (

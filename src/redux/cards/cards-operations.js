@@ -18,9 +18,9 @@ import {
 } from './cards-actions';
 
 const fetchCards = () => dispatch => {
-  dispatch(fetchAllCardsRequest());
   axios.defaults.baseURL =
     'https://questify-backend.goit.global/';
+  dispatch(fetchAllCardsRequest());
 
   axios
     .get('/card')
@@ -34,11 +34,10 @@ const fetchCards = () => dispatch => {
 
 const addCards = card => dispatch => {
   // const card = { name, number };
-
-  dispatch(addCardRequest());
-
   axios.defaults.baseURL =
     'https://questify-backend.goit.global/';
+
+  dispatch(addCardRequest());
 
   axios
     .post('/card', { ...card })
@@ -46,9 +45,10 @@ const addCards = card => dispatch => {
     .catch(error => dispatch(addCardError(error.message)));
 };
 const deleteCard = cardId => dispatch => {
-  dispatch(deleteCardRequest());
   axios.defaults.baseURL =
     'https://questify-backend.goit.global/';
+
+  dispatch(deleteCardRequest());
 
   axios
     .delete(`/card/${cardId}`)
@@ -59,9 +59,10 @@ const deleteCard = cardId => dispatch => {
 };
 
 const editCard = (cardId, card) => dispatch => {
-  dispatch(editCardRequest());
   axios.defaults.baseURL =
     'https://questify-backend.goit.global/';
+
+  dispatch(editCardRequest());
 
   axios
     .patch(`/card/${cardId}`, { ...card })
@@ -73,15 +74,11 @@ const toggleCompleted =
   (cardId, { status }) =>
   dispatch => {
     const update = { status };
-    console.log(
-      '🚀 ~ file: cards-operations.js ~ line 76 ~ update',
-      update,
-    );
-
-    dispatch(toggleCompletedRequest());
 
     axios.defaults.baseURL =
       'https://questify-backend.goit.global/';
+
+    dispatch(toggleCompletedRequest());
 
     axios
       .patch(`/card/complete/${cardId}`, update)
