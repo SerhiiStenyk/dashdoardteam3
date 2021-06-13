@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {authOperations} from '../../redux/auth';
-import LandingClasses from  './Landing.css';
+import LandingClasses from  './Landing.scss';
 import {NavLink} from 'react-router-dom'
 
 class Landing extends Component {
