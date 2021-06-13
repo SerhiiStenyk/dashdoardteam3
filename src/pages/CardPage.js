@@ -14,19 +14,19 @@ import TommorowWraper from '../components/TomorrowWrapper/TommorowWrapper';
 import Done from '../components/Done/DoneBtn';
 
 export default function CardPage() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const isLoadingCard = useSelector(
     cardsSelectors.getLoading,
   );
 
-  // useEffect(() => {
-  //   dispatch(cardsOperations.fetchCards());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(cardsOperations.fetchCards());
+  }, [dispatch]);
 
   return (
     <div>
       <AppBar />
-      {isLoadingCard && <LoaderSpinner/>}
+      {isLoadingCard && <LoaderSpinner />}
       <AddButton />
       <TodayWrapper />
       <TommorowWraper />
