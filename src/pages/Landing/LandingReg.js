@@ -2,28 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {authOperations} from '../../redux/auth';
 import LandingClasses from  './Landing.css';
-import {NavLink} from 'react-router-dom'
 
-class Landing extends Component {
-   state = {
-    email: '',
-    password: '',  
-   };
+class LandingReg extends Component {
+    state = {
+        email: '',
+        password: '',  
+       };
+    
+       handleChange = ({target: {name, value}}) => {
+           this.setState({[name]: value});
+       };
+    
+       handleSubmit = e => {
+           e.preventDefault();
 
-   handleChange = ({target: {name, value}}) => {
-       this.setState({[name]: value});
-   };
-
-   handleSubmit = e => {
-       e.preventDefault();
-
-       this.props.onLogin(this.state);
-
-       this.setState({ email: '', password: ''});
-   }
-
+           this.props.onRegister(this.state);
+    
+           this.setState({ email: '', password: ''});
+       }
+    
     render() {
-       const { email, password } = this.state;
+        const { email, password } = this.state;
 
         return (
             <div>
@@ -34,12 +33,12 @@ class Landing extends Component {
                 <h1 className="title">Questify will turn your life into <br/>
                     a thrilling game full of amazing<br/>
                     quests and exciting challenges.</h1>
-                <h2 className="appeal">Write your email address to log in</h2>
+                <h2 className="appeal">Write your email address to register</h2>
                   
                 <form 
-                   onSubmit={this.handleSubmit}
-                   autoComplete="off">
-
+                onSubmit={this.handleSubmit}
+                autoComplete="off">
+                
                   <input 
                   type="email"
                   name="email" 
@@ -56,9 +55,6 @@ class Landing extends Component {
                   placeholder='Password' 
                   className="inputPassword"/>
 
-                  <NavLink to="/reg" className="registration">registration</NavLink>
-
-
                   <button 
                   type="submit" 
                   className="button">go!</button>
@@ -66,12 +62,14 @@ class Landing extends Component {
                   </div>
                   </section>
             </div>
-        )
+        );
     }
 }
 
+//const mapStateToProps = (state) => ({})
+
 const mapDispatchToProps = {
-    onLogin: authOperations.logIn,
+    onRegister: authOperations.register,
 }
 
-export default connect(null, mapDispatchToProps)(Landing);
+export default connect(null, mapDispatchToProps)(LandingReg);
