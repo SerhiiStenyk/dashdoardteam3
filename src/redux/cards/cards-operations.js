@@ -21,7 +21,7 @@ const fetchCards = () => dispatch => {
   dispatch(fetchAllCardsRequest());
 
   axios
-    .get('/card')
+    .get('/api/card')
     .then(({ data }) =>
       dispatch(fetchAllCardsSuccess(data)),
     )
@@ -35,21 +35,22 @@ const addCards = card => dispatch => {
 
   dispatch(addCardRequest());
 
-  axios.defaults.baseURL =
-    'https://questify-backend.goit.global/';
+  // axios.defaults.baseURL =
+  //   'https://questify-backend.goit.global/';
 
   axios
-    .post('/card', { ...card })
+    .post('/api/card', { ...card })
     .then(({ data }) => dispatch(addCardSuccess(data)))
     .catch(error => dispatch(addCardError(error.message)));
 };
+
 const deleteCard = cardId => dispatch => {
   dispatch(deleteCardRequest());
-  axios.defaults.baseURL =
-    'https://questify-backend.goit.global/';
+  // axios.defaults.baseURL =
+  //   'https://questify-backend.goit.global/';
 
   axios
-    .delete(`/card/${cardId}`)
+    .delete(`/api/card/${cardId}`)
     .then(() => dispatch(deleteCardSuccess(cardId)))
     .catch(error =>
       dispatch(deleteCardError(error.message)),
@@ -58,11 +59,11 @@ const deleteCard = cardId => dispatch => {
 
 const editCard = (cardId, card) => dispatch => {
   dispatch(editCardRequest());
-  axios.defaults.baseURL =
-    'https://questify-backend.goit.global/';
+  // axios.defaults.baseURL =
+  //   'https://questify-backend.goit.global/';
 
   axios
-    .patch(`/card/${cardId}`, { ...card })
+    .patch(`/api/card/${cardId}`, { ...card })
     .then(() => dispatch(editCardSuccess(cardId)))
     .catch(error => dispatch(editCardError(error.message)));
 };
@@ -78,11 +79,11 @@ const toggleCompleted =
 
     dispatch(toggleCompletedRequest());
 
-    axios.defaults.baseURL =
-      'https://questify-backend.goit.global/';
+    // axios.defaults.baseURL =
+    //   'https://questify-backend.goit.global/';
 
     axios
-      .patch(`/card/complete/${cardId}`, update)
+      .patch(`/api/card/complete/${cardId}`, update)
       .then(() => dispatch(toggleCompletedSuccess(cardId)))
       .catch(error =>
         dispatch(toggleCompletedError(error.message)),
