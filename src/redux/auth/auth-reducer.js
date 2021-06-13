@@ -5,8 +5,8 @@ import authActions from './auth-actions';
 const initialUserState = { email: null, id: null };
 
 const user = createReducer(initialUserState, {
-  [authActions.registerSuccess]: (_, { payload }) => payload.userData,
-  [authActions.loginSuccess]: (_, { payload }) => payload.userData,
+  [authActions.registerSuccess]: (_, { payload }) => payload.user,
+  [authActions.loginSuccess]: (_, { payload }) => payload.user,
   [authActions.logoutSuccess]: () => initialUserState,
 });
 

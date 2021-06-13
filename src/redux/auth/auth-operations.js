@@ -2,7 +2,7 @@ import axios from 'axios';
 import authActions from './auth-actions';
 
 axios.defaults.baseURL = 'https://goit-backend-23.herokuapp.com/';
-axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+//axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
