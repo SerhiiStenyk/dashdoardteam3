@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
 import './DifficultLevelModal.scss';
+//<<<<<<< animation-maksym-1
+
+export default function DifficultLevelModal({
+  difficultlevel,
+  changeState,
+}) {
+  const [isActive, setIsActive] = useState(false);
+
+  const [level, setLevel] = useState({
+//=======
 const levels = [
   {
     id: 0,
@@ -7,6 +17,7 @@ const levels = [
     color: 'teal',
   },
   {
+//>>>>>>> master
     id: 1,
     level: 'Normal',
     color: 'green',
@@ -48,7 +59,7 @@ export default function DifficultLevelModal({
     <div className="dropdown-container">
       <div
         className="dropdown-input"
-        onClick={() => setIsActive(!isActive)}
+        onClick={() => changeState(setIsActive, !isActive)}
       >
         <div className="dropdown-placeholder">
           <div
@@ -69,7 +80,7 @@ export default function DifficultLevelModal({
           <div
             className="dropdown-item"
             key={item.id}
-            onClick={() => onChoiseLevel(item)}
+            onClick={() => changeState(onChoiseLevel, item)}
           >
             <div
               className={`dropdown-round ${item.color}`}
