@@ -1,9 +1,9 @@
-//import s from './Logo.module.scss'
+import s from './Logo.module.scss';
 
 const Logo = () => {
   return (
-    <span /*className={s.logo}*/>Questify</span>
+    <span className={s.logo}>Questify</span>
   )
 }
 
-export default Logo
+export default Logo;

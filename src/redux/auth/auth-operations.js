@@ -2,7 +2,7 @@ import axios from 'axios';
 import authActions from './auth-actions';
 
 axios.defaults.baseURL = 'https://goit-backend-23.herokuapp.com/';
-axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+
 const token = {
   set(token) {
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -17,7 +17,7 @@ const register = credentials => async dispatch => {
 
   try {
     const response = await axios.post('/api/users/signup', credentials);
-    
+    console.log(response);
     token.set(response.data.token);
     dispatch(authActions.registerSuccess(response.data));
   } catch (error) {
@@ -40,19 +40,17 @@ const logIn = credentials => async dispatch => {
 };
 
 const logOut = () => async dispatch => {
-  dispatch(authActions.logoutRequest());
+  dispatch(authActions.logoutRequest())
 
   try {
-    await axios.post('/api/users/logout');
-
-    token.unset();
-    //данные никакие не передаём, это чтобы очистить state
-    // (сбросить в начальное состояние)
-    dispatch(authActions.logoutSuccess());
+    await axios.post('/api/users/logout')
+    token.unset()
+    
+    dispatch(authActions.logoutSuccess())
   } catch (error) {
-    dispatch(authActions.logoutError(error.message));
+     dispatch(authActions.logoutError(error.message))
   }
-};
+}
 
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default { register, logIn, logOut };
