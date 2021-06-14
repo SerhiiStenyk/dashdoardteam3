@@ -8,11 +8,11 @@ export default function PublicRoute({
   children,
   ...routeProps
 }) {
-  // const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
-  const token = useSelector(authSelectors.getToken);
+  const isAuthenticated = useSelector(authSelectors.getIsAuthenticated);
+  // const token = useSelector(authSelectors.getToken);
   return (
     <Route {...routeProps}>
-      {token && routeProps.restricted ? (
+      {isAuthenticated && routeProps.restricted ? (
         <Redirect to={redirectTo} />
       ) : (
         children
