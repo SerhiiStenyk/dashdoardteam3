@@ -22,7 +22,10 @@ const register = credentials => async dispatch => {
     token.set(response.data.token);
     dispatch(authActions.registerSuccess(response.data));
   } catch (error) {
-     dispatch(authActions.registerError(error.message));
+     //dispatch(authActions.registerError(error.message));
+     if (error.response && error.response.data) {
+      alert(error.response.data.message);
+    }
     }
    
 };
@@ -32,11 +35,14 @@ const logIn = credentials => async dispatch => {
 
   try {
     const response = await axios.post('/api/users/login', credentials);
-
+    console.log(response);
     token.set(response.data.token);
     dispatch(authActions.loginSuccess(response.data));
   } catch (error) {
-    dispatch(authActions.loginError(error.message));
+    if (error.response && error.response.data) {
+      alert(error.response.data.message);
+    }
+    //dispatch(authActions.loginError(error.message));
   }
 };
 
