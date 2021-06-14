@@ -1,5 +1,7 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authOperations } from './redux/auth';
 import LoaderSpinner from './components/LoaderSpinner/LoaderSpinner';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
@@ -34,11 +36,11 @@ const NotFoundPage = lazy(() =>
 );
 
 export default function App() {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(authOperations.getCurrentUser());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(authOperations.getCurrentUser());
+  }, [dispatch]);
 
   return (
       <>
