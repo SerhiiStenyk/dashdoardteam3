@@ -164,7 +164,15 @@ export default function CustomSelect(props) {
   const onToggleComplete = useCallback(
     (
       cardId,
-      { title, difficulty, category, date, time, type },
+      {
+        title,
+        difficulty,
+        status,
+        category,
+        date,
+        time,
+        type,
+      },
     ) =>
       dispatch(
         cardsOperations.toggleCompleted(cardId, {
@@ -195,7 +203,7 @@ export default function CustomSelect(props) {
 
     if (props.isOnCreate) {
       onSubmit(card);
-
+      props.onHandleAddCard();
       return;
     }
     onEdit(id, card);
