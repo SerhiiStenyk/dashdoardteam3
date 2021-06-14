@@ -11,6 +11,10 @@ import TodoCard from '../TodoCard/TodoCard';
 export default function TodayWrapper() {
   const dispatch = useDispatch();
   const cards = useSelector(cardsSelectors.getCards);
+  console.log(
+    '🚀 ~ file: TodayWrapper.jsx ~ line 14 ~ TodayWrapper ~ cards',
+    cards.data.cards,
+  );
 
   const today = new Date();
   const dateToCompar = `${today.getFullYear()}-${
@@ -24,8 +28,8 @@ export default function TodayWrapper() {
   }`;
   let filteredCards;
 
-  if (cards.cards) {
-    filteredCards = cards.cards.filter(
+  if (cards.data.cards) {
+    filteredCards = cards.data.cards.filter(
       ({ status, date }) =>
         status !== 'Complete' && date === dateToCompar,
     );
