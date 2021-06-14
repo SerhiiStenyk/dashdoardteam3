@@ -1,34 +1,22 @@
 import { Component } from 'react';
 import style from './addButton.module.css';
 import Card from '../TodoCard/TodoCard';
-import Container from '../Container/Container';
 
 class Button extends Component {
   state = {
     isOnCreate: false,
-    numClicked: '',
     isHidden: false,
   };
 
-  handleAddCard = e => {
-    // e.preventDefault();
-
-    this.setState(({ numClicked }) => ({
+  handleAddCard = () => {
+    this.setState(() => ({
       isOnCreate: true,
-      // numClicked: numClicked + 1,
       isHidden: !this.state.isHidden,
     }));
-    // console.log(`clic ${this.state.numClicked}`);
   };
 
-  /*
-  reset = () => {
-    this.setState({ numClicked: '' })
-  }
-*/
   render() {
     return (
-      // <Container>
       <div>
         {this.state.isHidden && (
           <Card
@@ -45,7 +33,6 @@ class Button extends Component {
           </button>
         </div>
       </div>
-      // </Container>
     );
   }
 }

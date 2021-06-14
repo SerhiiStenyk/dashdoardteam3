@@ -201,7 +201,6 @@ export default function CustomSelect(props) {
     onEdit(id, card);
   };
   const onCompleteClick = function (id) {
-    console.log('id ', id);
     setStatus('Complete');
     onToggleComplete(id, card);
   };
@@ -218,7 +217,6 @@ export default function CustomSelect(props) {
     >
       <div className={s.mainCardContainer}>
         <div className={s.topContainer}>
-          {' '}
           {/* Иконки кубка и звезды */}
           <div className={s.levelStarCupContainer}>
             <DifficultLevelModal
@@ -381,6 +379,7 @@ export default function CustomSelect(props) {
                 <svg
                   className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
                   alt="cross red"
+                  onClick={() => props.onHandleAddCard()}
                 >
                   <use
                     href={`${sprite}#cross-red-clear`}

@@ -53,30 +53,33 @@ const time = [
   '23:30',
 ];
 
-// const data = new Date();
-// const dayNumber = data.getDay();
-
 const getToday = function () {
-  const currentDate = new Date(
-    new Date().getTime(),
-    // + 24 * 60 * 60 * 1000,
-  );
-  const day = currentDate.getDate();
-  const month = currentDate.getMonth() + 1;
-  const year = currentDate.getFullYear();
-  return year + '-' + '0' + month + '-' + day;
+  const today = new Date();
+  const dateToCompar = `${today.getFullYear()}-${
+    today.getMonth() < 9
+      ? `0${today.getMonth() + 1}`
+      : today.getMonth() + 1
+  }-${
+    today.getDate() < 10
+      ? `0${today.getDate()}`
+      : today.getDate()
+  }`;
+  return dateToCompar;
 };
 const today = getToday();
 
 const getTommorow = function () {
-  const currentDate = new Date(
-    new Date().getTime(),
-    // + 24 * 60 * 60 * 1000,
-  );
-  const day = currentDate.getDate() + 1;
-  const month = currentDate.getMonth() + 1;
-  const year = currentDate.getFullYear();
-  return year + '-' + '0' + month + '-' + day;
+  const today = new Date();
+  const dateToCompar = `${today.getFullYear()}-${
+    today.getMonth() < 9
+      ? `0${today.getMonth() + 1}`
+      : today.getMonth() + 1
+  }-${
+    today.getDate() < 10
+      ? `0${today.getDate()}`
+      : today.getDate() + 1
+  }`;
+  return dateToCompar;
 };
 
 export default function DataTimeModal({
@@ -90,7 +93,6 @@ export default function DataTimeModal({
 
   if (dataCameFromProps > today) {
     tommorow = getTommorow();
-    // onDataChange(tommorow);
   }
 
   const [isActive, setIsActive] = useState(false);
@@ -100,31 +102,36 @@ export default function DataTimeModal({
   const [timer, setTimer] = useState(
     timeCameFromProps || '00:00',
   );
-  // setTime(timer);
-  // setFinishDate(startDate);
 
   const setTodayData = function () {
-    const currentDate = new Date(
-      new Date().getTime(),
-      // + 24 * 60 * 60 * 1000,
-    );
-    const day = currentDate.getDate();
-    const month = currentDate.getMonth() + 1;
-    const year = currentDate.getFullYear();
-    setStartDate(year + '-' + '0' + month + '-' + day);
-    onDataChange(year + '-' + '0' + month + '-' + day);
+    const today = new Date();
+
+    const dateToCompar = `${today.getFullYear()}-${
+      today.getMonth() < 9
+        ? `0${today.getMonth() + 1}`
+        : today.getMonth() + 1
+    }-${
+      today.getDate() < 10
+        ? `0${today.getDate()}`
+        : today.getDate()
+    }`;
+    setStartDate(dateToCompar);
+    onDataChange(dateToCompar);
   };
 
   const setTomorrowData = function () {
-    const currentDate = new Date(
-      new Date().getTime(),
-      // + 24 * 60 * 60 * 1000,
-    );
-    const day = currentDate.getDate() + 1;
-    const month = currentDate.getMonth() + 1;
-    const year = currentDate.getFullYear();
-    setStartDate(year + '-' + '0' + month + '-' + day);
-    onDataChange(year + '-' + '0' + month + '-' + day);
+    const today = new Date();
+    const dateToCompar = `${today.getFullYear()}-${
+      today.getMonth() < 9
+        ? `0${today.getMonth() + 1}`
+        : today.getMonth() + 1
+    }-${
+      today.getDate() < 10
+        ? `0${today.getDate()}`
+        : today.getDate() + 1
+    }`;
+    setStartDate(dateToCompar);
+    onDataChange(dateToCompar);
   };
 
   const onDataTodayClick = function () {
