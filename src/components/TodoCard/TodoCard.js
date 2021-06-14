@@ -195,7 +195,7 @@ export default function CustomSelect(props) {
 
     if (props.isOnCreate) {
       onSubmit(card);
-
+      props.onHandleAddCard();
       return;
     }
     onEdit(id, card);
