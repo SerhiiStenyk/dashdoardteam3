@@ -7,6 +7,7 @@ import {
 import s from './TodayWrapper.module.css';
 
 import TodoCard from '../TodoCard/TodoCard';
+import AddButton from '../addButton/button';
 
 export default function TodayWrapper() {
   const dispatch = useDispatch();
@@ -24,8 +25,8 @@ export default function TodayWrapper() {
   }`;
   let filteredCards;
 
-  if (cards.cards) {
-    filteredCards = cards.cards.filter(
+  if (cards) {
+    filteredCards = cards.filter(
       ({ status, date }) =>
         status !== 'Complete' && date === dateToCompar,
     );
@@ -39,6 +40,7 @@ export default function TodayWrapper() {
       <h2 className={s.dayTitle}>TODAY</h2>
 
       <ul className={s.list}>
+        <AddButton />
         {filteredCards &&
           filteredCards.map(
             ({

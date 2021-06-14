@@ -20,6 +20,16 @@ const categories = [
   { name: 'Leisure', color: '#F8D2FF' },
   { name: 'Work', color: '#D3F6CE' },
 ];
+const today = new Date();
+const dateToCompar = `${today.getFullYear()}-${
+  today.getMonth() < 9
+    ? `0${today.getMonth() + 1}`
+    : today.getMonth() + 1
+}-${
+  today.getDate() < 10
+    ? `0${today.getDate()}`
+    : today.getDate()
+}`;
 
 export default function CustomSelect(props) {
   const dispatch = useDispatch();
@@ -57,7 +67,8 @@ export default function CustomSelect(props) {
 
   // Дата окончания
   // eslint-disable-next-line
-  const [finishDate, setFinishDate] = useState(new Date());
+  const [finishDate, setFinishDate] =
+    useState(dateToCompar);
   const [timer, setTime] = useState(props.time || '00:00');
 
   //Группы: STUFF, FAMILY, HEALTH, LEARNING, LEISURE, WORK
@@ -179,19 +190,18 @@ export default function CustomSelect(props) {
     status,
   };
 
-  console.log(card.status);
   const onReadyClick = function (id) {
-    // setStatus('done');
     setStatus('incomplete');
 
     if (props.isOnCreate) {
       onSubmit(card);
+
       return;
     }
     onEdit(id, card);
   };
   const onCompleteClick = function (id) {
-    console.log(id);
+    console.log('id ', id);
     setStatus('Complete');
     onToggleComplete(id, card);
   };
@@ -289,7 +299,6 @@ export default function CustomSelect(props) {
             />
           )}
         </div>
-
         <div className={s.bottomContainer}>
           {/* Группы карточек */}
           {isCategoryActive ? (
@@ -328,40 +337,46 @@ export default function CustomSelect(props) {
             </p>
           </div>
           {/* Иконки save, clear, done и кнопка START*/}
-          <div className={s.saveClearDoneStartContainer}>
-            {status === 'edit' && (
-              <>
-                <svg
-                  className={`${s.saveClearDoneIcon} ${s.saveIcon}`}
-                  // onClick={() => setStatus('incomplete')}
-                  onClick={() => onReadyClick(props.id)}
-                >
-                  <use
-                    href={`${sprite}#diskette-save`}
-                  ></use>
-                </svg>
 
-                <div onClick={() => setModal(true)}>
+          <div className={s.saveClearDoneStartContainer}>
+            {props.isOnCreate ||
+              (status === 'edit' && (
+                <>
                   <svg
-                    className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
-                    alt="cross red"
+                    className={`${s.saveClearDoneIcon} ${s.saveIcon}`}
+                    // onClick={() => setStatus('incomplete')}
+                    onClick={() => onReadyClick(props.id)}
                   >
                     <use
-                      href={`${sprite}#cross-red-clear`}
+                      href={`${sprite}#diskette-save`}
                     ></use>
                   </svg>
-                </div>
 
-                <svg
-                  className={`${s.saveClearDoneIcon} ${s.doneIcon}`}
-                  alt="check mark"
-                  onClick={() => onCompleteClick(props.id)}
-                >
-                  <use href={`${sprite}#check-mark`}></use>
-                </svg>
-              </>
-            )}
-            {status === 'create' && (
+                  <div onClick={() => setModal(true)}>
+                    <svg
+                      className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
+                      alt="cross red"
+                    >
+                      <use
+                        href={`${sprite}#cross-red-clear`}
+                      ></use>
+                    </svg>
+                  </div>
+
+                  <svg
+                    className={`${s.saveClearDoneIcon} ${s.doneIcon}`}
+                    alt="check mark"
+                    onClick={() =>
+                      onCompleteClick(props.id)
+                    }
+                  >
+                    <use
+                      href={`${sprite}#check-mark`}
+                    ></use>
+                  </svg>
+                </>
+              ))}
+            {props.isOnCreate && (
               <>
                 <svg
                   className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
@@ -373,16 +388,16 @@ export default function CustomSelect(props) {
                 </svg>
                 <div
                   className={s.startButton}
-                  onClick={() => setStatus('incomplete')}
+                  // onClick={() => setStatus('incomplete')}
+                  onClick={() => onReadyClick(props.id)}
                 >
-                  START
+                  CREATE
                 </div>
               </>
             )}
           </div>
         </div>
         {/*Модалка/**/}
-
         <Modal
           id={props.id}
           isOpened={modalActive}

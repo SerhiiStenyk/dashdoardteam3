@@ -1,5 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-
 import { useSelector, useDispatch } from 'react-redux';
 
 import {
@@ -28,8 +26,8 @@ export default function TmmorowWrapper() {
 
   let filteredCards;
 
-  if (cards.cards) {
-    filteredCards = cards.cards.filter(
+  if (cards) {
+    filteredCards = cards.filter(
       ({ status, date }) =>
         status !== 'Complete' && date > dateToCompar,
     );

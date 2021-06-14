@@ -1,41 +1,38 @@
-.makeButton{
-    background-color: #FF851C;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    border: 1px solid #FF851C;
-    
-    box-shadow: 0px 0px 2px 2px #f5c49a;
-    font-family: Helvetica Neue Cyr;
-    font-size: 25px;
-    font-weight: 300;
-    color: aliceblue; 
-    
+.makeButton {
+  background-color: #ff851c;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid #ff851c;
+
+  box-shadow: 0px 0px 2px 2px #f5c49a;
+  font-family: Helvetica Neue Cyr;
+  font-size: 25px;
+  font-weight: 300;
+  color: aliceblue;
 }
 /*.container {
     position: sticky;
 /*  justify-content: space-between;
   flex-direction: column;
    display: flex;*/
- /* height: 100vh;
+/* height: 100vh;
  
 }*/
-    
-   
 
 .btnHolder {
-    bottom: 42px;
-    right: 23px;
-    position: sticky;
+  position: fixed;
+  bottom: 42px;
+  right: 23px;
+  /* position: sticky; */
   justify-content: flex-end;
-    display: flex; 
+  display: flex;
 }
 
-.makeButton:focus, 
-.makeButton:hover{
-    background-color: #fa7603; 
-    box-shadow: 0px 0px 3px 3px #f5c49a;
-    color: rgb(242, 248, 248); 
-    
+.makeButton:focus,
+.makeButton:hover {
+  background-color: #fa7603;
+  box-shadow: 0px 0px 3px 3px #f5c49a;
+  color: rgb(242, 248, 248);
+  cursor: pointer;
 }
-
