@@ -45,6 +45,7 @@ $desctop: 1280px;
 .starCupIcon {
   width: 19px;
   height: 19px;
+  cursor: pointer;
   filter: drop-shadow(0px 3px 4px rgba(0, 215, 255, 0.25));
   @media screen and (min-width: $tablet) {
     width: 15px;
@@ -111,6 +112,8 @@ $desctop: 1280px;
   }
 }
 .categoryList li {
+  cursor: pointer;
+
   list-style-type: none;
 }
 
@@ -122,6 +125,8 @@ $desctop: 1280px;
   width: 120px;
   height: 35px;
   border-radius: 0px 25px 25px 0px;
+  cursor: pointer;
+
   @media screen and (min-width: $tablet) {
     width: 88px;
     height: 25px;
@@ -151,14 +156,17 @@ $desctop: 1280px;
   padding: 3px 8px 3px 0;
   margin-right: 9px;
   border-right: 1px solid #b9c3c8;
+  cursor: pointer;
 }
 .doneIcon {
+  cursor: pointer;
   width: 18px;
   @media screen and (min-width: $tablet) {
     width: 14px;
   }
 }
 .startButton {
+  cursor: pointer;
   font-size: 16px;
   letter-spacing: 0.02em;
   color: #00d7ff;

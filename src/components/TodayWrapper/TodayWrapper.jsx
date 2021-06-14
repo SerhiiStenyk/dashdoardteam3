@@ -7,14 +7,11 @@ import {
 import s from './TodayWrapper.module.css';
 
 import TodoCard from '../TodoCard/TodoCard';
+import AddButton from '../addButton/button';
 
 export default function TodayWrapper() {
   const dispatch = useDispatch();
   const cards = useSelector(cardsSelectors.getCards);
-  console.log(
-    '🚀 ~ file: TodayWrapper.jsx ~ line 14 ~ TodayWrapper ~ cards',
-    cards.data.cards,
-  );
 
   const today = new Date();
   const dateToCompar = `${today.getFullYear()}-${
@@ -28,8 +25,8 @@ export default function TodayWrapper() {
   }`;
   let filteredCards;
 
-  if (cards.data.cards) {
-    filteredCards = cards.data.cards.filter(
+  if (cards) {
+    filteredCards = cards.filter(
       ({ status, date }) =>
         status !== 'Complete' && date === dateToCompar,
     );
@@ -43,6 +40,7 @@ export default function TodayWrapper() {
       <h2 className={s.dayTitle}>TODAY</h2>
 
       <ul className={s.list}>
+        <AddButton />
         {filteredCards &&
           filteredCards.map(
             ({

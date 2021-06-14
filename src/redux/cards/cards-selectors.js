@@ -1,8 +1,8 @@
 import { createSelector } from '@reduxjs/toolkit';
 
 const getLoading = state => state.cards.loading;
-const getCards = state => state.cards.cards; //getAllCards
 const getError = state => state.cards.error;
+const getCards = state => state.cards.cards; //getAllCards
 
 const getCompletedCards = createSelector(
   [getCards],

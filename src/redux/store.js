@@ -42,16 +42,16 @@ const authPersistConfig = {
   whitelist: ['token'],
   // blacklist: ['user', 'error'],
 };
-const cardsPersistConfig = {
-  key: 'cards',
-  storage,
+// const cardsPersistConfig = {
+//   key: 'cards',
+//   storage,
 
-  // blacklist: ['user', 'error'],
-};
+// blacklist: ['user', 'error'],
+// };
 const store = configureStore({
   reducer: {
     auth: persistReducer(authPersistConfig, authReducer),
-    cards: persistReducer(cardsPersistConfig, cardsReducer),
+    cards: cardsReducer,
   },
   middleware,
   devTools: process.env.NODE_ENV === 'development',

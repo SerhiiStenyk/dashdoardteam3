@@ -17,78 +17,96 @@ import {
   toggleCompletedError,
 } from './cards-actions';
 
-const fetchCards = () => dispatch => {
+const fetchCards = () => async dispatch => {
   dispatch(fetchAllCardsRequest());
-
-  axios
-    .get('/api/card')
-    .then(({ data }) =>
-      dispatch(fetchAllCardsSuccess(data)),
-    )
-    .catch(error =>
-      dispatch(fetchAllCardsError(error.message)),
-    );
+  try {
+    const { data } = await axios.get('/api/card');
+    dispatch(fetchAllCardsSuccess(data.data.cards));
+  } catch (error) {
+    dispatch(fetchAllCardsError(error));
+  }
 };
 
-const addCards = card => dispatch => {
-  // const card = { name, number };
+// const addCards = card => dispatch => {
+//   dispatch(addCardRequest());
 
+//   axios
+//     .post('/api/card', { ...card })
+//     .then(({ data }) => dispatch(addCardSuccess(data)))
+//     .catch(error => dispatch(addCardError(error.message)));
+// };
+const addCards = card => async dispatch => {
   dispatch(addCardRequest());
 
-  // axios.defaults.baseURL =
-  //   'https://questify-backend.goit.global/';
-
-  axios
-    .post('/api/card', { ...card })
-    .then(({ data }) => dispatch(addCardSuccess(data)))
-    .catch(error => dispatch(addCardError(error.message)));
+  try {
+    const { data } = await axios.post('/api/card', {
+      ...card,
+    });
+    dispatch(addCardSuccess(data.data.card));
+  } catch (error) {
+    dispatch(addCardError(error));
+  }
 };
 
-const deleteCard = cardId => dispatch => {
+// const deleteCard = cardId => dispatch => {
+//   dispatch(deleteCardRequest());
+//   // axios.defaults.baseURL =
+//   //   'https://questify-backend.goit.global/';
+
+//   axios
+//     .delete(`/api/card/${cardId}`)
+//     .then(() => dispatch(deleteCardSuccess(cardId)))
+//     .catch(error =>
+//       dispatch(deleteCardError(error.message)),
+//     );
+// };
+const deleteCard = cardId => async dispatch => {
   dispatch(deleteCardRequest());
-  // axios.defaults.baseURL =
-  //   'https://questify-backend.goit.global/';
 
-  axios
-    .delete(`/api/card/${cardId}`)
-    .then(() => dispatch(deleteCardSuccess(cardId)))
-    .catch(error =>
-      dispatch(deleteCardError(error.message)),
-    );
+  try {
+    await axios.delete(`/api/card/${cardId}`);
+    dispatch(deleteCardSuccess(cardId));
+  } catch (error) {
+    dispatch(deleteCardError(error));
+  }
 };
 
-const editCard = (cardId, card) => dispatch => {
+const editCard = (cardId, card) => async dispatch => {
   dispatch(editCardRequest());
-  // axios.defaults.baseURL =
-  //   'https://questify-backend.goit.global/';
 
-  axios
-    .patch(`/api/card/${cardId}`, { ...card })
-    .then(() => dispatch(editCardSuccess(cardId)))
-    .catch(error => dispatch(editCardError(error.message)));
+  try {
+    const { data } = await axios.patch(
+      `/api/card/${cardId}`,
+      {
+        ...card,
+      },
+    );
+    dispatch(editCardSuccess(data.data.card));
+  } catch (error) {
+    dispatch(editCardError(error));
+  }
 };
 
-const toggleCompleted =
-  (cardId, { status }) =>
-  dispatch => {
-    const update = { status };
-    console.log(
-      '🚀 ~ file: cards-operations.js ~ line 76 ~ update',
+const toggleCompleted = cardId => async dispatch => {
+  const update = { status: 'Complete' };
+  console.log(
+    '🚀 ~ file: cards-operations.js ~ line 76 ~ update',
+    update,
+  );
+
+  dispatch(toggleCompletedRequest());
+
+  try {
+    const { data } = await axios.patch(
+      `/api/card/${cardId}/complete/`,
       update,
     );
-
-    dispatch(toggleCompletedRequest());
-
-    // axios.defaults.baseURL =
-    //   'https://questify-backend.goit.global/';
-
-    axios
-      .patch(`/api/card/complete/${cardId}`, update)
-      .then(() => dispatch(toggleCompletedSuccess(cardId)))
-      .catch(error =>
-        dispatch(toggleCompletedError(error.message)),
-      );
-  };
+    console.log('data', data);
+    dispatch(toggleCompletedSuccess(data.status));
+  } catch (error) {
+    dispatch(toggleCompletedError(error));
+  }
+};
 
 /* eslint import/no-anonymous-default-export: [2, {"allowObject": true}] */
 export default {

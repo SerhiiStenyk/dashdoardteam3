@@ -47,7 +47,7 @@ export default function DoneBtn() {
       </div>
       {isOpen && (
         <DoneList
-          cards={cards.cards}
+          cards={cards}
           onRemove={() => onRemoveCard}
         />
       )}
