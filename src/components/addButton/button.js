@@ -28,24 +28,24 @@ class Button extends Component {
 */
   render() {
     return (
-      <Container>
-        <div>
-          {this.state.isHidden && (
-            <Card
-              isOnCreate={this.state.isOnCreate}
-              onHandleAddCard={this.handleAddCard}
-            />
-          )}
-          <div className={style.btnHolder}>
-            <button
-              className={style.makeButton}
-              onClick={this.handleAddCard}
-            >
-              {this.state.isHidden ? '-' : '+'}
-            </button>
-          </div>
+      // <Container>
+      <div>
+        {this.state.isHidden && (
+          <Card
+            isOnCreate={this.state.isOnCreate}
+            onHandleAddCard={this.handleAddCard}
+          />
+        )}
+        <div className={style.btnHolder}>
+          <button
+            className={style.makeButton}
+            onClick={this.handleAddCard}
+          >
+            {this.state.isHidden ? '-' : '+'}
+          </button>
         </div>
-      </Container>
+      </div>
+      // </Container>
     );
   }
 }

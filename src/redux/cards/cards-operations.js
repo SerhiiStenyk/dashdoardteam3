@@ -89,11 +89,6 @@ const editCard = (cardId, card) => async dispatch => {
 
 const toggleCompleted = cardId => async dispatch => {
   const update = { status: 'Complete' };
-  console.log(
-    '🚀 ~ file: cards-operations.js ~ line 76 ~ update',
-    update,
-  );
-
   dispatch(toggleCompletedRequest());
 
   try {
@@ -101,8 +96,7 @@ const toggleCompleted = cardId => async dispatch => {
       `/api/card/${cardId}/complete/`,
       update,
     );
-    console.log('data', data);
-    dispatch(toggleCompletedSuccess(data.status));
+    dispatch(toggleCompletedSuccess(data.data.card));
   } catch (error) {
     dispatch(toggleCompletedError(error));
   }

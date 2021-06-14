@@ -34,7 +34,7 @@ const cards = createReducer([], {
     payload,
   ],
   [toggleCompletedSuccess]: (state, { payload }) => [
-    ...state.filter(({ id }) => id !== payload.id),
+    ...state.filter(({ _id }) => _id !== payload._id),
     payload,
   ],
 });
