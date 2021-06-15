@@ -75,9 +75,9 @@ line-height: 45px;
   line-height: 45px;
   letter-spacing: 0.02em;
   color: #B9C3C8;
-   }
+}
 
-   @media (min-width: 768px) {
+ @media (min-width: 768px) {
     .appeal {
       width: 298px;
       height: 45px;;
@@ -85,8 +85,7 @@ line-height: 45px;
       font-size: 18px;
       line-height: 45px;
   }}
-
-  @media (min-width: 1280px) {
+@media (min-width: 1280px) {
     .appeal {
       width: 397px;
       height: 45px;
@@ -95,7 +94,7 @@ line-height: 45px;
       line-height: 45px;
   }}
 
-   .inputEmail {
+.inputEmail {
     display: flex;
     position: absolute;
     width: 290px;
@@ -106,7 +105,7 @@ line-height: 45px;
     color: #00D7FF; 
    }
 
-   .inputEmail:focus { color: #000000; }
+.inputEmail:focus { color: #000000; }
 
    @media (min-width: 768px) {
     .inputEmail {
@@ -120,7 +119,7 @@ line-height: 45px;
       top: 290px;
    }}
 
-   .inputPassword {
+.inputPassword {
     display: flex;
     position: absolute;
     width: 290px;
@@ -131,7 +130,7 @@ line-height: 45px;
     color: #00D7FF; 
    }
 
-   .inputPassword:focus { color: #000000; }
+.inputPassword:focus { color: #000000; }
 
    @media (min-width: 768px) {
     .inputPassword {
@@ -145,7 +144,7 @@ line-height: 45px;
       top: 320px;
    }}
 
-   .registration {
+.registration {
     display: flex;
     position: absolute;
     top: 275px;
@@ -200,19 +199,21 @@ line-height: 45px;
       top: 370px;
    }}
 
+
    body { 
         background: url("../../images/mobile/landingMobile.jpg") ;
         background-repeat: no-repeat; 
-        background-size: cover;  
+        background-size: cover;
+        width: 100%;
       }
-      @media (min-resolution: 1.25dppx) {
-        body {
-        background: url("../../images/mobile/landing\ -\ mobile@2x.jpg");
-      }}
-      @media (min-resolution: 3.25dppx) {
-        body {
-        background: url("../../images/mobile/landing\ -\ mobile@4x.jpg");
-      }}
+        // @media (min-resolution: 1.25dppx) {
+        //   body {
+        //   background: url("../../images/mobile/landing\ -\ mobile@2x.jpg");
+        // }}
+        @media (min-resolution: 3.25dppx) {
+          body {
+          background: url("../../images/mobile/landing\ -\ mobile@4x.jpg");
+        }}
 
     @media (min-width: 768px) {
         body {
@@ -220,10 +221,10 @@ line-height: 45px;
           background-repeat: no-repeat;
           background-size: cover; }
         }
-        @media (min-resolution: 1.25dppx) {
-          body {
-          background: url("../../images/tablet/landing\ -\ tablet@2x.jpg");
-        }}
+        // @media (min-resolution: 1.25dppx) {
+        //   body {
+        //   background: url("../../images/tablet/landing\ -\ tablet@2x.jpg");
+        // }}
         @media (min-resolution: 3.25dppx) {
           body {
           background: url("../../images/tablet/landing\ -\ tablet@4x.jpg");
@@ -233,12 +234,14 @@ line-height: 45px;
         body {
           background: url("../../images/desktop/landing.jpg") ;
           background-repeat: no-repeat;
-          background-size: cover; }
-          @media (min-resolution: 1.25dppx) {
-            body {
-            background: url("../../images/desktop/landing@2x.jpg");
-          }}
+          background-size: cover;
+         }
+          // @media (min-resolution: 1.25dppx) {
+          //   body {
+          //   // background: url("../../images/desktop/landing@2x.jpg");
+          // }}
           @media (min-resolution: 3.25dppx) {
             body {
             background: url("../../images/desktop/landing@4x.jpg");
-          }}}
+          }}
+        }

@@ -9,6 +9,7 @@ import LoaderSpinner from '../components/LoaderSpinner/LoaderSpinner';
 import AppBar from '../components/AppBar/AppBar';
 import TodayWrapper from '../components/TodayWrapper/TodayWrapper';
 import TommorowWraper from '../components/TomorrowWrapper/TommorowWrapper';
+import './CardPage.scss';
 
 import Done from '../components/Done/DoneBtn';
 
@@ -23,7 +24,7 @@ export default function CardPage() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="cardPage">
       <AppBar />
       {isLoadingCard && <LoaderSpinner />}
       <TodayWrapper />

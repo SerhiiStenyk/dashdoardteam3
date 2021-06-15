@@ -17,6 +17,7 @@ $desctop: 1280px;
   justify-content: center;
   position: relative;
   max-width: calc(#{$mobile} - 30px);
+  background-color: #ffffff;
   margin: 15px;
   height: 260px;
   box-shadow: -3px -4px 4px rgba(21, 57, 90, 0.03),

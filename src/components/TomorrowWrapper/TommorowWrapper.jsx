@@ -40,7 +40,7 @@ export default function TmmorowWrapper() {
 
   return (
     <div className={s.container}>
-      <h2 className={s.dayTitle}>TOMMOROW</h2>
+      <h2 className={s.dayTitle}>TOMORROW</h2>
 
       <ul className={s.list}>
         {filteredCards &&
