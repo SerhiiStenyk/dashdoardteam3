@@ -88,6 +88,7 @@ export default function DataTimeModal({
   onTimeChange,
 
   onDataChange,
+  changeState,
 }) {
   let tommorow;
 
@@ -155,7 +156,9 @@ export default function DataTimeModal({
       <div className="data-timer-container">
         <div
           className="data-timer-input"
-          onClick={() => setIsActive(!isActive)}
+          onClick={() =>
+            changeState(setIsActive, !isActive)
+          }
         >
           <div className="data-timer-placeholder">
             {startDate === today ? (
