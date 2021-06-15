@@ -38,7 +38,7 @@ export default function DifficultLevelModal({
   );
 
   const onChoiseLevel = function (value) {
-    console.log(value.level);
+    // console.log(value.level);
 
     setLevel(value);
     setIsActive(!isActive);

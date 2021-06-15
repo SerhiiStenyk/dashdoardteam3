@@ -22,7 +22,7 @@ export default function DoneBtn() {
   const toggling = () => setIsOpen(!isOpen);
 
   const onRemoveCard = cardId => {
-    console.log(cardId);
+    // console.log(cardId);
     dispatch(cardsOperations.deleteCard(cardId));
   };
 

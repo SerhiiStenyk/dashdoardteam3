@@ -4,15 +4,14 @@ import s from './Logout.module.scss';
 import sprite from '../../sprite.svg';
 import { connect } from 'react-redux';
 
-
-const Logout = ({onLogout}) => {
+const Logout = ({ onLogout }) => {
   return (
     <div>
       <button
         className={s.link}
         type="button"
         onClick={onLogout}
-        >
+      >
         <svg className={s.svg}>
           <use href={`${sprite}#logout`}></use>
         </svg>
@@ -23,7 +22,6 @@ const Logout = ({onLogout}) => {
 
 const mapDispatchToProps = {
   onLogout: authOperations.logOut,
-}
-
+};
 
 export default connect(null, mapDispatchToProps)(Logout);

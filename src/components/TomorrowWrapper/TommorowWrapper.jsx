@@ -34,7 +34,7 @@ export default function TmmorowWrapper() {
   }
 
   const onRemoveCard = cardId => {
-    console.log(cardId);
+    // console.log(cardId);
     dispatch(cardsOperations.deleteCard(cardId));
   };
 
