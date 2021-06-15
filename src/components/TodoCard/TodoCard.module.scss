@@ -1,3 +1,13 @@
+.appear {
+  opacity: 0; 
+  // transform: translateX(-100%);
+}
+.appearActive {
+  opacity: 1;
+  // transform: translateX(0);
+  transition: all 1500ms;
+}
+
 $mobile: 320px;
 $tablet: 768px;
 $desctop: 1280px;
@@ -152,8 +162,8 @@ $desctop: 1280px;
   width: 20px;
   height: 20px;
   @media screen and (min-width: $tablet) {
-    width: 18px;
-    height: 16px;
+        width: 22px;
+    height: 20px;
   }
 }
 .clearIcon,
@@ -215,6 +225,7 @@ $desctop: 1280px;
   color: #00d7ff;
 }
 .continue {
+  cursor: pointer;
   font-size: 14px;
   line-height: 0px;
   color: #b9c3c8;

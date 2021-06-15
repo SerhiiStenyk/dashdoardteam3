@@ -57,9 +57,7 @@ export default function CustomSelect(props) {
   );
 
   // Для внесения (изменения) и отрисовки наименования тудушки
-  const [title, setTitle] = useState(
-    props.title || 'Do some thing',
-  );
+  const [title, setTitle] = useState(props.title || '');
 
   // Дата начала
   // eslint-disable-next-line
@@ -219,275 +217,290 @@ export default function CustomSelect(props) {
 
   // ----------------------------------------------------
   return (
-    <div
-      className={
-        !isChallengeStarted
-          ? s.todoCard
-          : `${s.todoCard} ${s.dark}`
-      }
-      onClick={handleEdit}
+    <CSSTransition
+      classNames={s}
+      in={true}
+      appear={true}
+      timeout={500}
     >
-      {/* Отображение картинки по окончанию выполнения */}
+      <div
+        className={
+          !isChallengeStarted
+            ? s.todoCard
+            : `${s.todoCard} ${s.dark}`
+        }
+        onClick={handleEdit}
+      >
+        {/* Отображение картинки по окончанию выполнения */}
 
-      {isDoneImgShown ? (
-        <CSSTransition
-          in={isDoneImgShown}
-          timeout={250}
-          classNames={{
-            enter: s['animeCompleted-enter'],
-            enterActive: s['animeCompleted-enter-active'],
-          }}
-        >
-          <div className={s.completedContainer}>
-            <p
-              className={`${s.phraseCompleted} ${
-                type === 'Challenge' && s.white
-              }`}
-            >
-              COMPLETED:
-              <span className={s.cutTitle}>{` ${title
-                .split(' ')
-                .slice(0, 3)
-                .join(' ')}...`}</span>
-            </p>
-            <svg className={s.completedIcon}>
-              <use
-                href={`${sprite}#${
-                  type === 'Task'
-                    ? 'completed-todo'
-                    : 'completed-challenge'
+        {isDoneImgShown ? (
+          <CSSTransition
+            in={isDoneImgShown}
+            timeout={250}
+            classNames={{
+              enter: s['animeCompleted-enter'],
+              enterActive: s['animeCompleted-enter-active'],
+            }}
+          >
+            <div className={s.completedContainer}>
+              <p
+                className={`${s.phraseCompleted} ${
+                  type === 'Challenge' && s.white
                 }`}
-              ></use>
-            </svg>
-            <p
-              className={s.continue}
-              onClick={() =>
-                setIsDoneImgShown(!isDoneImgShown)
-              }
-            >
-              Continue
-            </p>
-          </div>
-        </CSSTransition>
-      ) : (
-        <CSSTransition
-          in={isDoneImgShown}
-          timeout={250}
-          classNames={{
-            exit: s['animeCard-exit'],
-            exitActive: s['animeCard-exit-active'],
-          }}
-        >
-          <div className={s.mainCardContainer}>
-            <div className={s.topContainer}>
-              {/* Иконки кубка и звезды */}
-              <div className={s.levelStarCupContainer}>
-                <DifficultLevelModal
-                  onDifficltChange={onDifficltChange}
-                  difficultlevelCameFromProps={
-                    props.difficulty
-                  }
-                  setIsDoneImgShown={setIsDoneImgShown}
-                  changeState={changeState}
-                />
-                {isChallengeStarted ? (
-                  <svg className={s.starCupIcon}>
-                    <use
-                      href={`${sprite}#cup-blue`}
-                      onClick={onSetTypeOfTastOrChallenge}
-                    ></use>
-                  </svg>
+              >
+                COMPLETED:
+                <span className={s.cutTitle}>{` ${title
+                  .split(' ')
+                  .slice(0, 3)
+                  .join(' ')}...`}</span>
+              </p>
+              <svg className={s.completedIcon}>
+                <use
+                  href={`${sprite}#${
+                    type === 'Task'
+                      ? 'completed-todo'
+                      : 'completed-challenge'
+                  }`}
+                ></use>
+              </svg>
+              <p
+                className={s.continue}
+                onClick={() => onCompleteClick(props.id)}
+              >
+                Continue
+              </p>
+            </div>
+          </CSSTransition>
+        ) : (
+          <CSSTransition
+            in={isDoneImgShown}
+            timeout={250}
+            classNames={{
+              exit: s['animeCard-exit'],
+              exitActive: s['animeCard-exit-active'],
+            }}
+          >
+            <div className={s.mainCardContainer}>
+              <div className={s.topContainer}>
+                {/* Иконки кубка и звезды */}
+                <div className={s.levelStarCupContainer}>
+                  <DifficultLevelModal
+                    onDifficltChange={onDifficltChange}
+                    difficultlevelCameFromProps={
+                      props.difficulty
+                    }
+                    setIsDoneImgShown={setIsDoneImgShown}
+                    changeState={changeState}
+                  />
+                  {isChallengeStarted ? (
+                    <svg className={s.starCupIcon}>
+                      <use
+                        href={`${sprite}#cup-blue`}
+                        onClick={onSetTypeOfTastOrChallenge}
+                      ></use>
+                    </svg>
+                  ) : (
+                    <svg className={s.starCupIcon}>
+                      <use
+                        href={`${sprite}#star-blue`}
+                        onClick={onSetTypeOfTastOrChallenge}
+                      ></use>
+                    </svg>
+                  )}
+                </div>
+                {/* Надпись CHALLENGE, EDIT CHALLENGE, CREATE NEW QUEST или EDIT QUEST */}
+                <div className={s.operationContainer}>
+                  {status === 'create' ? (
+                    <p className={s.operation}>
+                      CREATE NEW QUEST
+                    </p>
+                  ) : null}
+                  {status === 'edit' &&
+                  !isChallengeStarted ? (
+                    <p className={s.operation}>
+                      EDIT QUEST
+                    </p>
+                  ) : null}
+                  {isChallengeStarted &&
+                  status !== 'edit' ? (
+                    <p className={s.operation}>CHALLENGE</p>
+                  ) : null}
+                  {isChallengeStarted &&
+                  status === 'edit' ? (
+                    <p className={s.operation}>
+                      EDIT CHALLENGE
+                    </p>
+                  ) : null}
+                  {status === 'Complete' ||
+                  status === 'incomplete' ? (
+                    <br
+                      className={`${s.operation} ${s.hidden}`}
+                    ></br>
+                  ) : null}
+                </div>
+                {/* Инпут или наименование карточки */}
+                {status === 'create' ||
+                status === 'edit' ||
+                status === 'incomplete' ? (
+                  <input
+                    className={`${s.title} ${s.inline}`}
+                    name="todo"
+                    type="text"
+                    value={title}
+                    placeholder="Do some thing"
+                    onChange={handleChangeInpute}
+                  />
                 ) : (
-                  <svg className={s.starCupIcon}>
-                    <use
-                      href={`${sprite}#star-blue`}
-                      onClick={onSetTypeOfTastOrChallenge}
-                    ></use>
-                  </svg>
+                  <p
+                    className={`${s.title} ${
+                      isChallengeStarted && s.white
+                    }`}
+                  >
+                    {title}
+                  </p>
+                )}
+                {/* Дата и время */}
+                {isChallengeStarted ? (
+                  <DataTimeChelengeModal
+                    timeCameFromProps={props.time}
+                    dataCameFromProps={props.date}
+                    onTimeChange={onTimeChange}
+                    onDataChange={onDataChange}
+                    setIsDoneImgShown={setIsDoneImgShown}
+                    changeState={changeState}
+                  />
+                ) : (
+                  <DataTimeModal
+                    timeCameFromProps={props.time}
+                    dataCameFromProps={props.date}
+                    onTimeChange={onTimeChange}
+                    onDataChange={onDataChange}
+                    setIsDoneImgShown={setIsDoneImgShown}
+                    changeState={changeState}
+                  />
                 )}
               </div>
-              {/* Надпись CHALLENGE, EDIT CHALLENGE, CREATE NEW QUEST или EDIT QUEST */}
-              <div className={s.operationContainer}>
-                {status === 'create' ? (
-                  <p className={s.operation}>
-                    CREATE NEW QUEST
-                  </p>
+              <div className={s.bottomContainer}>
+                {/* Группы карточек */}
+                {isCategoryActive ? (
+                  <div
+                    className={s.categoryContainer}
+                    onClick={() =>
+                      setIsCategoryActive(!isCategoryActive)
+                    }
+                  >
+                    <ul className={s.categoryList}>
+                      {categories.map(item => (
+                        <li
+                          key={item.name}
+                          onClick={() => setCategory(item)}
+                        >
+                          {item.name.toUpperCase()}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ) : null}
-                {status === 'edit' &&
-                !isChallengeStarted ? (
-                  <p className={s.operation}>EDIT QUEST</p>
-                ) : null}
-                {isChallengeStarted && status !== 'edit' ? (
-                  <p className={s.operation}>CHALLENGE</p>
-                ) : null}
-                {isChallengeStarted && status === 'edit' ? (
-                  <p className={s.operation}>
-                    EDIT CHALLENGE
-                  </p>
-                ) : null}
-                {status === 'Complete' ||
-                status === 'incomplete' ? (
-                  <br
-                    className={`${s.operation} ${s.hidden}`}
-                  ></br>
-                ) : null}
-              </div>
-              {/* Инпут или наименование карточки */}
-              {status === 'create' || status === 'edit' ? (
-                <input
-                  className={`${s.title} ${s.inline}`}
-                  name="todo"
-                  type="text"
-                  value={title}
-                  onChange={handleChangeInpute}
-                />
-              ) : (
-                <p
-                  className={`${s.title} ${
-                    isChallengeStarted && s.white
-                  }`}
-                >
-                  {title}
-                </p>
-              )}
-              {/* Дата и время */}
-              {isChallengeStarted ? (
-                <DataTimeChelengeModal
-                  timeCameFromProps={props.time}
-                  dataCameFromProps={props.date}
-                  onTimeChange={onTimeChange}
-                  onDataChange={onDataChange}
-                  setIsDoneImgShown={setIsDoneImgShown}
-                  changeState={changeState}
-                />
-              ) : (
-                <DataTimeModal
-                  timeCameFromProps={props.time}
-                  dataCameFromProps={props.date}
-                  onTimeChange={onTimeChange}
-                  onDataChange={onDataChange}
-                  setIsDoneImgShown={setIsDoneImgShown}
-                  changeState={changeState}
-                />
-              )}
-            </div>
-            <div className={s.bottomContainer}>
-              {/* Группы карточек */}
-              {isCategoryActive ? (
                 <div
-                  className={s.categoryContainer}
+                  className={`${
+                    s.selectedCategoryContainer
+                  } ${isCategoryActive && s.hidden}`}
                   onClick={() =>
-                    setIsCategoryActive(!isCategoryActive)
+                    changeState(
+                      setIsCategoryActive,
+                      !isCategoryActive,
+                    )
                   }
+                  style={{
+                    backgroundColor: category.color,
+                  }}
                 >
-                  <ul className={s.categoryList}>
-                    {categories.map(item => (
-                      <li
-                        key={item.name}
-                        onClick={() => setCategory(item)}
-                      >
-                        {item.name.toUpperCase()}
-                      </li>
-                    ))}
-                  </ul>
+                  <p className={s.selectedCategory}>
+                    {category.name.toUpperCase()}
+                  </p>
                 </div>
-              ) : null}
-              <div
-                className={`${
-                  s.selectedCategoryContainer
-                } ${isCategoryActive && s.hidden}`}
-                onClick={() =>
-                  changeState(
-                    setIsCategoryActive,
-                    !isCategoryActive,
-                  )
-                }
-                style={{ backgroundColor: category.color }}
-              >
-                <p className={s.selectedCategory}>
-                  {category.name.toUpperCase()}
-                </p>
-              </div>
-              {/* Иконки save, clear, done и кнопка START*/}
+                {/* Иконки save, clear, done и кнопка START*/}
 
-              <div
-                className={s.saveClearDoneStartContainer}
-              >
-                {props.isOnCreate ||
-                  (status === 'edit' && (
+                <div
+                  className={s.saveClearDoneStartContainer}
+                >
+                  {props.isOnCreate ||
+                    (status === 'edit' && (
+                      <>
+                        <svg
+                          className={`${s.saveClearDoneIcon} ${s.saveIcon}`}
+                          // onClick={() => setStatus('incomplete')}
+                          onClick={() =>
+                            onReadyClick(props.id)
+                          }
+                        >
+                          <use
+                            href={`${sprite}#diskette-save`}
+                          ></use>
+                        </svg>
+
+                        <div onClick={() => setModal(true)}>
+                          <svg
+                            className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
+                            alt="cross red"
+                          >
+                            <use
+                              href={`${sprite}#cross-red-clear`}
+                            ></use>
+                          </svg>
+                        </div>
+
+                        <svg
+                          className={`${s.saveClearDoneIcon} ${s.doneIcon}`}
+                          alt="check mark"
+                          onClick={() => {
+                            setIsDoneImgShown(true);
+                          }}
+                        >
+                          <use
+                            href={`${sprite}#check-mark`}
+                          ></use>
+                        </svg>
+                      </>
+                    ))}
+                  {props.isOnCreate && (
                     <>
                       <svg
-                        className={`${s.saveClearDoneIcon} ${s.saveIcon}`}
+                        className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
+                        alt="cross red"
+                        onClick={() =>
+                          props.onHandleAddCard()
+                        }
+                      >
+                        <use
+                          href={`${sprite}#cross-red-clear`}
+                        ></use>
+                      </svg>
+                      <div
+                        className={s.startButton}
                         // onClick={() => setStatus('incomplete')}
                         onClick={() =>
                           onReadyClick(props.id)
                         }
                       >
-                        <use
-                          href={`${sprite}#diskette-save`}
-                        ></use>
-                      </svg>
-
-                      <div onClick={() => setModal(true)}>
-                        <svg
-                          className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
-                          alt="cross red"
-                        >
-                          <use
-                            href={`${sprite}#cross-red-clear`}
-                          ></use>
-                        </svg>
+                        CREATE
                       </div>
-
-                      <svg
-                        className={`${s.saveClearDoneIcon} ${s.doneIcon}`}
-                        alt="check mark"
-                        onClick={() => {
-                          setIsDoneImgShown(true);
-                          onCompleteClick(props.id);
-                        }}
-                      >
-                        <use
-                          href={`${sprite}#check-mark`}
-                        ></use>
-                      </svg>
                     </>
-                  ))}
-                {props.isOnCreate && (
-                  <>
-                    <svg
-                      className={`${s.saveClearDoneIcon} ${s.clearIcon}`}
-                      alt="cross red"
-                      onClick={() =>
-                        props.onHandleAddCard()
-                      }
-                    >
-                      <use
-                        href={`${sprite}#cross-red-clear`}
-                      ></use>
-                    </svg>
-                    <div
-                      className={s.startButton}
-                      // onClick={() => setStatus('incomplete')}
-                      onClick={() => onReadyClick(props.id)}
-                    >
-                      CREATE
-                    </div>
-                  </>
-                )}
+                  )}
+                </div>
               </div>
+              {/*Модалка/**/}
+              <Modal
+                id={props.id}
+                isOpened={modalActive}
+                onModalClose={setModal}
+                title={`Delete this ${type}?`}
+                onRemove={props.onRemove}
+              ></Modal>
             </div>
-            {/*Модалка/**/}
-            <Modal
-              id={props.id}
-              isOpened={modalActive}
-              onModalClose={setModal}
-              title={`Delete this ${type}?`}
-              onRemove={props.onRemove}
-            ></Modal>
-          </div>
-        </CSSTransition>
-      )}
-    </div>
+          </CSSTransition>
+        )}
+      </div>
+    </CSSTransition>
   );
 }
