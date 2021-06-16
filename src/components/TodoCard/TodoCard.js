@@ -42,7 +42,6 @@ export default function CustomSelect(props) {
   // const [isActive, setIsActive] = useState(false);
 
   // Типы level: Easy, Normal, Hard
-  // eslint-disable-next-line
   const [difficulty, setDifficulty] = useState('Normal');
 
   // Основное состояние карточки: create, edit, incomplete, done
@@ -362,6 +361,7 @@ export default function CustomSelect(props) {
                 {/* Дата и время */}
                 {isChallengeStarted ? (
                   <DataTimeChelengeModal
+                    todoStatus={status}
                     timeCameFromProps={props.time}
                     dataCameFromProps={props.date}
                     onTimeChange={onTimeChange}
@@ -371,6 +371,7 @@ export default function CustomSelect(props) {
                   />
                 ) : (
                   <DataTimeModal
+                    todoStatus={status}
                     timeCameFromProps={props.time}
                     dataCameFromProps={props.date}
                     onTimeChange={onTimeChange}

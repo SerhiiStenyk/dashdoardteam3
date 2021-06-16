@@ -1,6 +1,17 @@
+$mobile: 320px;
+$tablet: 768px;
+$desctop: 1280px;
+
 .data-timer-container {
   position: relative;
   min-width: 0px;
+  font-size: 18px;
+  line-height: 18px;
+  letter-spacing: 0.02em;
+  @media screen and (min-width: $tablet) {
+    font-size: 14px;
+    line-height: 14px;
+  }
 }
 .data-timer-options-close {
   width: 15px;
@@ -15,26 +26,12 @@
 
 .data-timer-input {
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
 .data-timer-placeholder {
-  display: flex;
   align-items: center;
-
-  // .data-timer-input {
-  //   // display: flex;
-  //   align-items: center;
-  //   padding-top: 6px;
-}
-
-.data-timer-placeholder {
   display: flex;
-  // justify-content: space-between;
-  // align-items: center;
-  margin-left: 36px;
-
   color: #b9c3c8;
   cursor: pointer;
 }
@@ -43,13 +40,13 @@
 }
 
 .data-timer-options {
-  position: absolute;
   top: -30%;
-  left: 63px;
+  left: 16%;
   display: flex;
+  position: absolute;
 
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   visibility: hidden;
   overflow: scroll;
 
@@ -59,11 +56,15 @@
   background-color: white;
   border-radius: 10%;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  @media screen and (min-width: $tablet) {
+    left: 14%;
+  }
 }
 
 .data-timer-active {
   visibility: visible;
   opacity: 1;
+  z-index: 1;
 }
 
 .data-timer-item {
@@ -80,11 +81,15 @@
 }
 
 .data-timer-item-container {
+  position: relative;
   height: 90px;
   overflow: scroll;
+  margin-left: 2px;
+  padding-left: 2px;
+  border-left: 1px solid #b9c3c8;
 }
 .calendar-icon {
-  width: 20px;
-  height: 20px;
-  margin-left: 5px;
+  width: 12px;
+  height: 14px;
+  margin-left: 7px;
 }
