@@ -227,7 +227,7 @@ export default function CustomSelect(props) {
       appear={true}
       timeout={500}
     >
-      <div
+      <li
         className={
           !isChallengeStarted
             ? s.todoCard
@@ -504,7 +504,7 @@ export default function CustomSelect(props) {
             </div>
           </CSSTransition>
         )}
-      </div>
+      </li>
     </CSSTransition>
   );
 }

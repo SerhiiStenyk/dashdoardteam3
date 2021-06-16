@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
 import {
   cardsOperations,
   cardsSelectors,
@@ -10,6 +11,8 @@ import TodoCard from '../TodoCard/TodoCard';
 import AddButton from '../addButton/button';
 
 export default function TodayWrapper() {
+  const [isOnCreate, setIsOnCreate] = useState(false);
+
   const dispatch = useDispatch();
   const cards = useSelector(cardsSelectors.getCards);
 
@@ -35,12 +38,25 @@ export default function TodayWrapper() {
     dispatch(cardsOperations.deleteCard(cardId));
   };
 
+  const handleAddCard = () => {
+    setIsOnCreate(!isOnCreate);
+  };
+
   return (
     <div className={s.container}>
       <h2 className={s.dayTitle}>TODAY</h2>
+      <AddButton
+        handleAddCard={handleAddCard}
+        isHidden={isOnCreate}
+      />
 
-      <div className={s.list}>
-        <AddButton />
+      <ul className={s.list}>
+        {isOnCreate && (
+          <TodoCard
+            isOnCreate={isOnCreate}
+            onHandleAddCard={handleAddCard}
+          />
+        )}
         {filteredCards &&
           filteredCards.map(
             ({
@@ -67,7 +83,7 @@ export default function TodayWrapper() {
               />
             ),
           )}
-      </div>
+      </ul>
     </div>
   );
 }
