@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACT,QAAQ,EAAE,QAAQ;EAClB,IAAI,EAAC,GAAG;EACR,GAAG,EAAE,GAAG;EACR,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,MAAM;EACvB,WAAW,EAAE,MAAM;CACpB",
+    "sources": [
+        "LoaderSpinner.module.scss"
+    ],
+    "names": [],
+    "file": "LoaderSpinner.module.css"
+}

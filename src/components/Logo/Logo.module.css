@@ -1,0 +1,31 @@
+@charset "UTF-8";
+/*весь dashboard*/
+/*шапка*/
+/*белые тудушки*/
+/*тень для белых тудушек*/
+/*синие тудушки*/
+/*тень для синих тудушек*/
+/*бэкдроп для всех тудушек*/
+/*белое выпадающее меню*/
+/*синее выпадающее меню и элипс в хедере*/
+/*для всех выпадающих менюшек*/
+/*цветные полоски на картах*/
+/*звёзды, кубок, лого, easy*/
+/*Текст*/
+/*текст на главном экране*/
+.logo {
+  font-family: "HelveticaNeueCyr", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 21px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: #00D7FF;
+}
+
+@media (max-width: 767px) {
+  .logo {
+    margin-right: auto;
+  }
+}
+/*# sourceMappingURL=Logo.module.css.map */

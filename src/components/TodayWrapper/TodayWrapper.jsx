@@ -39,7 +39,7 @@ export default function TodayWrapper() {
     <div className={s.container}>
       <h2 className={s.dayTitle}>TODAY</h2>
 
-      <ul className={s.list}>
+      <div className={s.list}>
         <AddButton />
         {filteredCards &&
           filteredCards.map(
@@ -67,7 +67,7 @@ export default function TodayWrapper() {
               />
             ),
           )}
-      </ul>
+      </div>
     </div>
   );
 }

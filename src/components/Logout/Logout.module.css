@@ -1,0 +1,47 @@
+@charset "UTF-8";
+/*весь dashboard*/
+/*шапка*/
+/*белые тудушки*/
+/*тень для белых тудушек*/
+/*синие тудушки*/
+/*тень для синих тудушек*/
+/*бэкдроп для всех тудушек*/
+/*белое выпадающее меню*/
+/*синее выпадающее меню и элипс в хедере*/
+/*для всех выпадающих менюшек*/
+/*цветные полоски на картах*/
+/*звёзды, кубок, лого, easy*/
+/*Текст*/
+/*текст на главном экране*/
+.link {
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin-left: 10px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.svg {
+  width: 25px;
+  height: 25px;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  fill: #3E4E6C;
+  -webkit-transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-transition-property: fill;
+  transition-property: fill;
+}
+
+.svg:hover, .svg:focus {
+  fill: #7B8AA4;
+}
+/*# sourceMappingURL=Logout.module.css.map */

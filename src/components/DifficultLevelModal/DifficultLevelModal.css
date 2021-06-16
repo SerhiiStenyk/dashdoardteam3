@@ -1,0 +1,114 @@
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #00d7ff;
+  margin-bottom: 0px;
+  margin-left: 7px;
+  cursor: pointer;
+}
+
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.dropdown-placeholder {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #b9c3c8;
+  cursor: pointer;
+}
+
+.dropdown-placeholder:hover {
+  color: black;
+}
+
+.dropdown-options {
+  position: absolute;
+  top: calc(-100% - 22px);
+  left: -21px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  visibility: hidden;
+  width: 90px;
+  height: 80px;
+  padding-left: 12px;
+  color: #b9c3c8;
+  opacity: 0;
+  background-color: white;
+  border-radius: 10%;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.dropdown-active {
+  visibility: visible;
+  opacity: 1;
+}
+
+.dropdown-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  padding-bottom: 4px;
+  border-bottom: 1px dotted #fff;
+}
+
+.dropdown-item:hover {
+  color: #000;
+}
+
+.dropdown-round {
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.red {
+  background-color: #db0837;
+}
+
+.green {
+  background-color: #24d40c;
+}
+
+.teal {
+  background-color: #00d7ff;
+}
+/*# sourceMappingURL=DifficultLevelModal.css.map */
