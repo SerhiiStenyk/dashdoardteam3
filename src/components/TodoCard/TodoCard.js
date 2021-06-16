@@ -20,18 +20,22 @@ const categories = [
   { name: 'Leisure', color: '#F8D2FF' },
   { name: 'Work', color: '#D3F6CE' },
 ];
-const today = new Date();
-const dateToCompar = `${today.getFullYear()}-${
-  today.getMonth() < 9
-    ? `0${today.getMonth() + 1}`
-    : today.getMonth() + 1
-}-${
-  today.getDate() < 10
-    ? `0${today.getDate()}`
-    : today.getDate()
-}`;
 
 export default function CustomSelect(props) {
+  const today = new Date();
+  const dateToCompar = `${today.getFullYear()}-${
+    today.getMonth() < 9
+      ? `0${today.getMonth() + 1}`
+      : today.getMonth() + 1
+  }-${
+    today.getDate() < 10
+      ? `0${today.getDate()}`
+      : `${
+          props.isTommorow
+            ? today.getDate() + 1
+            : today.getDate()
+        }`
+  }`;
   const dispatch = useDispatch();
 
   //modal

@@ -24,6 +24,8 @@ export default function TmmorowWrapper() {
       : today.getDate()
   }`;
 
+  const isTommorow = true;
+
   let filteredCards;
 
   if (cards) {
@@ -65,6 +67,7 @@ export default function TmmorowWrapper() {
                 time={time}
                 title={title}
                 type={type}
+                isTommorow={isTommorow}
                 onRemove={() => onRemoveCard(_id)}
               />
             ),
