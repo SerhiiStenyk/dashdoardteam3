@@ -22,6 +22,7 @@
 
 .btnHolder {
   position: fixed;
+  z-index: 1;
   bottom: 42px;
   right: 23px;
   /* position: sticky; */
