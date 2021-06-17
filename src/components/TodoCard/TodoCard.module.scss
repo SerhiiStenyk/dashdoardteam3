@@ -1,5 +1,5 @@
 .appear {
-  opacity: 0; 
+  opacity: 0;
   // transform: translateX(-100%);
 }
 .appearActive {
@@ -26,7 +26,7 @@ $desctop: 1280px;
   display: flex;
   justify-content: center;
   position: relative;
-  max-width: calc(#{$mobile} - 30px);
+  width: calc(100% - 30px);
   background-color: #ffffff;
   margin: 15px;
   height: 260px;
@@ -34,8 +34,12 @@ $desctop: 1280px;
     3px 4px 4px rgba(21, 57, 90, 0.03);
   border-radius: 10px;
   @media screen and (min-width: $tablet) {
-    width: 205px;
+    margin: 14px;
+    width: calc((100% - 28px * 3) / 3);
     height: 199px;
+  }
+  @media screen and (min-width: $desctop) {
+    width: calc((100% - 28px * 5) / 5);
   }
 }
 .mainCardContainer {
@@ -162,7 +166,7 @@ $desctop: 1280px;
   width: 20px;
   height: 20px;
   @media screen and (min-width: $tablet) {
-        width: 22px;
+    width: 22px;
     height: 20px;
   }
 }
