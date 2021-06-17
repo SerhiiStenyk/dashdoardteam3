@@ -204,49 +204,62 @@ line-height: 45px;
       top: 370px;
    }}
 
+   .LandingPage{
+    
+    // display: block;
+    // width: 100vm;
+    height: 100vh;
+    background-color: tomato;
+}
 
-   body { 
+
+   .LandingPage { 
         background: url("../../images/mobile/landingMobile.jpg") ;
         background-repeat: no-repeat; 
-        background-size: cover;
+        // background-size: cover;
         width: 100%;
+        // height: auto;
       }
         // @media (min-resolution: 1.25dppx) {
-        //   body {
+        //   .LandingPage {
         //   background: url("../../images/mobile/landing\ -\ mobile@2x.jpg");
         // }}
         @media (min-resolution: 3.25dppx) {
-          body {
+          .LandingPage {
           background: url("../../images/mobile/landing\ -\ mobile@4x.jpg");
         }}
 
     @media (min-width: 768px) {
-        body {
+        .LandingPage {
           background: url("../../images/tablet/landing\ -\ tablet.jpg") ;
           background-repeat: no-repeat;
-          background-size: cover; }
+          // background-size: cover; 
+        }
         }
         // @media (min-resolution: 1.25dppx) {
-        //   body {
+        //   .LandingPage {
         //   background: url("../../images/tablet/landing\ -\ tablet@2x.jpg");
         // }}
         @media (min-resolution: 3.25dppx) {
-          body {
+          .LandingPage {
           background: url("../../images/tablet/landing\ -\ tablet@4x.jpg");
         }}
 
     @media (min-width: 1280px) {
-        body {
+        .LandingPage {
           background: url("../../images/desktop/landing.jpg") ;
           background-repeat: no-repeat;
-          background-size: cover;
+          // background-size: cover;
+          width: 1280px;
+          margin-left: auto;
+          margin-right: auto;
          }
           // @media (min-resolution: 1.25dppx) {
           //   body {
           //   // background: url("../../images/desktop/landing@2x.jpg");
           // }}
           @media (min-resolution: 3.25dppx) {
-            body {
+            .LandingPage {
             background: url("../../images/desktop/landing@4x.jpg");
           }}
         }
