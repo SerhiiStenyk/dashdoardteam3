@@ -24,12 +24,12 @@ export default function CardPage() {
   }, [dispatch]);
 
   return (
-    <div className="cardPage">
+    <section className="cardPage">
       <AppBar />
       {isLoadingCard && <LoaderSpinner />}
       <TodayWrapper />
       <TommorowWraper />
       <Done />
-    </div>
+    </section>
   );
 }
