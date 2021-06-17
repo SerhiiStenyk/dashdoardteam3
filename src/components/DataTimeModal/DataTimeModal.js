@@ -83,6 +83,7 @@ const getTommorow = function () {
 };
 
 export default function DataTimeModal({
+  todoStatus,
   timeCameFromProps,
   dataCameFromProps,
   onTimeChange,
@@ -154,26 +155,28 @@ export default function DataTimeModal({
   return (
     <>
       <div className="data-timer-container">
-        <div
-          className="data-timer-input"
-          onClick={() =>
-            changeState(setIsActive, !isActive)
-          }
-        >
-          <div className="data-timer-placeholder">
-            {startDate === today ? (
-              <div>Today, </div>
-            ) : (
-              <div>Tomorrow, </div>
-            )}
-            <div>&nbsp;{timer}</div>
-            <div>
-              <svg className="calendar-icon">
-                <use href={sprite + '#calendar'}></use>
-              </svg>
+        {!isActive && (
+          <div
+            className="data-timer-input"
+            onClick={() =>
+              changeState(setIsActive, !isActive)
+            }
+          >
+            <div className="data-timer-placeholder">
+              {startDate === today ? (
+                <div>Today, </div>
+              ) : (
+                <div>Tomorrow, </div>
+              )}
+              <div>&nbsp;{timer}</div>
+              {todoStatus === ('edit' || 'create') && (
+                <svg className="calendar-icon">
+                  <use href={sprite + '#calendar'}></use>
+                </svg>
+              )}
             </div>
           </div>
-        </div>
+        )}
 
         <div
           className={

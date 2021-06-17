@@ -54,6 +54,7 @@ const time = [
 ];
 
 export default function DataTimeChelengeModal({
+  todoStatus,
   timeCameFromProps,
   dataCameFromProps,
   onTimeChange,
@@ -111,11 +112,11 @@ export default function DataTimeChelengeModal({
           <div className="chelenge-timer-placeholder">
             <div>{DayOfWeek}, &nbsp;</div>
             <div>{timer}</div>
-            <div>
+            {todoStatus === ('edit' || 'create') && (
               <svg className="chelenge-calendar-icon">
                 <use href={sprite + '#calendar'}></use>
               </svg>
-            </div>
+            )}
           </div>
         </div>
 
