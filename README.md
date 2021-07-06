@@ -1,9 +1,9 @@
-Итоговый командный проект. 
-Технологии :  
+Final team project. 
+Technologies :  
 React, Redux, React hooks, SASS, Axios,
 NodeJS.
 
-Рабочая страница - https://dashboardteam3.netlify.app/
+Page - https://dashboardteam3.netlify.app/
 
 
-Бек - https://goit-backend-23.herokuapp.com/api-docs/#/ 
+Back-end - https://goit-backend-23.herokuapp.com/api-docs/#/ 
